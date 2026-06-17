@@ -138,7 +138,7 @@ for (const slug of slugs){
 <meta name="twitter:description" content="${esc(c.seo.desc)}"/>
 <meta name="twitter:image" content="${SITE}/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="../styles.css"/>
+<link rel="stylesheet" href="../styles.css?v=7"/>
 <script type="application/ld+json">${JSON.stringify(appLd)}</script>
 <script type="application/ld+json">${JSON.stringify(crumbLd)}</script>
 <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
@@ -225,7 +225,7 @@ const REG = fs.readFileSync(path.join(ROOT,"countries.js"),"utf8");
 const APP = fs.readFileSync(path.join(ROOT,"app.js"),"utf8");
 function inline(html){
   return html
-    .replace(/<link rel="stylesheet" href="(\.\.\/)?styles\.css"\/>/, "<style>\n"+CSS+"\n</style>")
+    .replace(/<link rel="stylesheet" href="(\.\.\/)?styles\.css(\?[^"]*)?"\/>/, "<style>\n"+CSS+"\n</style>")
     .replace(/<script src="(\.\.\/)?countries\.js(\?[^"]*)?"><\/script>/, "<script>\n"+REG+"\n</script>")
     .replace(/<script type="module" src="(\.\.\/)?app\.js(\?[^"]*)?"><\/script>/, '<script type="module">\n'+APP+"\n</script>");
 }
