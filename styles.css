@@ -120,6 +120,19 @@ header.bar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 /* the shutter bar is shown whenever the camera is live (desktop keeps its square frame) */
 body.cam-live .vf-shutter{display:flex}
 
+/* Android-style zoom selector (.6 / 1x / 2x ...) on the frame */
+.vf-zoom{position:absolute;left:50%;bottom:112px;transform:translateX(-50%);z-index:6;display:none;
+  gap:6px;padding:5px;border-radius:999px;background:rgba(11,19,14,.5);
+  backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+.vf-zoom.show{display:flex}
+.vf-zoombtn{min-width:38px;height:38px;padding:0 8px;border-radius:999px;border:none;cursor:pointer;
+  background:transparent;color:#fff;font-weight:700;font-size:12.5px;font-family:"Spline Sans Mono",monospace;
+  -webkit-tap-highlight-color:transparent;transition:background .2s,color .2s}
+.vf-zoombtn.on{background:rgba(255,255,255,.94);color:#0B130E}
+@supports(padding:max(0px)){
+  body.cam-live .vf-zoom{bottom:max(112px,calc(96px + env(safe-area-inset-bottom)))}
+}
+
 /* phone: live camera fills the screen so feedback + shutter need no scroll */
 @media(max-width:900px){
   body.cam-live{overflow:hidden}

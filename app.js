@@ -10,7 +10,7 @@ const el = {
   vfEmpty:$("vfEmpty"), badge:$("vfBadge"), gates:$("gates"), verdict:$("verdict"),
   score:$("scoreNum"), status:$("status"), country:$("country"),
   vfStart:$("vfStart"), upload:$("upload"),
-  vfMsg:$("vfMsg"), vfShutter:$("vfShutter"), vfCapture:$("vfCapture"), vfFlip:$("vfFlip"), vfClose:$("vfClose"),
+  vfMsg:$("vfMsg"), vfShutter:$("vfShutter"), vfCapture:$("vfCapture"), vfFlip:$("vfFlip"), vfClose:$("vfClose"), vfZoom:$("vfZoom"),
   result:$("result"), resultImg:$("resultImg"), rmeta:$("rmeta"),
   download:$("download"), sheet:$("sheet"), report:$("report"), retake:$("retake")
 };
@@ -183,6 +183,7 @@ async function startCam(){
   el.video.style.display="block"; el.feed.style.display="none"; el.vfEmpty.style.display="none";
   mode="live"; running=true;
   document.body.classList.add("cam-live");
+  setupZoom();
   setStatus("Line up with the guide. The frame turns green and Capture unlocks when every check passes.");
   sizeHud(); requestAnimationFrame(loop);
 }
@@ -192,12 +193,44 @@ function stopCam(){
   el.video.style.display="none"; el.vfEmpty.style.display="block";
   document.body.classList.remove("cam-live");
   if(el.vfMsg) el.vfMsg.className="vf-msg";
+  if(el.vfZoom){ el.vfZoom.classList.remove("show"); el.vfZoom.innerHTML=""; }
   el.hud.getContext("2d").clearRect(0,0,el.hud.width,el.hud.height);
   prevStatus={}; renderGates(currentGates());
 }
 async function flipCamera(){
   facing = facing==="user" ? "environment" : "user";
   if(running){ stream&&stream.getTracks().forEach(t=>t.stop()); running=false; await startCam(); }
+}
+// Android-style zoom selector — only shown when the camera reports a zoom range.
+function setupZoom(){
+  if(!el.vfZoom) return;
+  el.vfZoom.classList.remove("show"); el.vfZoom.innerHTML="";
+  const track = stream && stream.getVideoTracks && stream.getVideoTracks()[0];
+  if(!track || !track.getCapabilities) return;
+  let caps; try{ caps=track.getCapabilities(); }catch(e){ return; }
+  if(!caps || !caps.zoom || !(caps.zoom.max > caps.zoom.min)) return;
+  const min=caps.zoom.min, max=caps.zoom.max;
+  let stops=[];
+  if(min < 1) stops.push(min);                          // ultrawide (e.g. .6)
+  for(const z of [1,2,3,4,5,6,8,10]) if(z>=Math.max(1,min) && z<=max) stops.push(z);
+  stops=[...new Set(stops)].sort((a,b)=>a-b);
+  if(stops.length < 2) return;                          // nothing meaningful to switch between
+  const cur = (track.getSettings && track.getSettings().zoom) || (stops.includes(1)?1:stops[0]);
+  for(const z of stops){
+    const b=document.createElement("button");
+    b.className="vf-zoombtn"+(Math.abs(z-cur)<1e-3?" on":"");
+    b.textContent = z<1 ? z.toFixed(1) : (Number.isInteger(z)? z+"×" : z.toFixed(1)+"×");
+    b.addEventListener("click",()=>applyZoom(z,b));
+    el.vfZoom.appendChild(b);
+  }
+  el.vfZoom.classList.add("show");
+}
+function applyZoom(z,btn){
+  const track = stream && stream.getVideoTracks && stream.getVideoTracks()[0];
+  if(!track) return;
+  track.applyConstraints({advanced:[{zoom:z}]}).then(()=>{
+    [...el.vfZoom.children].forEach(b=>b.classList.toggle("on", b===btn));
+  }).catch(()=>{});
 }
 function sizeHud(){ const r=el.video.parentElement.getBoundingClientRect(); el.hud.width=r.width; el.hud.height=r.height; }
 window.addEventListener("resize",()=>{ if(mode==="live")sizeHud(); });

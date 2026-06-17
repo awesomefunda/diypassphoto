@@ -52,6 +52,7 @@ const TOOL = `
             <label class="vf-uploadlink" for="upload">or check a photo you already have</label>
             <input type="file" id="upload" accept="image/*"/>
           </div>
+          <div class="vf-zoom" id="vfZoom"></div>
           <div class="vf-shutter" id="vfShutter">
             <button class="vf-btn" id="vfFlip" aria-label="Flip camera" title="Flip camera">⟲</button>
             <button class="vf-shot" id="vfCapture" aria-label="Capture photo" disabled></button>
@@ -139,7 +140,7 @@ for (const slug of slugs){
 <meta name="twitter:description" content="${esc(c.seo.desc)}"/>
 <meta name="twitter:image" content="${SITE}/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="../styles.css?v=8"/>
+<link rel="stylesheet" href="../styles.css?v=10"/>
 <script type="application/ld+json">${JSON.stringify(appLd)}</script>
 <script type="application/ld+json">${JSON.stringify(crumbLd)}</script>
 <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
@@ -211,8 +212,8 @@ ${footerCountries()}
 </div></footer>
 
 <script>window.GF_START="${slug}";</script>
-<script src="../countries.js?v=9"></script>
-<script type="module" src="../app.js?v=9"></script>
+<script src="../countries.js?v=10"></script>
+<script type="module" src="../app.js?v=10"></script>
 </body>
 </html>`;
   fs.writeFileSync(path.join(cdir, `${slug}.html`), html);
