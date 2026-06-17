@@ -322,6 +322,7 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
         <div class="controls">
           <button class="btn primary" id="startCam">Start live guide</button>
           <button class="btn go" id="capture" disabled>Capture &amp; format</button>
+          <button class="btn" id="flipCam" disabled>Flip camera</button>
           <label class="btn" for="upload">Check a photo</label>
           <input type="file" id="upload" accept="image/*"/>
         </div>
@@ -1803,12 +1804,13 @@ const el = {
   video:$("video"), feed:$("feed"), hud:$("hud"), frame:$("framewrap"),
   vfEmpty:$("vfEmpty"), badge:$("vfBadge"), gates:$("gates"), verdict:$("verdict"),
   score:$("scoreNum"), status:$("status"), country:$("country"),
-  startCam:$("startCam"), capture:$("capture"), upload:$("upload"),
+  startCam:$("startCam"), capture:$("capture"), flipCam:$("flipCam"), upload:$("upload"),
   result:$("result"), resultImg:$("resultImg"), rmeta:$("rmeta"),
   download:$("download"), sheet:$("sheet"), report:$("report"), retake:$("retake")
 };
 let landmarker=null, imageLandmarker=null, modelReady=false;
 let running=false, stream=null, mode="idle", stillImage=null, lastResults=null, prevStatus={}, lastChecks=[];
+let facing="user"; // "user" = selfie (default), "environment" = rear
 
 const FLAG_LABELS={ no_glasses:"Remove glasses (not permitted)", neutral_expression:"Neutral expression — confirm", no_head_covering:"No hat / head covering (unless religious)" };
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -1822,6 +1824,7 @@ function boot(){
   el.country.value = (window.GF_START && SPECS[window.GF_START]) ? window.GF_START : Object.keys(SPECS)[0];
   el.country.addEventListener("change",()=>{ prevStatus={}; renderGates(currentGates()); if(mode==="still"&&stillImage) runStill(); });
   el.startCam.addEventListener("click",()=> running?stopCam():startCam());
+  if(el.flipCam) el.flipCam.addEventListener("click",flipCamera);
   el.capture.addEventListener("click",captureLive);
   el.upload.addEventListener("change",onUpload);
   if(el.retake) el.retake.onclick=()=> el.result.classList.remove("on");
@@ -1900,7 +1903,7 @@ function geometry(lm,w,h){
 /* ---------- check engine ---------- */
 function buildChecks({geo,bg,sharp,light,faceCount,out,spec}){
   const C=[],push=(id,label,status,measured,coach)=>C.push({id,label,status,measured,coach});
-  if(geo!==undefined) push("face","One face detected",faceCount===1?"pass":"fail",faceCount===1?"1 face":`${faceCount||0} faces`,faceCount===0?"No face found — move closer and face the camera.":"Only one person may be in frame.");
+  if(geo!==undefined) push("face","One face detected",faceCount===undefined?"idle":(faceCount===1?"pass":"fail"),faceCount===undefined?"—":(faceCount===1?"1 face":`${faceCount||0} faces`),faceCount===0?"No face found — move closer and face the camera.":"Only one person may be in frame.");
   if(geo){
     const[hmin,hmax]=spec.headRatio,hr=geo.headRatio;
     push("head","Head size",hr>=hmin&&hr<=hmax?"pass":"fail",`${(hr*100).toFixed(0)}% · ${Math.round(hmin*100)}–${Math.round(hmax*100)}%`,hr<hmin?"Move closer — your head is too small in the frame.":hr>hmax?"Move back — your head fills too much of the frame.":"");
@@ -1954,12 +1957,15 @@ function renderGates(checks){
 /* ---------- live ---------- */
 async function startCam(){
   if(running)return;
-  try{ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"},width:{ideal:1920},height:{ideal:1080}},audio:false}); }
+  try{ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:facing},width:{ideal:1920},height:{ideal:1080}},audio:false}); }
   catch(e){ setStatus("Camera not available ("+e.name+"). Use 'Check a photo' below to upload one instead."); return; }
   try{ el.video.srcObject=stream; await el.video.play(); }
   catch(e){ setStatus("Camera started but couldn't play ("+e.name+"). Try 'Check a photo' instead."); stopCam(); return; }
+  // Mirror the selfie view so it reads naturally; rear camera shows un-mirrored.
+  el.video.style.transform = facing==="user" ? "scaleX(-1)" : "none";
   el.video.style.display="block"; el.feed.style.display="none"; el.vfEmpty.style.display="none";
   mode="live"; running=true; el.startCam.textContent="Stop camera";
+  if(el.flipCam) el.flipCam.disabled=false;
   setStatus("Line up with the guide. The frame turns green and Capture unlocks when every check passes.");
   sizeHud(); requestAnimationFrame(loop);
 }
@@ -1968,8 +1974,13 @@ function stopCam(){
   if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
   el.video.style.display="none"; el.vfEmpty.style.display="block";
   el.startCam.textContent="Start live guide";
+  if(el.flipCam) el.flipCam.disabled=true;
   el.hud.getContext("2d").clearRect(0,0,el.hud.width,el.hud.height);
   prevStatus={}; renderGates(currentGates());
+}
+async function flipCamera(){
+  facing = facing==="user" ? "environment" : "user";
+  if(running){ stream&&stream.getTracks().forEach(t=>t.stop()); running=false; await startCam(); }
 }
 function sizeHud(){ const r=el.video.parentElement.getBoundingClientRect(); el.hud.width=r.width; el.hud.height=r.height; }
 window.addEventListener("resize",()=>{ if(mode==="live")sizeHud(); });

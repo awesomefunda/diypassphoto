@@ -54,6 +54,7 @@ const TOOL = `
         <div class="controls">
           <button class="btn primary" id="startCam">Start live guide</button>
           <button class="btn go" id="capture" disabled>Capture &amp; format</button>
+          <button class="btn" id="flipCam" disabled>Flip camera</button>
           <label class="btn" for="upload">Check a photo</label>
           <input type="file" id="upload" accept="image/*"/>
         </div>
@@ -203,8 +204,8 @@ ${footerCountries()}
 </div></footer>
 
 <script>window.GF_START="${slug}";</script>
-<script src="../countries.js?v=5"></script>
-<script type="module" src="../app.js?v=5"></script>
+<script src="../countries.js?v=6"></script>
+<script type="module" src="../app.js?v=6"></script>
 </body>
 </html>`;
   fs.writeFileSync(path.join(cdir, `${slug}.html`), html);
