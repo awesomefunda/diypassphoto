@@ -1960,8 +1960,9 @@ function renderGates(checks){
 async function startCam(){
   if(running)return;
   try{ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user",width:{ideal:1280},height:{ideal:1280}},audio:false}); }
-  catch(e){ setStatus("Camera permission denied. You can still check an existing photo."); return; }
-  el.video.srcObject=stream; await el.video.play();
+  catch(e){ setStatus("Camera not available ("+e.name+"). Use 'Check a photo' below to upload one instead."); return; }
+  try{ el.video.srcObject=stream; await el.video.play(); }
+  catch(e){ setStatus("Camera started but couldn't play ("+e.name+"). Try 'Check a photo' instead."); stopCam(); return; }
   el.video.style.display="block"; el.feed.style.display="none"; el.vfEmpty.style.display="none";
   mode="live"; running=true; el.startCam.textContent="Stop camera";
   setStatus("Line up with the guide. The frame turns green and Capture unlocks when every check passes.");
@@ -1982,19 +1983,25 @@ let lastTs=-1;
 function loop(){
   if(!running)return;
   const spec=SPECS[el.country.value], vw=el.video.videoWidth, vh=el.video.videoHeight;
-  if(vw&&modelReady){
-    const now=performance.now(); let res=null;
-    if(now!==lastTs){ res=landmarker.detectForVideo(el.video,now); lastTs=now; lastResults=res; }
-    drawHud(spec,res||lastResults);
-    if(res){
-      const mc=document.createElement("canvas");mc.width=vw;mc.height=vh;
-      const mx=mc.getContext("2d");mx.drawImage(el.video,0,0,vw,vh);
-      const geo=res.faceLandmarks&&res.faceLandmarks[0]?geometry(res.faceLandmarks[0],vw,vh):null;
-      const bg=analyzeBackground(mx,vw,vh,spec.background.target), sharp=analyzeSharpness(mx,vw,vh);
-      const light=geo?analyzeLighting(mx,geo.faceBox):null;
-      renderGates(buildChecks({geo,bg,sharp,light,faceCount:res.faceLandmarks?res.faceLandmarks.length:0,
-        out:{okDims:true,dims:`${spec.out.wPx}×${spec.out.hPx}`,kb:null},spec}));
+  if(vw){
+    const mc=document.createElement("canvas");mc.width=vw;mc.height=vh;
+    const mx=mc.getContext("2d");mx.drawImage(el.video,0,0,vw,vh);
+    let geo=null, faceCount=0, res=null;
+    if(modelReady){
+      const now=performance.now();
+      if(now!==lastTs){ res=landmarker.detectForVideo(el.video,now); lastTs=now; lastResults=res; }
+      else { res=lastResults; }
+      if(res&&res.faceLandmarks&&res.faceLandmarks[0]){
+        geo=geometry(res.faceLandmarks[0],vw,vh);
+        faceCount=res.faceLandmarks.length;
+      }
     }
+    drawHud(spec,res||lastResults);
+    const bg=analyzeBackground(mx,vw,vh,spec.background.target);
+    const sharp=analyzeSharpness(mx,vw,vh);
+    const light=geo?analyzeLighting(mx,geo.faceBox):null;
+    renderGates(buildChecks({geo,bg,sharp,light,faceCount,
+      out:{okDims:true,dims:`${spec.out.wPx}×${spec.out.hPx}`,kb:null},spec}));
   }
   requestAnimationFrame(loop);
 }
