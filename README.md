@@ -5,9 +5,6 @@ green when your passport/visa photo meets the spec. Live guidance + spec-accurat
 for 10 countries, fully client-side, free, open-source. Your photo never leaves your device, and it
 **never edits the photo** — so it stays compliant with the 2026 US no-alteration rule.
 
-> Built privacy-first like Locdone (nothing uploaded), structured to lift into a Next.js app like
-> BinOverflow. Each country gets its own indexable landing page from one source of truth.
-
 ---
 
 ## Files
@@ -92,19 +89,5 @@ to). One bold move (the frame going green); everything else kept quiet. Reduced-
   HUD → `useCamera()` hook. The per-country pages become `app/c/[slug]/page.tsx` generated from the
   same JSON via `generateStaticParams` (your `generate.js` logic moves into the framework).
 - MediaPipe: `npm i @mediapipe/tasks-vision`. No DB needed (no server state).
-
-## SEO / launch
-On-page is done (unique meta + JSON-LD per page, sitemap, robots, interlinking, 3 guides). For launch
-submission steps (Search Console, Show HN, AlternativeTo, etc.) see `DIRECTORY_SUBMISSIONS.md`.
-
-## Honest limitations
-- Measures the spec; **can't guarantee acceptance** (stated in UI).
-- Glasses / head covering / identity are `manual` flags, not scored.
-- **Crown estimation** is approximated above the forehead landmarks — the one geometry measurement
-  worth refining (see `dpar39/ppp`'s SCFace-validated method; GPL, mind the license).
-- Tune thresholds (head tolerances, ΔE limits, sharpness cutoff) against real accepted/rejected
-  samples before trusting them hard.
-- Country spec numbers are cross-checked against PhotoGen + published specs but **verify each against
-  the official source** before launch — they change.
 
 MIT.
