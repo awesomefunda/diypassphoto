@@ -203,8 +203,8 @@ ${footerCountries()}
 </div></footer>
 
 <script>window.GF_START="${slug}";</script>
-<script src="../countries.js?v=4"></script>
-<script type="module" src="../app.js"></script>
+<script src="../countries.js?v=5"></script>
+<script type="module" src="../app.js?v=5"></script>
 </body>
 </html>`;
   fs.writeFileSync(path.join(cdir, `${slug}.html`), html);
@@ -220,7 +220,7 @@ function inline(html){
   return html
     .replace(/<link rel="stylesheet" href="(\.\.\/)?styles\.css"\/>/, "<style>\n"+CSS+"\n</style>")
     .replace(/<script src="(\.\.\/)?countries\.js(\?[^"]*)?"><\/script>/, "<script>\n"+REG+"\n</script>")
-    .replace(/<script type="module" src="(\.\.\/)?app\.js"><\/script>/, '<script type="module">\n'+APP+"\n</script>");
+    .replace(/<script type="module" src="(\.\.\/)?app\.js(\?[^"]*)?"><\/script>/, '<script type="module">\n'+APP+"\n</script>");
 }
 for (const slug of slugs){
   fs.writeFileSync(path.join(sdir, `${slug}.html`), inline(fs.readFileSync(path.join(cdir, `${slug}.html`),"utf8")));
