@@ -109,6 +109,39 @@ header.bar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .framewrap.go .vf-badge .blink{animation:pulse 1.1s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
+/* in-frame live feedback message (native-camera style) */
+.vf-msg{position:absolute;top:52px;left:50%;transform:translateX(-50%);z-index:6;display:none;
+  max-width:86%;text-align:center;padding:9px 15px;border-radius:13px;font-weight:600;font-size:14px;line-height:1.3;
+  background:rgba(11,19,14,.74);color:#fff;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
+  box-shadow:0 6px 22px rgba(0,0,0,.28)}
+.vf-msg.show{display:block}
+.vf-msg.go{background:var(--go);color:#fff}
+
+/* in-frame shutter bar (shown full-screen on phones) */
+.vf-shutter{position:absolute;left:0;right:0;bottom:0;z-index:6;display:none;
+  align-items:center;justify-content:space-between;
+  padding:16px 26px calc(16px + env(safe-area-inset-bottom));
+  background:linear-gradient(to top,rgba(11,19,14,.62),transparent)}
+.vf-shutter .vf-btn{width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.42);
+  background:rgba(11,19,14,.5);color:#fff;font-size:21px;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
+.vf-shot{width:72px;height:72px;border-radius:50%;border:5px solid rgba(255,255,255,.92);
+  background:#fff;cursor:pointer;flex:0 0 auto;box-shadow:0 0 0 3px rgba(0,0,0,.28);transition:background .3s,border-color .3s}
+.vf-shot:disabled{opacity:.45;cursor:not-allowed}
+.framewrap.go .vf-shot:not(:disabled){border-color:var(--go);background:var(--go)}
+
+/* phone: live camera fills the screen so feedback + shutter need no scroll */
+@media(max-width:900px){
+  body.cam-live{overflow:hidden}
+  body.cam-live .bar,body.cam-live footer,body.cam-live .controls,body.cam-live .hint,body.cam-live .panel{display:none}
+  body.cam-live .framewrap{position:fixed;inset:0;z-index:1000;padding:0;margin:0}
+  body.cam-live .viewfinder{aspect-ratio:auto;width:100vw;height:100dvh;border-radius:0}
+  body.cam-live .cropmark{display:none}
+  body.cam-live .vf-shutter{display:flex}
+  body.cam-live .vf-msg{display:none}
+  body.cam-live .vf-msg.show{display:block}
+}
+
 /* gate panel */
 .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-1);overflow:hidden;display:flex;flex-direction:column}
 .panel .phead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 17px;border-bottom:1px solid var(--line)}
@@ -301,7 +334,13 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
           <video id="video" autoplay playsinline muted style="display:none"></video>
           <canvas class="feed" id="feed" style="display:none"></canvas>
           <canvas class="hud" id="hud"></canvas>
+          <div class="vf-msg" id="vfMsg"></div>
           <div class="vf-empty" id="vfEmpty"><span class="big">Start the live guide</span>Use the rear camera if someone can take it for you — it's sharper than the selfie cam.</div>
+          <div class="vf-shutter" id="vfShutter">
+            <button class="vf-btn" id="vfFlip" aria-label="Flip camera" title="Flip camera">⟲</button>
+            <button class="vf-shot" id="vfCapture" aria-label="Capture photo" disabled></button>
+            <button class="vf-btn" id="vfClose" aria-label="Close camera" title="Close camera">✕</button>
+          </div>
         </div>
       </div>
       <div>
@@ -1802,6 +1841,7 @@ const el = {
   vfEmpty:$("vfEmpty"), badge:$("vfBadge"), gates:$("gates"), verdict:$("verdict"),
   score:$("scoreNum"), status:$("status"), country:$("country"),
   startCam:$("startCam"), capture:$("capture"), flipCam:$("flipCam"), upload:$("upload"),
+  vfMsg:$("vfMsg"), vfShutter:$("vfShutter"), vfCapture:$("vfCapture"), vfFlip:$("vfFlip"), vfClose:$("vfClose"),
   result:$("result"), resultImg:$("resultImg"), rmeta:$("rmeta"),
   download:$("download"), sheet:$("sheet"), report:$("report"), retake:$("retake")
 };
@@ -1822,6 +1862,9 @@ function boot(){
   el.country.addEventListener("change",()=>{ prevStatus={}; renderGates(currentGates()); if(mode==="still"&&stillImage) runStill(); });
   el.startCam.addEventListener("click",()=> running?stopCam():startCam());
   if(el.flipCam) el.flipCam.addEventListener("click",flipCamera);
+  if(el.vfFlip) el.vfFlip.addEventListener("click",flipCamera);
+  if(el.vfCapture) el.vfCapture.addEventListener("click",captureLive);
+  if(el.vfClose) el.vfClose.addEventListener("click",stopCam);
   el.capture.addEventListener("click",captureLive);
   el.upload.addEventListener("change",onUpload);
   if(el.retake) el.retake.onclick=()=> el.result.classList.remove("on");
@@ -1949,6 +1992,17 @@ function renderGates(checks){
   el.verdict.textContent=req===0?"Waiting for a photo…":go?"All required checks pass":"Not ready yet";
   el.score.textContent=req?`${pass}/${req}`:"";
   el.capture.disabled=!(mode==="live"&&go);
+  if(el.vfCapture) el.vfCapture.disabled=!(mode==="live"&&go);
+  // in-frame coaching message — the single most useful thing to fix right now
+  if(el.vfMsg){
+    if(mode!=="live"){ el.vfMsg.className="vf-msg"; el.vfMsg.textContent=""; }
+    else if(go){ el.vfMsg.className="vf-msg show go"; el.vfMsg.textContent="✓ Looks good — tap the shutter"; }
+    else{
+      const f=checks.find(c=>c.status==="fail"&&c.coach)||checks.find(c=>c.status==="warn"&&c.coach);
+      el.vfMsg.className="vf-msg show";
+      el.vfMsg.textContent=f?f.coach:"Line up your face inside the oval.";
+    }
+  }
 }
 
 /* ---------- live ---------- */
@@ -1963,6 +2017,7 @@ async function startCam(){
   el.video.style.display="block"; el.feed.style.display="none"; el.vfEmpty.style.display="none";
   mode="live"; running=true; el.startCam.textContent="Stop camera";
   if(el.flipCam) el.flipCam.disabled=false;
+  document.body.classList.add("cam-live");
   setStatus("Line up with the guide. The frame turns green and Capture unlocks when every check passes.");
   sizeHud(); requestAnimationFrame(loop);
 }
@@ -1972,6 +2027,8 @@ function stopCam(){
   el.video.style.display="none"; el.vfEmpty.style.display="block";
   el.startCam.textContent="Start live guide";
   if(el.flipCam) el.flipCam.disabled=true;
+  document.body.classList.remove("cam-live");
+  if(el.vfMsg) el.vfMsg.className="vf-msg";
   el.hud.getContext("2d").clearRect(0,0,el.hud.width,el.hud.height);
   prevStatus={}; renderGates(currentGates());
 }
@@ -1981,6 +2038,7 @@ async function flipCamera(){
 }
 function sizeHud(){ const r=el.video.parentElement.getBoundingClientRect(); el.hud.width=r.width; el.hud.height=r.height; }
 window.addEventListener("resize",()=>{ if(mode==="live")sizeHud(); });
+window.addEventListener("orientationchange",()=>{ if(mode==="live")setTimeout(sizeHud,250); });
 
 let lastTs=-1;
 function loop(){
@@ -2075,7 +2133,9 @@ function makePhoto(src,sw,sh){
 function captureLive(){
   const vw=el.video.videoWidth,vh=el.video.videoHeight;
   const c=document.createElement("canvas");c.width=vw;c.height=vh;c.getContext("2d").drawImage(el.video,0,0,vw,vh);
+  const onPhone=document.body.classList.contains("cam-live")&&matchMedia("(max-width:900px)").matches;
   showResult(makePhoto(c,vw,vh));
+  if(onPhone) stopCam(); // leave the full-screen camera so the result shows
 }
 let lastResult=null;
 function showResult(r){

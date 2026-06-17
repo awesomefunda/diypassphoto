@@ -10,6 +10,7 @@ const el = {
   vfEmpty:$("vfEmpty"), badge:$("vfBadge"), gates:$("gates"), verdict:$("verdict"),
   score:$("scoreNum"), status:$("status"), country:$("country"),
   startCam:$("startCam"), capture:$("capture"), flipCam:$("flipCam"), upload:$("upload"),
+  vfMsg:$("vfMsg"), vfShutter:$("vfShutter"), vfCapture:$("vfCapture"), vfFlip:$("vfFlip"), vfClose:$("vfClose"),
   result:$("result"), resultImg:$("resultImg"), rmeta:$("rmeta"),
   download:$("download"), sheet:$("sheet"), report:$("report"), retake:$("retake")
 };
@@ -30,6 +31,9 @@ function boot(){
   el.country.addEventListener("change",()=>{ prevStatus={}; renderGates(currentGates()); if(mode==="still"&&stillImage) runStill(); });
   el.startCam.addEventListener("click",()=> running?stopCam():startCam());
   if(el.flipCam) el.flipCam.addEventListener("click",flipCamera);
+  if(el.vfFlip) el.vfFlip.addEventListener("click",flipCamera);
+  if(el.vfCapture) el.vfCapture.addEventListener("click",captureLive);
+  if(el.vfClose) el.vfClose.addEventListener("click",stopCam);
   el.capture.addEventListener("click",captureLive);
   el.upload.addEventListener("change",onUpload);
   if(el.retake) el.retake.onclick=()=> el.result.classList.remove("on");
@@ -157,6 +161,17 @@ function renderGates(checks){
   el.verdict.textContent=req===0?"Waiting for a photo…":go?"All required checks pass":"Not ready yet";
   el.score.textContent=req?`${pass}/${req}`:"";
   el.capture.disabled=!(mode==="live"&&go);
+  if(el.vfCapture) el.vfCapture.disabled=!(mode==="live"&&go);
+  // in-frame coaching message — the single most useful thing to fix right now
+  if(el.vfMsg){
+    if(mode!=="live"){ el.vfMsg.className="vf-msg"; el.vfMsg.textContent=""; }
+    else if(go){ el.vfMsg.className="vf-msg show go"; el.vfMsg.textContent="✓ Looks good — tap the shutter"; }
+    else{
+      const f=checks.find(c=>c.status==="fail"&&c.coach)||checks.find(c=>c.status==="warn"&&c.coach);
+      el.vfMsg.className="vf-msg show";
+      el.vfMsg.textContent=f?f.coach:"Line up your face inside the oval.";
+    }
+  }
 }
 
 /* ---------- live ---------- */
@@ -171,6 +186,7 @@ async function startCam(){
   el.video.style.display="block"; el.feed.style.display="none"; el.vfEmpty.style.display="none";
   mode="live"; running=true; el.startCam.textContent="Stop camera";
   if(el.flipCam) el.flipCam.disabled=false;
+  document.body.classList.add("cam-live");
   setStatus("Line up with the guide. The frame turns green and Capture unlocks when every check passes.");
   sizeHud(); requestAnimationFrame(loop);
 }
@@ -180,6 +196,8 @@ function stopCam(){
   el.video.style.display="none"; el.vfEmpty.style.display="block";
   el.startCam.textContent="Start live guide";
   if(el.flipCam) el.flipCam.disabled=true;
+  document.body.classList.remove("cam-live");
+  if(el.vfMsg) el.vfMsg.className="vf-msg";
   el.hud.getContext("2d").clearRect(0,0,el.hud.width,el.hud.height);
   prevStatus={}; renderGates(currentGates());
 }
@@ -189,6 +207,7 @@ async function flipCamera(){
 }
 function sizeHud(){ const r=el.video.parentElement.getBoundingClientRect(); el.hud.width=r.width; el.hud.height=r.height; }
 window.addEventListener("resize",()=>{ if(mode==="live")sizeHud(); });
+window.addEventListener("orientationchange",()=>{ if(mode==="live")setTimeout(sizeHud,250); });
 
 let lastTs=-1;
 function loop(){
@@ -283,7 +302,9 @@ function makePhoto(src,sw,sh){
 function captureLive(){
   const vw=el.video.videoWidth,vh=el.video.videoHeight;
   const c=document.createElement("canvas");c.width=vw;c.height=vh;c.getContext("2d").drawImage(el.video,0,0,vw,vh);
+  const onPhone=document.body.classList.contains("cam-live")&&matchMedia("(max-width:900px)").matches;
   showResult(makePhoto(c,vw,vh));
+  if(onPhone) stopCam(); // leave the full-screen camera so the result shows
 }
 let lastResult=null;
 function showResult(r){

@@ -47,7 +47,13 @@
           <video id="video" autoplay playsinline muted style="display:none"></video>
           <canvas class="feed" id="feed" style="display:none"></canvas>
           <canvas class="hud" id="hud"></canvas>
+          <div class="vf-msg" id="vfMsg"></div>
           <div class="vf-empty" id="vfEmpty"><span class="big">Start the live guide</span>Use the rear camera if someone can take it for you — it's sharper than the selfie cam.</div>
+          <div class="vf-shutter" id="vfShutter">
+            <button class="vf-btn" id="vfFlip" aria-label="Flip camera" title="Flip camera">⟲</button>
+            <button class="vf-shot" id="vfCapture" aria-label="Capture photo" disabled></button>
+            <button class="vf-btn" id="vfClose" aria-label="Close camera" title="Close camera">✕</button>
+          </div>
         </div>
       </div>
       <div>
@@ -160,7 +166,7 @@
 </div></footer>
 
 <script>window.GF_START="china-passport";</script>
-<script src="../countries.js?v=6"></script>
-<script type="module" src="../app.js?v=6"></script>
+<script src="../countries.js?v=7"></script>
+<script type="module" src="../app.js?v=7"></script>
 </body>
 </html>
