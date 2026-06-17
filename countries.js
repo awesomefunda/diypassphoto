@@ -2,7 +2,7 @@
 window.COUNTRY_SPECS = {
   "us-passport": {
     "label": "US Passport",
-    "flag": "\ud83c\uddfa\ud83c\uddf8",
+    "flag": "US",
     "country": "United States",
     "docName": "Passport",
     "out": {
@@ -75,7 +75,7 @@ window.COUNTRY_SPECS = {
       }
     ],
     "emblem": {
-      "icon": "\ud83e\udd85",
+      "icon": "",
       "name": "Bald eagle",
       "kind": "National bird"
     },
@@ -83,7 +83,7 @@ window.COUNTRY_SPECS = {
   },
   "dv-lottery": {
     "label": "US Visa / DV Lottery",
-    "flag": "\ud83c\uddfa\ud83c\uddf8",
+    "flag": "US",
     "country": "United States",
     "docName": "Visa / DV Lottery (DS-160 / DS-260)",
     "out": {
@@ -156,7 +156,7 @@ window.COUNTRY_SPECS = {
       }
     ],
     "emblem": {
-      "icon": "\ud83e\udd85",
+      "icon": "",
       "name": "Bald eagle",
       "kind": "National bird"
     },
@@ -164,7 +164,7 @@ window.COUNTRY_SPECS = {
   },
   "uk-passport": {
     "label": "UK Passport",
-    "flag": "\ud83c\uddec\ud83c\udde7",
+    "flag": "UK",
     "country": "United Kingdom",
     "docName": "Passport",
     "out": {
@@ -230,7 +230,7 @@ window.COUNTRY_SPECS = {
       }
     ],
     "emblem": {
-      "icon": "\ufffd\u0081",
+      "icon": "",
       "name": "Lion",
       "kind": "National animal"
     },
@@ -238,7 +238,7 @@ window.COUNTRY_SPECS = {
   },
   "schengen-eu": {
     "label": "Schengen / EU Visa",
-    "flag": "\ud83c\uddea\ud83c\uddfa",
+    "flag": "EU",
     "country": "Schengen / EU",
     "docName": "Visa & Passport (35\u00d745mm)",
     "out": {
@@ -304,7 +304,7 @@ window.COUNTRY_SPECS = {
       }
     ],
     "emblem": {
-      "icon": "\ud83e\udd89",
+      "icon": "",
       "name": "Owl",
       "kind": "Emblem"
     },
@@ -312,7 +312,7 @@ window.COUNTRY_SPECS = {
   },
   "india-passport": {
     "label": "India Passport",
-    "flag": "\ud83c\uddee\ud83c\uddf3",
+    "flag": "IN",
     "country": "India",
     "docName": "Passport (2\u00d72in)",
     "out": {
@@ -375,7 +375,7 @@ window.COUNTRY_SPECS = {
       }
     ],
     "emblem": {
-      "icon": "\ufffd\u0090\ufffd",
+      "icon": "",
       "name": "Bengal tiger",
       "kind": "National animal"
     },
@@ -383,7 +383,7 @@ window.COUNTRY_SPECS = {
   },
   "canada-passport": {
     "label": "Canada Passport",
-    "flag": "\ud83c\udde8\ud83c\udde6",
+    "flag": "CA",
     "country": "Canada",
     "docName": "Passport (50\u00d770mm)",
     "out": {
@@ -447,7 +447,7 @@ window.COUNTRY_SPECS = {
       }
     ],
     "emblem": {
-      "icon": "\ud83e\uddab",
+      "icon": "",
       "name": "Beaver",
       "kind": "National animal"
     },
@@ -455,7 +455,7 @@ window.COUNTRY_SPECS = {
   },
   "australia-passport": {
     "label": "Australia Passport",
-    "flag": "\ud83c\udde6\ud83c\uddfa",
+    "flag": "AU",
     "country": "Australia",
     "docName": "Passport (35\u00d745mm)",
     "out": {
@@ -514,7 +514,7 @@ window.COUNTRY_SPECS = {
       }
     ],
     "emblem": {
-      "icon": "\ud83e\udd98",
+      "icon": "",
       "name": "Kangaroo",
       "kind": "National animal"
     },
@@ -522,7 +522,7 @@ window.COUNTRY_SPECS = {
   },
   "china-visa": {
     "label": "China Visa",
-    "flag": "\ud83c\udde8\ud83c\uddf3",
+    "flag": "CN",
     "country": "China",
     "docName": "Visa (33\u00d748mm)",
     "out": {
@@ -589,7 +589,7 @@ window.COUNTRY_SPECS = {
       }
     ],
     "emblem": {
-      "icon": "\ufffd\u0090\ufffd",
+      "icon": "",
       "name": "Giant panda",
       "kind": "National animal"
     },
@@ -597,7 +597,7 @@ window.COUNTRY_SPECS = {
   },
   "japan-passport": {
     "label": "Japan Passport",
-    "flag": "\ud83c\uddef\ud83c\uddf5",
+    "flag": "JP",
     "country": "Japan",
     "docName": "Passport (35\u00d745mm)",
     "out": {
@@ -656,7 +656,7 @@ window.COUNTRY_SPECS = {
       }
     ],
     "emblem": {
-      "icon": "\ufffd\u0090\ufffd",
+      "icon": "",
       "name": "Green pheasant",
       "kind": "National bird"
     },
@@ -664,7 +664,7 @@ window.COUNTRY_SPECS = {
   },
   "germany-passport": {
     "label": "Germany Passport",
-    "flag": "\ud83c\udde9\ud83c\uddea",
+    "flag": "DE",
     "country": "Germany",
     "docName": "Passport (35\u00d745mm)",
     "out": {
@@ -724,7 +724,7 @@ window.COUNTRY_SPECS = {
       }
     ],
     "emblem": {
-      "icon": "\ud83e\udd85",
+      "icon": "",
       "name": "Federal eagle",
       "kind": "National animal"
     },

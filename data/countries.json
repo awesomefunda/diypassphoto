@@ -1,7 +1,7 @@
 {
   "us-passport": {
     "label": "US Passport",
-    "flag": "🇺🇸",
+    "flag": "US",
     "country": "United States",
     "docName": "Passport",
     "out": {
@@ -74,7 +74,7 @@
       }
     ],
     "emblem": {
-      "icon": "🦅",
+      "icon": "",
       "name": "Bald eagle",
       "kind": "National bird"
     },
@@ -82,7 +82,7 @@
   },
   "dv-lottery": {
     "label": "US Visa / DV Lottery",
-    "flag": "🇺🇸",
+    "flag": "US",
     "country": "United States",
     "docName": "Visa / DV Lottery (DS-160 / DS-260)",
     "out": {
@@ -155,7 +155,7 @@
       }
     ],
     "emblem": {
-      "icon": "🦅",
+      "icon": "",
       "name": "Bald eagle",
       "kind": "National bird"
     },
@@ -163,7 +163,7 @@
   },
   "uk-passport": {
     "label": "UK Passport",
-    "flag": "🇬🇧",
+    "flag": "UK",
     "country": "United Kingdom",
     "docName": "Passport",
     "out": {
@@ -229,7 +229,7 @@
       }
     ],
     "emblem": {
-      "icon": "�",
+      "icon": "",
       "name": "Lion",
       "kind": "National animal"
     },
@@ -237,7 +237,7 @@
   },
   "schengen-eu": {
     "label": "Schengen / EU Visa",
-    "flag": "🇪🇺",
+    "flag": "EU",
     "country": "Schengen / EU",
     "docName": "Visa & Passport (35×45mm)",
     "out": {
@@ -303,7 +303,7 @@
       }
     ],
     "emblem": {
-      "icon": "🦉",
+      "icon": "",
       "name": "Owl",
       "kind": "Emblem"
     },
@@ -311,7 +311,7 @@
   },
   "india-passport": {
     "label": "India Passport",
-    "flag": "🇮🇳",
+    "flag": "IN",
     "country": "India",
     "docName": "Passport (2×2in)",
     "out": {
@@ -374,7 +374,7 @@
       }
     ],
     "emblem": {
-      "icon": "��",
+      "icon": "",
       "name": "Bengal tiger",
       "kind": "National animal"
     },
@@ -382,7 +382,7 @@
   },
   "canada-passport": {
     "label": "Canada Passport",
-    "flag": "🇨🇦",
+    "flag": "CA",
     "country": "Canada",
     "docName": "Passport (50×70mm)",
     "out": {
@@ -446,7 +446,7 @@
       }
     ],
     "emblem": {
-      "icon": "🦫",
+      "icon": "",
       "name": "Beaver",
       "kind": "National animal"
     },
@@ -454,7 +454,7 @@
   },
   "australia-passport": {
     "label": "Australia Passport",
-    "flag": "🇦🇺",
+    "flag": "AU",
     "country": "Australia",
     "docName": "Passport (35×45mm)",
     "out": {
@@ -513,7 +513,7 @@
       }
     ],
     "emblem": {
-      "icon": "🦘",
+      "icon": "",
       "name": "Kangaroo",
       "kind": "National animal"
     },
@@ -521,7 +521,7 @@
   },
   "china-visa": {
     "label": "China Visa",
-    "flag": "🇨🇳",
+    "flag": "CN",
     "country": "China",
     "docName": "Visa (33×48mm)",
     "out": {
@@ -588,7 +588,7 @@
       }
     ],
     "emblem": {
-      "icon": "��",
+      "icon": "",
       "name": "Giant panda",
       "kind": "National animal"
     },
@@ -596,7 +596,7 @@
   },
   "japan-passport": {
     "label": "Japan Passport",
-    "flag": "🇯🇵",
+    "flag": "JP",
     "country": "Japan",
     "docName": "Passport (35×45mm)",
     "out": {
@@ -655,7 +655,7 @@
       }
     ],
     "emblem": {
-      "icon": "��",
+      "icon": "",
       "name": "Green pheasant",
       "kind": "National bird"
     },
@@ -663,7 +663,7 @@
   },
   "germany-passport": {
     "label": "Germany Passport",
-    "flag": "🇩🇪",
+    "flag": "DE",
     "country": "Germany",
     "docName": "Passport (35×45mm)",
     "out": {
@@ -723,11 +723,10 @@
       }
     ],
     "emblem": {
-      "icon": "🦅",
+      "icon": "",
       "name": "Federal eagle",
       "kind": "National animal"
     },
     "officialUrl": "https://www.bundesdruckerei.de/en/Photo-template"
   }
 }
-
