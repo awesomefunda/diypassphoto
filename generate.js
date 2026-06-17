@@ -170,6 +170,7 @@ ${TOOL}
 ${footerCountries()}
     </div>
     <div><h4>Guides</h4>
+      <a href="../blog/ai-passport-photo-tools-non-compliant-2026.html">AI tools &amp; 2026 rule</a>
       <a href="../blog/us-passport-photo-at-home.html">US photo at home</a>
       <a href="../blog/dv-lottery-photo-requirements.html">DV Lottery rules</a>
       <a href="../blog/white-wall-gray-background-fix.html">Fix grey backgrounds</a>
@@ -205,7 +206,7 @@ fs.writeFileSync(path.join(sdir, "index.html"), inline(fs.readFileSync(path.join
 
 /* 4) Sitemap ------------------------------------------------------------ */
 const today = new Date().toISOString().slice(0,10);
-const blogs = ["us-passport-photo-at-home","dv-lottery-photo-requirements","white-wall-gray-background-fix"];
+const blogs = ["ai-passport-photo-tools-non-compliant-2026","us-passport-photo-at-home","dv-lottery-photo-requirements","white-wall-gray-background-fix"];
 const urls = [
   `  <url><loc>${SITE}/</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>`,
   `  <url><loc>${SITE}/blog/</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`,
