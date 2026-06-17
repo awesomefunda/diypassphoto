@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DIYPassPhoto — Free Passport & Visa Photo Checker | Snap it. Verify it. Pass it.</title>
+<meta name="description" content="Take your passport or visa photo from your phone and know it's compliant before you submit. Free live camera guidance, spec-accurate checks for 10 countries. Nothing uploaded. No studio needed."/>
+<link rel="canonical" href="https://diypassphoto.com/"/>
+<meta name="keywords" content="passport photo checker, diy passport photo, passport photo at home, visa photo checker, passport photo from phone, free passport photo, passport photo requirements 2026"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="DIYPassPhoto — Snap it. Verify it. Pass it."/>
+<meta property="og:description" content="Passport & visa photos from your phone — checked against the official spec before you submit. Nothing uploaded."/>
+<meta property="og:url" content="https://diypassphoto.com/"/>
+<meta property="og:image" content="https://diypassphoto.com/og-image.png"/>
+<meta property="og:site_name" content="DIYPassPhoto"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="DIYPassPhoto — Snap it. Verify it. Pass it."/>
+<meta name="twitter:description" content="Passport & visa photos from your phone — checked against the official spec before you submit. Nothing uploaded."/>
+<meta name="twitter:image" content="https://diypassphoto.com/og-image.png"/>
+<meta name="robots" content="index,follow"/>
+<link rel="stylesheet" href="styles.css"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"DIYPassPhoto","applicationCategory":"PhotographyApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free passport and visa photo checker — take your photo from your phone, verify it meets the official spec, download and submit. 10 countries supported. Nothing uploaded.","url":"https://diypassphoto.com/","featureList":["Live camera guidance","Head size & position check","Background colour check","Sharpness check","Lighting check","File spec check","10 countries supported","Download formatted photo","Privacy-first — nothing uploaded"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"DIYPassPhoto","url":"https://diypassphoto.com/","logo":"https://diypassphoto.com/og-image.png","sameAs":[]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"DIYPassPhoto","url":"https://diypassphoto.com/","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://diypassphoto.com/c/{search_term_string}.html"},"query-input":"required name=search_term_string"}}
+</script>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="brand" href="/"><span class="mark"></span>DIYPassPhoto</a>
+  <nav class="navlinks">
+    <a href="#tool">Checker</a><a href="#how">How it works</a><a href="#checks">What we check</a><a href="#countries">Countries</a><a href="#guides">Guides</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <section class="hero" id="tool">
+    <span class="eyebrow">Free · From your phone · Nothing uploaded</span>
+    <h1>Snap it. Verify it. <em>Pass it.</em></h1>
+    <p class="lede">Passport &amp; visa photos from your phone — checked against the official spec before you submit. Nothing uploaded. No studio. No guessing.</p>
+    <div class="trust"><span>10 countries</span><span>No signup</span><span>Never edits your photo</span><span>2026-rule compliant</span></div>
+
+    <div class="studio">
+      <div class="framewrap" id="framewrap">
+        <span class="cropmark tl"></span><span class="cropmark tr"></span><span class="cropmark bl"></span><span class="cropmark br"></span>
+        <div class="viewfinder">
+          <div class="vf-badge" id="vfBadge"><span class="blink"></span>CAMERA OFF</div>
+          <video id="video" playsinline muted style="display:none"></video>
+          <canvas class="feed" id="feed" style="display:none"></canvas>
+          <canvas class="hud" id="hud"></canvas>
+          <div class="vf-empty" id="vfEmpty"><span class="big">Start the live guide</span>Use the rear camera if someone can take it for you — it's sharper than the selfie cam.</div>
+        </div>
+      </div>
+      <div>
+        <div class="panel">
+          <div class="phead"><span class="ttl">Compliance gates</span><select class="country" id="country" aria-label="Document type"></select></div>
+          <div class="gates" id="gates"></div>
+          <div class="score"><span class="verdict hold" id="verdict">Waiting for a photo…</span><span class="mono" id="scoreNum" style="color:var(--mist)"></span></div>
+        </div>
+        <div class="controls">
+          <button class="btn primary" id="startCam">Start live guide</button>
+          <button class="btn go" id="capture" disabled>Capture &amp; format</button>
+          <label class="btn" for="upload">Check a photo</label>
+          <input type="file" id="upload" accept="image/*"/>
+        </div>
+        <div class="hint" id="status">Tip: face a window for soft, even light. Overhead lights cause the shadows that get photos rejected.</div>
+      </div>
+    </div>
+
+    <div class="result" id="result">
+      <img id="resultImg" alt="Your formatted photo preview"/>
+      <div>
+        <div class="rmeta" id="rmeta"></div>
+        <div class="controls" style="margin-top:14px">
+          <button class="btn go" id="download">Download photo</button>
+          <button class="btn" id="report">Download report</button>
+          <button class="btn" id="sheet">4×6 sheet</button>
+          <button class="btn" id="retake">Retake</button>
+        </div>
+        <div class="disclaimer">Measured against the published spec — not a guarantee of acceptance. Confirm any “?” items (glasses, expression) yourself. No AI edits applied.</div>
+      </div>
+    </div>
+
+    <div class="disclaimer">DIYPassPhoto measures the published specification; the issuing authority makes the final call. Since January 2026 the US rejects AI-altered or beautified photos, so DIYPassPhoto <b>measures and coaches — it never edits your face or replaces your background.</b></div>
+  </section>
+
+  <section class="block" id="how">
+    <span class="eyebrow">The idea</span>
+    <h2 class="sec">Guidance while you shoot — not a verdict after you've failed.</h2>
+    <p class="sec-sub">Every other tool makes you take a blind photo and upload it to find out if it failed. DIYPassPhoto flips that around — live guidance from your phone, zero uploads.</p>
+    <div class="steps">
+      <div class="step"><div class="num">STEP 01</div><h3>Pick your document</h3><p>Ten passport and visa types, each loading its own exact rules.</p></div>
+      <div class="step"><div class="num">STEP 02</div><h3>Line up live</h3><p>The viewfinder reads head size, tilt, eyes, background and light in real time.</p></div>
+      <div class="step"><div class="num">STEP 03</div><h3>Capture on green</h3><p>The shutter unlocks only when every required gate passes.</p></div>
+      <div class="step"><div class="num">STEP 04</div><h3>Format &amp; download</h3><p>Cropped to exact pixels, compressed to the size limit, ready to submit.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="checks">
+    <span class="eyebrow">What we check</span>
+    <h2 class="sec">Every requirement, measured — with the actual numbers.</h2>
+    <div class="checkgrid">
+      <div class="cc"><h3>Head size &amp; position</h3><p>Crown-to-chin height as a share of the frame, eye line and centering — the geometry that fails most applications.</p></div>
+      <div class="cc"><h3>Background</h3><p>How uniform it is and how far its colour drifts from target. A white wall often photographs grey — we catch it.</p></div>
+      <div class="cc"><h3>Pose &amp; expression</h3><p>Facing forward, head level, eyes open, neutral mouth. Profiles and big smiles get bounced.</p></div>
+      <div class="cc"><h3>Lighting &amp; shadows</h3><p>Even exposure and left-vs-right balance, so shadows under the nose or on the backdrop don't sink you.</p></div>
+      <div class="cc"><h3>Sharpness</h3><p>A blur score — soft photos are a common rejection no checklist warns you about.</p></div>
+      <div class="cc"><h3>File specs</h3><p>Exact pixels, aspect, JPEG and the file-size ceiling for digital uploads.</p></div>
+    </div>
+    <p class=”hint”>Glasses, head coverings and “is this really you” are human calls — DIYPassPhoto flags them to confirm rather than faking a score.</p>
+  </section>
+
+  <section class="block" id="countries">
+    <span class="eyebrow">Coverage</span>
+    <h2 class="sec">Pick your country.</h2>
+    <p class="sec-sub">Each one has its own page with the exact spec, common rejection reasons and the checker pre-set.</p>
+    <div class="countries" id="countryGrid"></div>
+  </section>
+
+  <section class="block">
+    <div class="privacy">
+      <div class="ic">✓</div>
+      <div><h3>Your photo never leaves your device</h3>
+      <p>No server, no upload. Face detection, measurement, cropping and compression all run locally in your browser — entirely on your phone or computer. Close the tab and nothing remains.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="guides">
+    <span class="eyebrow">Guides</span>
+    <h2 class="sec">Learn the rules before you shoot.</h2>
+    <ul class="bloglist">
+      <li><a href="blog/us-passport-photo-at-home.html"><span class="k">US · 2026</span><h3>Take a US passport photo at home</h3><p>The no-AI rule, the 50–69% head-size band, and the mistakes that cost a second trip.</p></a></li>
+      <li><a href="blog/dv-lottery-photo-requirements.html"><span class="k">DV Lottery</span><h3>DV Lottery photo requirements 2026</h3><p>600–1200px, 240KB, square, white — and what the official tool won't warn you about.</p></a></li>
+      <li><a href="blog/white-wall-gray-background-fix.html"><span class="k">Background</span><h3>Why your white wall photographs grey</h3><p>White balance, exposure, and a clean white background with no editing.</p></a></li>
+    </ul>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <div class="cols">
+    <div><a class="brand" href="/" style="margin-bottom:10px"><span class="mark"></span>DIYPassPhoto</a>
+      <p style="max-width:34ch">Passport &amp; visa photos from your phone — verified against the official spec before you submit. Free, open-source, nothing uploaded.</p></div>
+    <div id="footCountriesA"><h4>Countries</h4></div>
+    <div><h4>Guides</h4>
+      <a href="blog/us-passport-photo-at-home.html">US photo at home</a>
+      <a href="blog/dv-lottery-photo-requirements.html">DV Lottery rules</a>
+      <a href="blog/white-wall-gray-background-fix.html">Fix grey backgrounds</a>
+    </div>
+  </div>
+  <div class="legal">Not affiliated with any government. DIYPassPhoto measures published specifications and cannot guarantee acceptance — always confirm current rules with the issuing authority.</div>
+</div></footer>
+
+<script>window.GF_START="us-passport";</script>
+<script src="countries.js"></script>
+<script type="module" src="app.js"></script>
+<script>
+addEventListener("DOMContentLoaded",()=>{
+  const S=window.COUNTRY_SPECS||{}, grid=document.getElementById("countryGrid"), fa=document.getElementById("footCountriesA");
+  Object.keys(S).forEach((slug,i)=>{
+    const s=S[slug];
+    const a=document.createElement("a"); a.className="ccard"; a.href=`c/${slug}.html`;
+    a.innerHTML=`<span class="fl">${s.flag}<span class="ani">${s.emblem.icon}</span></span><span class="cinfo"><span class="cn">${s.label}</span><span class="cs">${s.out.printMM[0]}×${s.out.printMM[1]}mm · ${s.out.wPx}×${s.out.hPx}px</span></span><span class="go-arrow">→</span>`;
+    grid.appendChild(a);
+    if(i<6){ const f=document.createElement("a"); f.href=`c/${slug}.html`; f.textContent=s.label; fa.appendChild(f); }
+  });
+});
+</script>
+</body>
+</html>

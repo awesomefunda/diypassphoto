@@ -1,0 +1,206 @@
+// generate.js — single source of truth (data/countries.json) -> site assets.
+// Run:  node generate.js
+const fs = require("fs");
+const path = require("path");
+
+const ROOT = __dirname;
+const data = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "countries.json"), "utf8"));
+const slugs = Object.keys(data);
+const SITE = "https://diypassphoto.com";
+const BRAND = "DIYPassPhoto";
+const TAGLINE = "Snap it. Verify it. Pass it.";
+
+/* 1) Browser registry --------------------------------------------------- */
+fs.writeFileSync(
+  path.join(ROOT, "countries.js"),
+  "// AUTO-GENERATED from data/countries.json by generate.js — do not edit by hand.\n" +
+  "window.COUNTRY_SPECS = " + JSON.stringify(data, null, 2) + ";\n"
+);
+
+/* helpers --------------------------------------------------------------- */
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const bgName = t => t[0] >= 250 ? "White" : (t[0] >= 235 ? "Off-white" : "Light grey");
+const headPct = h => `${Math.round(h[0]*100)}–${Math.round(h[1]*100)}%`;
+
+const TOOL = `
+    <div class="studio">
+      <div class="framewrap" id="framewrap">
+        <span class="cropmark tl"></span><span class="cropmark tr"></span><span class="cropmark bl"></span><span class="cropmark br"></span>
+        <div class="viewfinder">
+          <div class="vf-badge" id="vfBadge"><span class="blink"></span>CAMERA OFF</div>
+          <video id="video" playsinline muted style="display:none"></video>
+          <canvas class="feed" id="feed" style="display:none"></canvas>
+          <canvas class="hud" id="hud"></canvas>
+          <div class="vf-empty" id="vfEmpty"><span class="big">Start the live guide</span>Use the rear camera if someone can take it for you — it's sharper than the selfie cam.</div>
+        </div>
+      </div>
+      <div>
+        <div class="panel">
+          <div class="phead"><span class="ttl">Compliance gates</span><select class="country" id="country" aria-label="Document type"></select></div>
+          <div class="gates" id="gates"></div>
+          <div class="score"><span class="verdict hold" id="verdict">Waiting for a photo…</span><span class="mono" id="scoreNum" style="color:var(--mist)"></span></div>
+        </div>
+        <div class="controls">
+          <button class="btn primary" id="startCam">Start live guide</button>
+          <button class="btn go" id="capture" disabled>Capture &amp; format</button>
+          <label class="btn" for="upload">Check a photo</label>
+          <input type="file" id="upload" accept="image/*"/>
+        </div>
+        <div class="hint" id="status">Tip: face a window for soft, even light. Overhead lights cause the shadows that get photos rejected.</div>
+      </div>
+    </div>
+
+    <div class="result" id="result">
+      <img id="resultImg" alt="Your formatted photo preview"/>
+      <div>
+        <div class="rmeta" id="rmeta"></div>
+        <div class="controls" style="margin-top:14px">
+          <button class="btn go" id="download">Download photo</button>
+          <button class="btn" id="report">Download report</button>
+          <button class="btn" id="sheet">4×6 sheet</button>
+          <button class="btn" id="retake">Retake</button>
+        </div>
+        <div class="disclaimer">Measured against the published spec — not a guarantee of acceptance. Confirm any “?” items yourself. No AI edits applied.</div>
+      </div>
+    </div>`;
+
+function countryNav(current){
+  return slugs.map(s => {
+    const c = data[s];
+    const active = s === current ? ' style="border-color:var(--go-line)"' : "";
+    return `<a class="ccard" href="${s}.html"${active}><span class="fl">${c.flag}<span class="ani">${c.emblem.icon}</span></span><span class="cinfo"><span class="cn">${esc(c.label)}</span><span class="cs">${c.out.printMM[0]}×${c.out.printMM[1]}mm · ${c.out.wPx}×${c.out.hPx}px</span></span><span class="go-arrow">→</span></a>`;
+  }).join("\n        ");
+}
+function footerCountries(){
+  return slugs.slice(0,6).map(s => `      <a href="${s}.html">${esc(data[s].label)}</a>`).join("\n");
+}
+
+/* 2) Per-country pages -------------------------------------------------- */
+const cdir = path.join(ROOT, "c");
+fs.mkdirSync(cdir, { recursive: true });
+
+for (const slug of slugs){
+  const c = data[slug];
+  const url = `${SITE}/c/${slug}.html`;
+  const faqLd = {
+    "@context":"https://schema.org","@type":"FAQPage",
+    "mainEntity": c.faq.map(f => ({ "@type":"Question","name":f.q,"acceptedAnswer":{"@type":"Answer","text":f.a} }))
+  };
+  const crumbLd = {
+    "@context":"https://schema.org","@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"DIYPassPhoto","item":SITE+"/"},
+      {"@type":"ListItem","position":2,"name":c.label+" photo checker","item":url}
+    ]
+  };
+  const appLd = {
+    "@context":"https://schema.org","@type":"WebApplication","name":`DIYPassPhoto — ${c.label} photo checker`,
+    "applicationCategory":"PhotographyApplication","operatingSystem":"Web",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":url,"description":c.seo.desc
+  };
+  const fileKB = c.out.maxKB ? `≤ ${c.out.maxKB} KB` : "No strict limit";
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>${esc(c.seo.title)}</title>
+<meta name="description" content="${esc(c.seo.desc)}"/>
+<meta name="keywords" content="${esc(c.seo.keywords)}"/>
+<link rel="canonical" href="${url}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="${esc(c.seo.title)}"/>
+<meta property="og:description" content="${esc(c.seo.desc)}"/>
+<meta property="og:url" content="${url}"/>
+<meta property="og:image" content="${SITE}/og-image.png"/>
+<meta property="og:site_name" content="DIYPassPhoto"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="${esc(c.seo.title)}"/>
+<meta name="twitter:description" content="${esc(c.seo.desc)}"/>
+<meta name="twitter:image" content="${SITE}/og-image.png"/>
+<meta name="robots" content="index,follow"/>
+<link rel="stylesheet" href="../styles.css"/>
+<script type="application/ld+json">${JSON.stringify(appLd)}</script>
+<script type="application/ld+json">${JSON.stringify(crumbLd)}</script>
+<script type="application/ld+json">${JSON.stringify(faqLd)}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"DIYPassPhoto","url":"${SITE}/"}</script>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="brand" href="../"><span class="mark"></span>DIYPassPhoto</a>
+  <nav class="navlinks"><a href="../#how">How it works</a><a href="../#checks">What we check</a><a href="../#countries">Countries</a><a href="../#guides">Guides</a></nav>
+</div></header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../">DIYPassPhoto</a> / ${esc(c.country)} / ${esc(c.docName)}</div>
+
+  <section class="hero" id="tool">
+    <div class="emblem"><span class="flag">${c.flag}</span><span class="sep"></span><span class="ani">${c.emblem.icon}</span><span class="lbl">${esc(c.emblem.kind)}<b>${esc(c.emblem.name)}</b></span></div>
+    <h1>${esc(c.seo.h1)}</h1>
+    <p class="lede">Snap it from your phone, get the green light, download your photo and a compliance report. Checked against the official ${esc(c.country)} spec before you submit — nothing uploaded.</p>
+${TOOL}
+    <p class="official"><a href="${c.officialUrl}" target="_blank" rel="noopener noreferrer">Want the official rules? Read the ${esc(c.country)} requirements ↗</a></p>
+  </section>
+
+  <section class="block" id="countries">
+    <span class="eyebrow">Other countries</span>
+    <h2 class="sec">Need a different document?</h2>
+    <div class="countries">
+        ${countryNav(slug)}
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <div class="cols">
+    <div><a class="brand" href="../" style="margin-bottom:10px"><span class="mark"></span>DIYPassPhoto</a><p style="max-width:34ch">Passport &amp; visa photos from your phone — verified before you submit. Free, open-source, nothing uploaded.</p></div>
+    <div><h4>Countries</h4>
+${footerCountries()}
+    </div>
+    <div><h4>Guides</h4>
+      <a href="../blog/us-passport-photo-at-home.html">US photo at home</a>
+      <a href="../blog/dv-lottery-photo-requirements.html">DV Lottery rules</a>
+      <a href="../blog/white-wall-gray-background-fix.html">Fix grey backgrounds</a>
+    </div>
+  </div>
+  <div class="legal">Not affiliated with any government. DIYPassPhoto measures published specifications and cannot guarantee acceptance — always confirm current rules with the issuing authority. Snap it. Verify it. Pass it.</div>
+</div></footer>
+
+<script>window.GF_START="${slug}";</script>
+<script src="../countries.js"></script>
+<script type="module" src="../app.js"></script>
+</body>
+</html>`;
+  fs.writeFileSync(path.join(cdir, `${slug}.html`), html);
+}
+
+/* 3) Standalone single-file pages (inlined CSS+JS) — phone/offline/preview */
+const sdir = path.join(ROOT, "standalone");
+fs.mkdirSync(sdir, { recursive: true });
+const CSS = fs.readFileSync(path.join(ROOT,"styles.css"),"utf8");
+const REG = fs.readFileSync(path.join(ROOT,"countries.js"),"utf8");
+const APP = fs.readFileSync(path.join(ROOT,"app.js"),"utf8");
+function inline(html){
+  return html
+    .replace(/<link rel="stylesheet" href="(\.\.\/)?styles\.css"\/>/, "<style>\n"+CSS+"\n</style>")
+    .replace(/<script src="(\.\.\/)?countries\.js"><\/script>/, "<script>\n"+REG+"\n</script>")
+    .replace(/<script type="module" src="(\.\.\/)?app\.js"><\/script>/, '<script type="module">\n'+APP+"\n</script>");
+}
+for (const slug of slugs){
+  fs.writeFileSync(path.join(sdir, `${slug}.html`), inline(fs.readFileSync(path.join(cdir, `${slug}.html`),"utf8")));
+}
+fs.writeFileSync(path.join(sdir, "index.html"), inline(fs.readFileSync(path.join(ROOT,"index.html"),"utf8")));
+
+/* 4) Sitemap ------------------------------------------------------------ */
+const today = new Date().toISOString().slice(0,10);
+const blogs = ["us-passport-photo-at-home","dv-lottery-photo-requirements","white-wall-gray-background-fix"];
+const urls = [
+  `  <url><loc>${SITE}/</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>`,
+  ...slugs.map(s => `  <url><loc>${SITE}/c/${s}.html</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>`),
+  ...blogs.map(b => `  <url><loc>${SITE}/blog/${b}.html</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`)
+];
+fs.writeFileSync(path.join(ROOT, "sitemap.xml"),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`);
+
+console.log(`Generated countries.js, ${slugs.length} country pages, ${slugs.length+1} standalone pages, and sitemap.xml (${slugs.length+1+blogs.length} URLs).`);

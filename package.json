@@ -1,0 +1,21 @@
+{
+  "name": "snapphotoready",
+  "version": "1.0.0",
+  "description": "Snap your passport or ID photo from your phone — get the green light when it's ready. Live, private, in-browser. Free & open-source.",
+  "scripts": {
+    "build": "node generate.js",
+    "dev": "node generate.js && npx --yes serve .",
+    "serve": "npx --yes serve .",
+    "start": "npm run dev"
+  },
+  "keywords": [
+    "passport-photo",
+    "visa-photo",
+    "photo-checker",
+    "mediapipe",
+    "client-side",
+    "privacy"
+  ],
+  "license": "MIT",
+  "private": true
+}

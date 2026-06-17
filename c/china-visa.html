@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>China Visa Photo Checker â€” 33Ã—48mm, Under 120KB, Free</title>
+<meta name="description" content="Check your China visa photo against the 33Ã—48mm, pure-white, â‰¤120KB spec. DIYPassPhoto verifies framing and background live in your browser â€” free, nothing uploaded."/>
+<meta name="keywords" content="china visa photo, china visa photo size, 33x48mm photo, china visa photo requirements, china visa photo checker"/>
+<link rel="canonical" href="https://diypassphoto.com/c/china-visa.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="China Visa Photo Checker â€” 33Ã—48mm, Under 120KB, Free"/>
+<meta property="og:description" content="Check your China visa photo against the 33Ã—48mm, pure-white, â‰¤120KB spec. DIYPassPhoto verifies framing and background live in your browser â€” free, nothing uploaded."/>
+<meta property="og:url" content="https://diypassphoto.com/c/china-visa.html"/>
+<meta property="og:image" content="https://diypassphoto.com/og-image.png"/>
+<meta property="og:site_name" content="DIYPassPhoto"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="China Visa Photo Checker â€” 33Ã—48mm, Under 120KB, Free"/>
+<meta name="twitter:description" content="Check your China visa photo against the 33Ã—48mm, pure-white, â‰¤120KB spec. DIYPassPhoto verifies framing and background live in your browser â€” free, nothing uploaded."/>
+<meta name="twitter:image" content="https://diypassphoto.com/og-image.png"/>
+<meta name="robots" content="index,follow"/>
+<link rel="stylesheet" href="../styles.css"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"DIYPassPhoto — China Visa photo checker","applicationCategory":"PhotographyApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://diypassphoto.com/c/china-visa.html","description":"Check your China visa photo against the 33Ã—48mm, pure-white, â‰¤120KB spec. DIYPassPhoto verifies framing and background live in your browser â€” free, nothing uploaded."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DIYPassPhoto","item":"https://diypassphoto.com/"},{"@type":"ListItem","position":2,"name":"China Visa photo checker","item":"https://diypassphoto.com/c/china-visa.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What size is a China visa photo?","acceptedAnswer":{"@type":"Answer","text":"33 mm wide by 48 mm tall for prints; online photos are 354Ã—472 to 420Ã—560 pixels and 40â€“120 KB."}},{"@type":"Question","name":"Does the China visa photo need ears visible?","acceptedAnswer":{"@type":"Answer","text":"Yes â€” both ears should generally be visible, with a pure white background."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"DIYPassPhoto","url":"https://diypassphoto.com/"}</script>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="brand" href="../"><span class="mark"></span>DIYPassPhoto</a>
+  <nav class="navlinks"><a href="../#how">How it works</a><a href="../#checks">What we check</a><a href="../#countries">Countries</a><a href="../#guides">Guides</a></nav>
+</div></header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../">DIYPassPhoto</a> / China / Visa (33Ã—48mm)</div>
+
+  <section class="hero" id="tool">
+    <div class="emblem"><span class="flag">ðŸ‡¨ðŸ‡³</span><span class="sep"></span><span class="ani">ðŸ¼</span><span class="lbl">National animal<b>Giant panda</b></span></div>
+    <h1>China visa photo checker</h1>
+    <p class="lede">Snap it from your phone, get the green light, download your photo and a compliance report. Checked against the official China spec before you submit — nothing uploaded.</p>
+
+    <div class="studio">
+      <div class="framewrap" id="framewrap">
+        <span class="cropmark tl"></span><span class="cropmark tr"></span><span class="cropmark bl"></span><span class="cropmark br"></span>
+        <div class="viewfinder">
+          <div class="vf-badge" id="vfBadge"><span class="blink"></span>CAMERA OFF</div>
+          <video id="video" playsinline muted style="display:none"></video>
+          <canvas class="feed" id="feed" style="display:none"></canvas>
+          <canvas class="hud" id="hud"></canvas>
+          <div class="vf-empty" id="vfEmpty"><span class="big">Start the live guide</span>Use the rear camera if someone can take it for you — it's sharper than the selfie cam.</div>
+        </div>
+      </div>
+      <div>
+        <div class="panel">
+          <div class="phead"><span class="ttl">Compliance gates</span><select class="country" id="country" aria-label="Document type"></select></div>
+          <div class="gates" id="gates"></div>
+          <div class="score"><span class="verdict hold" id="verdict">Waiting for a photo…</span><span class="mono" id="scoreNum" style="color:var(--mist)"></span></div>
+        </div>
+        <div class="controls">
+          <button class="btn primary" id="startCam">Start live guide</button>
+          <button class="btn go" id="capture" disabled>Capture &amp; format</button>
+          <label class="btn" for="upload">Check a photo</label>
+          <input type="file" id="upload" accept="image/*"/>
+        </div>
+        <div class="hint" id="status">Tip: face a window for soft, even light. Overhead lights cause the shadows that get photos rejected.</div>
+      </div>
+    </div>
+
+    <div class="result" id="result">
+      <img id="resultImg" alt="Your formatted photo preview"/>
+      <div>
+        <div class="rmeta" id="rmeta"></div>
+        <div class="controls" style="margin-top:14px">
+          <button class="btn go" id="download">Download photo</button>
+          <button class="btn" id="report">Download report</button>
+          <button class="btn" id="sheet">4×6 sheet</button>
+          <button class="btn" id="retake">Retake</button>
+        </div>
+        <div class="disclaimer">Measured against the published spec — not a guarantee of acceptance. Confirm any “?” items yourself. No AI edits applied.</div>
+      </div>
+    </div>
+    <p class="official"><a href="http://www.visaforchina.cn/" target="_blank" rel="noopener noreferrer">Want the official rules? Read the China requirements ↗</a></p>
+  </section>
+
+  <section class="block" id="countries">
+    <span class="eyebrow">Other countries</span>
+    <h2 class="sec">Need a different document?</h2>
+    <div class="countries">
+        <a class="ccard" href="us-passport.html"><span class="fl">ðŸ‡ºðŸ‡¸<span class="ani">ðŸ¦…</span></span><span class="cinfo"><span class="cn">US Passport</span><span class="cs">51×51mm · 600×600px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="dv-lottery.html"><span class="fl">ðŸ‡ºðŸ‡¸<span class="ani">ðŸ¦…</span></span><span class="cinfo"><span class="cn">US Visa / DV Lottery</span><span class="cs">51×51mm · 600×600px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="uk-passport.html"><span class="fl">ðŸ‡¬ðŸ‡§<span class="ani">ðŸ¦</span></span><span class="cinfo"><span class="cn">UK Passport</span><span class="cs">35×45mm · 900×1129px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="schengen-eu.html"><span class="fl">ðŸ‡ªðŸ‡º<span class="ani">ðŸ¦‰</span></span><span class="cinfo"><span class="cn">Schengen / EU Visa</span><span class="cs">35×45mm · 413×531px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="india-passport.html"><span class="fl">ðŸ‡®ðŸ‡³<span class="ani">ðŸ…</span></span><span class="cinfo"><span class="cn">India Passport</span><span class="cs">51×51mm · 600×600px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="canada-passport.html"><span class="fl">ðŸ‡¨ðŸ‡¦<span class="ani">ðŸ¦«</span></span><span class="cinfo"><span class="cn">Canada Passport</span><span class="cs">50×70mm · 420×540px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="australia-passport.html"><span class="fl">ðŸ‡¦ðŸ‡º<span class="ani">ðŸ¦˜</span></span><span class="cinfo"><span class="cn">Australia Passport</span><span class="cs">35×45mm · 413×531px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="china-visa.html" style="border-color:var(--go-line)"><span class="fl">ðŸ‡¨ðŸ‡³<span class="ani">ðŸ¼</span></span><span class="cinfo"><span class="cn">China Visa</span><span class="cs">33×48mm · 354×472px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="japan-passport.html"><span class="fl">ðŸ‡¯ðŸ‡µ<span class="ani">ðŸ¦</span></span><span class="cinfo"><span class="cn">Japan Passport</span><span class="cs">35×45mm · 413×531px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="germany-passport.html"><span class="fl">ðŸ‡©ðŸ‡ª<span class="ani">ðŸ¦…</span></span><span class="cinfo"><span class="cn">Germany Passport</span><span class="cs">35×45mm · 413×531px</span></span><span class="go-arrow">→</span></a>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <div class="cols">
+    <div><a class="brand" href="../" style="margin-bottom:10px"><span class="mark"></span>DIYPassPhoto</a><p style="max-width:34ch">Passport &amp; visa photos from your phone — verified before you submit. Free, open-source, nothing uploaded.</p></div>
+    <div><h4>Countries</h4>
+      <a href="us-passport.html">US Passport</a>
+      <a href="dv-lottery.html">US Visa / DV Lottery</a>
+      <a href="uk-passport.html">UK Passport</a>
+      <a href="schengen-eu.html">Schengen / EU Visa</a>
+      <a href="india-passport.html">India Passport</a>
+      <a href="canada-passport.html">Canada Passport</a>
+    </div>
+    <div><h4>Guides</h4>
+      <a href="../blog/us-passport-photo-at-home.html">US photo at home</a>
+      <a href="../blog/dv-lottery-photo-requirements.html">DV Lottery rules</a>
+      <a href="../blog/white-wall-gray-background-fix.html">Fix grey backgrounds</a>
+    </div>
+  </div>
+  <div class="legal">Not affiliated with any government. DIYPassPhoto measures published specifications and cannot guarantee acceptance — always confirm current rules with the issuing authority. Snap it. Verify it. Pass it.</div>
+</div></footer>
+
+<script>window.GF_START="china-visa";</script>
+<script src="../countries.js"></script>
+<script type="module" src="../app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Germany Passport Photo Checker â€” 35Ã—45mm, Free &amp; Private</title>
+<meta name="description" content="Check your German biometric passport photo against the 35Ã—45mm spec with a light-grey background. DIYPassPhoto verifies framing and head size live â€” free, in your browser."/>
+<meta name="keywords" content="germany passport photo, german passport photo size, biometric photo germany, 35x45mm photo, germany passport photo checker"/>
+<link rel="canonical" href="https://diypassphoto.com/c/germany-passport.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Germany Passport Photo Checker â€” 35Ã—45mm, Free &amp; Private"/>
+<meta property="og:description" content="Check your German biometric passport photo against the 35Ã—45mm spec with a light-grey background. DIYPassPhoto verifies framing and head size live â€” free, in your browser."/>
+<meta property="og:url" content="https://diypassphoto.com/c/germany-passport.html"/>
+<meta property="og:image" content="https://diypassphoto.com/og-image.png"/>
+<meta property="og:site_name" content="DIYPassPhoto"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Germany Passport Photo Checker â€” 35Ã—45mm, Free &amp; Private"/>
+<meta name="twitter:description" content="Check your German biometric passport photo against the 35Ã—45mm spec with a light-grey background. DIYPassPhoto verifies framing and head size live â€” free, in your browser."/>
+<meta name="twitter:image" content="https://diypassphoto.com/og-image.png"/>
+<meta name="robots" content="index,follow"/>
+<style>
+/* ============================================================
+   GreenFrame design system  ·  "the instrument that says yes"
+   Palette: spruce-ink + emerald signal + cool optical white
+   Type: Bricolage Grotesque (display) · Inter (body) · Spline Sans Mono (readouts)
+   Motif: crop-marks (corner ticks) + a frame that goes green
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --paper:#F3F6F2; --paper-2:#E9EEE7; --card:#FBFCFA;
+  --ink:#0E1A14; --ink-2:#17271F; --mist:#5A6B61; --faint:#8A988F;
+  --line:#D6DDD3; --line-2:#C7D0C4;
+  --go:#11A861; --go-2:#0C8E51; --go-soft:#E1F2E8; --go-line:#A9DBC0;
+  --hold:#C2871F; --hold-soft:#F6ECD7;
+  --stop:#CC5544; --stop-soft:#F6E1DD;
+  --r:18px; --r-sm:11px;
+  --sh-1:0 1px 2px rgba(14,26,20,.05), 0 10px 30px -12px rgba(14,26,20,.12);
+  --sh-2:0 2px 6px rgba(14,26,20,.06), 0 24px 60px -20px rgba(14,26,20,.22);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Inter,system-ui,-apple-system,sans-serif;line-height:1.55;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+a{color:var(--go-2);text-decoration:none}
+a:hover{text-decoration:underline}
+.mono{font-family:"Spline Sans Mono",ui-monospace,monospace;font-feature-settings:"tnum"}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque",sans-serif;margin:0;line-height:1.04;letter-spacing:-.02em;font-weight:700}
+
+/* crop-mark eyebrow */
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:"Spline Sans Mono",monospace;
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--go-2);font-weight:600}
+.eyebrow::before{content:"";width:14px;height:14px;border-left:2px solid var(--go);border-top:2px solid var(--go)}
+
+/* ---------- top bar ---------- */
+header.bar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--paper) 86%,transparent);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:11px;font-family:"Bricolage Grotesque";font-weight:800;font-size:20px;letter-spacing:-.03em;color:var(--ink)}
+.brand:hover{text-decoration:none}
+.mark{width:30px;height:30px;border-radius:8px;border:2.5px solid var(--go);position:relative;flex:0 0 auto}
+.mark::before,.mark::after{content:"";position:absolute;width:7px;height:7px;border:2px solid var(--ink)}
+.mark::before{top:4px;left:4px;border-right:0;border-bottom:0}
+.mark::after{bottom:4px;right:4px;border-left:0;border-top:0}
+.navlinks{display:flex;gap:26px;font-size:14.5px;font-weight:500}
+.navlinks a{color:var(--mist)}
+.navlinks a:hover{color:var(--ink);text-decoration:none}
+@media(max-width:760px){.navlinks{display:none}}
+
+/* ---------- hero / studio ---------- */
+.hero{padding:46px 0 8px}
+.hero h1{font-size:clamp(34px,6vw,62px);font-weight:800;margin:16px 0 16px;max-width:15ch}
+.hero h1 em{font-style:normal;color:var(--go-2)}
+.hero .lede{font-size:clamp(17px,2.2vw,20px);color:var(--mist);max-width:52ch;margin:0}
+.trust{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px;font-size:13.5px;color:var(--mist)}
+.trust span{display:inline-flex;align-items:center;gap:7px}
+.trust span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--go)}
+
+.studio{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:start;margin-top:34px}
+@media(max-width:900px){.studio{grid-template-columns:1fr}}
+
+/* the signature frame around the viewfinder */
+.framewrap{position:relative;padding:14px}
+.framewrap::before,.framewrap::after,
+.framewrap>.tick-tl,.framewrap>.tick-tr,.framewrap>.tick-bl,.framewrap>.tick-br{pointer-events:none}
+.cropmark{position:absolute;width:26px;height:26px;z-index:3;transition:border-color .5s var(--ease)}
+.cropmark.tl{top:0;left:0;border-left:3px solid var(--line-2);border-top:3px solid var(--line-2)}
+.cropmark.tr{top:0;right:0;border-right:3px solid var(--line-2);border-top:3px solid var(--line-2)}
+.cropmark.bl{bottom:0;left:0;border-left:3px solid var(--line-2);border-bottom:3px solid var(--line-2)}
+.cropmark.br{bottom:0;right:0;border-right:3px solid var(--line-2);border-bottom:3px solid var(--line-2)}
+.framewrap.go .cropmark{border-color:var(--go)}
+
+.viewfinder{position:relative;background:#0B130E;border-radius:var(--r);overflow:hidden;aspect-ratio:1/1;
+  display:flex;align-items:center;justify-content:center;box-shadow:var(--sh-2);
+  outline:0 solid transparent;transition:box-shadow .5s var(--ease)}
+.framewrap.go .viewfinder{box-shadow:0 0 0 3px var(--go), var(--sh-2)}
+.viewfinder video,.viewfinder canvas.feed{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.viewfinder canvas.hud{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.vf-empty{position:relative;z-index:2;text-align:center;color:#9DB3A4;padding:30px;font-size:14px;max-width:30ch}
+.vf-empty .big{display:block;font-family:"Bricolage Grotesque";font-weight:700;font-size:20px;color:#E7F0E9;margin-bottom:8px;letter-spacing:-.02em}
+.vf-badge{position:absolute;top:14px;left:14px;z-index:5;font-family:"Spline Sans Mono",monospace;
+  font-size:11px;font-weight:600;letter-spacing:.1em;padding:7px 12px;border-radius:999px;
+  background:rgba(11,19,14,.74);color:#fff;border:1px solid rgba(255,255,255,.16);transition:background .35s}
+.vf-badge.go{background:var(--go);border-color:transparent}
+.vf-badge .blink{display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:7px;vertical-align:middle}
+.framewrap.go .vf-badge .blink{animation:pulse 1.1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* gate panel */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-1);overflow:hidden;display:flex;flex-direction:column}
+.panel .phead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 17px;border-bottom:1px solid var(--line)}
+.panel .phead .ttl{font-family:"Bricolage Grotesque";font-weight:700;font-size:15px}
+select.country{font-family:Inter;font-size:13px;font-weight:600;color:var(--ink);background:var(--paper);
+  border:1px solid var(--line-2);border-radius:9px;padding:8px 10px;max-width:62%}
+.gates{padding:5px 8px;overflow:auto;max-height:340px}
+.gate{display:flex;gap:11px;align-items:flex-start;padding:10px 9px;border-radius:10px;transition:background .35s}
+.gate+.gate{border-top:1px solid var(--paper-2)}
+.gate.just-passed{background:var(--go-soft)}
+.dot{flex:0 0 auto;width:19px;height:19px;border-radius:50%;margin-top:1px;display:grid;place-items:center;
+  font-size:11px;font-weight:700;color:#fff;transition:transform .3s var(--ease),background .3s}
+.dot.pass{background:var(--go)} .dot.fail{background:var(--stop)} .dot.warn{background:var(--hold)}
+.dot.manual{background:var(--faint)} .dot.idle{background:#C4CEC6}
+.gate.just-passed .dot{transform:scale(1.18)}
+.gate .body{flex:1;min-width:0}
+.gate .glabel{display:flex;justify-content:space-between;gap:8px;font-weight:600;font-size:13.5px}
+.gate .measured{font-family:"Spline Sans Mono",monospace;font-size:11px;color:var(--mist);white-space:nowrap;flex:0 0 auto}
+.gate .coach{font-size:12.5px;color:var(--mist);margin-top:3px;display:none}
+.gate.show-coach .coach{display:block}
+.score{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 17px;border-top:1px solid var(--line);background:var(--paper)}
+.score .verdict{font-family:"Bricolage Grotesque";font-weight:800;font-size:15.5px}
+.score .verdict.go{color:var(--go-2)} .score .verdict.hold{color:var(--ink)}
+
+/* controls + buttons */
+.controls{display:flex;gap:11px;flex-wrap:wrap;margin-top:18px}
+.btn{font-family:Inter;font-weight:600;font-size:14.5px;border-radius:12px;padding:12px 18px;
+  border:1px solid var(--line-2);background:var(--card);color:var(--ink);cursor:pointer;
+  display:inline-flex;align-items:center;gap:9px;transition:transform .12s,border-color .2s,background .2s}
+.btn:hover{border-color:var(--mist);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.primary:hover{background:var(--ink-2)}
+.btn.go{background:var(--go);border-color:var(--go);color:#fff}
+.btn.go:hover{background:var(--go-2)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+input[type=file]{display:none}
+.hint{font-size:13px;color:var(--mist);margin-top:12px;max-width:60ch}
+
+/* result */
+.result{display:none;grid-template-columns:210px 1fr;gap:20px;align-items:start;margin-top:20px;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--sh-1)}
+.result.on{display:grid}
+@media(max-width:560px){.result{grid-template-columns:1fr}}
+.result img{width:100%;border-radius:12px;border:1px solid var(--line);background:var(--paper)}
+.result .rmeta{font-family:"Spline Sans Mono",monospace;font-size:12.5px;color:var(--mist);line-height:1.7}
+.result .rmeta b{color:var(--ink)}
+
+.disclaimer{font-size:12.5px;color:var(--mist);background:var(--paper-2);border-radius:12px;padding:13px 15px;margin-top:16px}
+.disclaimer b{color:var(--ink)}
+
+/* ---------- sections ---------- */
+section.block{padding:54px 0;border-top:1px solid var(--line);margin-top:54px}
+h2.sec{font-size:clamp(26px,3.6vw,38px);font-weight:800;margin:12px 0 8px;max-width:18ch}
+.sec-sub{color:var(--mist);max-width:58ch;font-size:16px;margin:0 0 26px}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:820px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.steps{grid-template-columns:1fr}}
+.step{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 18px 18px}
+.step .num{font-family:"Spline Sans Mono",monospace;font-size:12px;font-weight:600;color:var(--go-2);letter-spacing:.1em}
+.step h3{font-size:16.5px;font-weight:700;margin:10px 0 5px}
+.step p{font-size:14px;color:var(--mist);margin:0}
+
+.checkgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:820px){.checkgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.checkgrid{grid-template-columns:1fr}}
+.cc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;position:relative}
+.cc::before{content:"";position:absolute;top:14px;right:14px;width:14px;height:14px;border-right:2px solid var(--go-line);border-top:2px solid var(--go-line)}
+.cc h3{font-size:16px;font-weight:700;margin-bottom:6px}
+.cc p{font-size:13.8px;color:var(--mist);margin:0}
+
+/* country grid */
+.countries{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:820px){.countries{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.countries{grid-template-columns:1fr}}
+.ccard{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);padding:16px 16px;transition:transform .14s var(--ease),border-color .2s,box-shadow .2s}
+.ccard:hover{transform:translateY(-2px);border-color:var(--go-line);box-shadow:var(--sh-1);text-decoration:none}
+.ccard .fl{font-size:26px;flex:0 0 auto;filter:saturate(1.1)}
+.ccard .cinfo .cn{font-family:"Bricolage Grotesque";font-weight:700;font-size:15.5px;color:var(--ink)}
+.ccard .cinfo .cs{font-family:"Spline Sans Mono",monospace;font-size:11.5px;color:var(--mist);margin-top:2px}
+.ccard .go-arrow{margin-left:auto;color:var(--faint);transition:color .2s,transform .2s}
+.ccard:hover .go-arrow{color:var(--go);transform:translateX(2px)}
+
+/* privacy band */
+.privacy{display:flex;gap:16px;align-items:flex-start;background:var(--go-soft);border:1px solid var(--go-line);border-radius:var(--r);padding:22px}
+.privacy .ic{flex:0 0 auto;width:38px;height:38px;border-radius:10px;background:var(--go);display:grid;place-items:center;color:#fff;font-weight:800;font-size:18px}
+.privacy h3{font-size:17px;font-weight:700;margin-bottom:5px;color:var(--ink)}
+.privacy p{font-size:14px;color:#2C513D;margin:0;max-width:70ch}
+
+/* spec strip (country pages) */
+.specstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:6px}
+@media(max-width:620px){.specstrip{grid-template-columns:1fr 1fr}}
+.specstrip .cell{background:var(--card);padding:16px}
+.specstrip .k{font-family:"Spline Sans Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mist)}
+.specstrip .v{font-family:"Bricolage Grotesque";font-weight:700;font-size:19px;margin-top:5px}
+
+/* generic lists on content pages */
+.list{list-style:none;padding:0;margin:0}
+.list li{position:relative;padding:9px 0 9px 26px;border-bottom:1px solid var(--line);font-size:15.5px}
+.list li::before{content:"";position:absolute;left:2px;top:15px;width:9px;height:9px;border-left:2px solid var(--go);border-bottom:2px solid var(--go);transform:rotate(-45deg)}
+.list.x li::before{border-color:var(--stop);transform:none;left:4px;top:14px;width:10px;height:2px;box-shadow:0 0 0 0 transparent;background:var(--stop);border:0}
+.list.x li{padding-left:24px}
+
+.faq dt{font-family:"Bricolage Grotesque";font-weight:700;font-size:16.5px;margin-top:20px}
+.faq dd{margin:6px 0 0;color:var(--mist);font-size:15px}
+
+/* blog cards */
+.bloglist{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:820px){.bloglist{grid-template-columns:1fr}}
+.bloglist a{display:block;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.bloglist a:hover{border-color:var(--go-line);text-decoration:none;transform:translateY(-2px);transition:.14s}
+.bloglist .k{font-family:"Spline Sans Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--go-2);font-weight:600}
+.bloglist h3{font-size:16px;font-weight:700;margin:8px 0 5px}
+.bloglist p{font-size:13.6px;color:var(--mist);margin:0}
+
+/* footer */
+footer{border-top:1px solid var(--line);margin-top:54px;padding:38px 0 48px;color:var(--mist);font-size:13.5px}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:24px}
+@media(max-width:680px){footer .cols{grid-template-columns:1fr 1fr}}
+footer h4{font-family:"Spline Sans Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:12px}
+footer a{display:block;color:var(--mist);padding:3px 0}
+footer a:hover{color:var(--ink);text-decoration:none}
+footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
+
+/* breadcrumb on country pages */
+.crumb{font-family:"Spline Sans Mono",monospace;font-size:12px;color:var(--mist);padding:22px 0 0}
+.crumb a{color:var(--mist)}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- national emblem (flag + animal) ---------- */
+.emblem{display:inline-flex;align-items:center;gap:12px;margin-top:18px;padding:9px 9px 9px 14px;
+  background:var(--card);border:1px solid var(--line);border-radius:999px;box-shadow:var(--sh-1)}
+.emblem .flag{font-size:22px;line-height:1}
+.emblem .sep{width:1px;height:20px;background:var(--line)}
+.emblem .ani{font-size:24px;line-height:1;filter:saturate(1.1)}
+.emblem .lbl{font-family:"Spline Sans Mono",monospace;font-size:11.5px;color:var(--mist);letter-spacing:.02em}
+.emblem .lbl b{display:block;font-family:Inter;font-weight:600;font-size:13px;color:var(--ink);letter-spacing:0;margin-top:1px}
+.ccard .fl .ani{font-size:15px;margin-left:-6px}
+
+/* official requirements link (country pages) */
+.official{margin:18px 0 0;font-size:14.5px}
+.official a{font-weight:600}
+
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"DIYPassPhoto — Germany Passport photo checker","applicationCategory":"PhotographyApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://diypassphoto.com/c/germany-passport.html","description":"Check your German biometric passport photo against the 35Ã—45mm spec with a light-grey background. DIYPassPhoto verifies framing and head size live â€” free, in your browser."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DIYPassPhoto","item":"https://diypassphoto.com/"},{"@type":"ListItem","position":2,"name":"Germany Passport photo checker","item":"https://diypassphoto.com/c/germany-passport.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What background does a German passport photo need?","acceptedAnswer":{"@type":"Answer","text":"A light grey background is standard for German biometric passport photos; pure white or coloured backgrounds are often rejected."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"DIYPassPhoto","url":"https://diypassphoto.com/"}</script>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="brand" href="../"><span class="mark"></span>DIYPassPhoto</a>
+  <nav class="navlinks"><a href="../#how">How it works</a><a href="../#checks">What we check</a><a href="../#countries">Countries</a><a href="../#guides">Guides</a></nav>
+</div></header>
+
+<main class="wrap">
+  <div class="crumb"><a href="../">DIYPassPhoto</a> / Germany / Passport (35Ã—45mm)</div>
+
+  <section class="hero" id="tool">
+    <div class="emblem"><span class="flag">ðŸ‡©ðŸ‡ª</span><span class="sep"></span><span class="ani">ðŸ¦…</span><span class="lbl">National animal<b>Federal eagle</b></span></div>
+    <h1>Germany passport photo checker</h1>
+    <p class="lede">Snap it from your phone, get the green light, download your photo and a compliance report. Checked against the official Germany spec before you submit — nothing uploaded.</p>
+
+    <div class="studio">
+      <div class="framewrap" id="framewrap">
+        <span class="cropmark tl"></span><span class="cropmark tr"></span><span class="cropmark bl"></span><span class="cropmark br"></span>
+        <div class="viewfinder">
+          <div class="vf-badge" id="vfBadge"><span class="blink"></span>CAMERA OFF</div>
+          <video id="video" playsinline muted style="display:none"></video>
+          <canvas class="feed" id="feed" style="display:none"></canvas>
+          <canvas class="hud" id="hud"></canvas>
+          <div class="vf-empty" id="vfEmpty"><span class="big">Start the live guide</span>Use the rear camera if someone can take it for you — it's sharper than the selfie cam.</div>
+        </div>
+      </div>
+      <div>
+        <div class="panel">
+          <div class="phead"><span class="ttl">Compliance gates</span><select class="country" id="country" aria-label="Document type"></select></div>
+          <div class="gates" id="gates"></div>
+          <div class="score"><span class="verdict hold" id="verdict">Waiting for a photo…</span><span class="mono" id="scoreNum" style="color:var(--mist)"></span></div>
+        </div>
+        <div class="controls">
+          <button class="btn primary" id="startCam">Start live guide</button>
+          <button class="btn go" id="capture" disabled>Capture &amp; format</button>
+          <label class="btn" for="upload">Check a photo</label>
+          <input type="file" id="upload" accept="image/*"/>
+        </div>
+        <div class="hint" id="status">Tip: face a window for soft, even light. Overhead lights cause the shadows that get photos rejected.</div>
+      </div>
+    </div>
+
+    <div class="result" id="result">
+      <img id="resultImg" alt="Your formatted photo preview"/>
+      <div>
+        <div class="rmeta" id="rmeta"></div>
+        <div class="controls" style="margin-top:14px">
+          <button class="btn go" id="download">Download photo</button>
+          <button class="btn" id="report">Download report</button>
+          <button class="btn" id="sheet">4×6 sheet</button>
+          <button class="btn" id="retake">Retake</button>
+        </div>
+        <div class="disclaimer">Measured against the published spec — not a guarantee of acceptance. Confirm any “?” items yourself. No AI edits applied.</div>
+      </div>
+    </div>
+    <p class="official"><a href="https://www.bundesdruckerei.de/en/Photo-template" target="_blank" rel="noopener noreferrer">Want the official rules? Read the Germany requirements ↗</a></p>
+  </section>
+
+  <section class="block" id="countries">
+    <span class="eyebrow">Other countries</span>
+    <h2 class="sec">Need a different document?</h2>
+    <div class="countries">
+        <a class="ccard" href="us-passport.html"><span class="fl">ðŸ‡ºðŸ‡¸<span class="ani">ðŸ¦…</span></span><span class="cinfo"><span class="cn">US Passport</span><span class="cs">51×51mm · 600×600px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="dv-lottery.html"><span class="fl">ðŸ‡ºðŸ‡¸<span class="ani">ðŸ¦…</span></span><span class="cinfo"><span class="cn">US Visa / DV Lottery</span><span class="cs">51×51mm · 600×600px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="uk-passport.html"><span class="fl">ðŸ‡¬ðŸ‡§<span class="ani">ðŸ¦</span></span><span class="cinfo"><span class="cn">UK Passport</span><span class="cs">35×45mm · 900×1129px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="schengen-eu.html"><span class="fl">ðŸ‡ªðŸ‡º<span class="ani">ðŸ¦‰</span></span><span class="cinfo"><span class="cn">Schengen / EU Visa</span><span class="cs">35×45mm · 413×531px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="india-passport.html"><span class="fl">ðŸ‡®ðŸ‡³<span class="ani">ðŸ…</span></span><span class="cinfo"><span class="cn">India Passport</span><span class="cs">51×51mm · 600×600px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="canada-passport.html"><span class="fl">ðŸ‡¨ðŸ‡¦<span class="ani">ðŸ¦«</span></span><span class="cinfo"><span class="cn">Canada Passport</span><span class="cs">50×70mm · 420×540px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="australia-passport.html"><span class="fl">ðŸ‡¦ðŸ‡º<span class="ani">ðŸ¦˜</span></span><span class="cinfo"><span class="cn">Australia Passport</span><span class="cs">35×45mm · 413×531px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="china-visa.html"><span class="fl">ðŸ‡¨ðŸ‡³<span class="ani">ðŸ¼</span></span><span class="cinfo"><span class="cn">China Visa</span><span class="cs">33×48mm · 354×472px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="japan-passport.html"><span class="fl">ðŸ‡¯ðŸ‡µ<span class="ani">ðŸ¦</span></span><span class="cinfo"><span class="cn">Japan Passport</span><span class="cs">35×45mm · 413×531px</span></span><span class="go-arrow">→</span></a>
+        <a class="ccard" href="germany-passport.html" style="border-color:var(--go-line)"><span class="fl">ðŸ‡©ðŸ‡ª<span class="ani">ðŸ¦…</span></span><span class="cinfo"><span class="cn">Germany Passport</span><span class="cs">35×45mm · 413×531px</span></span><span class="go-arrow">→</span></a>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <div class="cols">
+    <div><a class="brand" href="../" style="margin-bottom:10px"><span class="mark"></span>DIYPassPhoto</a><p style="max-width:34ch">Passport &amp; visa photos from your phone — verified before you submit. Free, open-source, nothing uploaded.</p></div>
+    <div><h4>Countries</h4>
+      <a href="us-passport.html">US Passport</a>
+      <a href="dv-lottery.html">US Visa / DV Lottery</a>
+      <a href="uk-passport.html">UK Passport</a>
+      <a href="schengen-eu.html">Schengen / EU Visa</a>
+      <a href="india-passport.html">India Passport</a>
+      <a href="canada-passport.html">Canada Passport</a>
+    </div>
+    <div><h4>Guides</h4>
+      <a href="../blog/us-passport-photo-at-home.html">US photo at home</a>
+      <a href="../blog/dv-lottery-photo-requirements.html">DV Lottery rules</a>
+      <a href="../blog/white-wall-gray-background-fix.html">Fix grey backgrounds</a>
+    </div>
+  </div>
+  <div class="legal">Not affiliated with any government. DIYPassPhoto measures published specifications and cannot guarantee acceptance — always confirm current rules with the issuing authority. Snap it. Verify it. Pass it.</div>
+</div></footer>
+
+<script>window.GF_START="germany-passport";</script>
+<script>
+// AUTO-GENERATED from data/countries.json by generate.js — do not edit by hand.
+window.COUNTRY_SPECS = {
+  "us-passport": {
+    "label": "US Passport",
+    "flag": "ðŸ‡ºðŸ‡¸",
+    "country": "United States",
+    "docName": "Passport",
+    "out": {
+      "wPx": 600,
+      "hPx": 600,
+      "aspect": 1,
+      "format": "jpeg",
+      "maxKB": null,
+      "dpi": 300,
+      "printMM": [
+        51,
+        51
+      ]
+    },
+    "headRatio": [
+      0.5,
+      0.69
+    ],
+    "eyeFromBottom": [
+      0.56,
+      0.69
+    ],
+    "background": {
+      "target": [
+        255,
+        255,
+        255
+      ],
+      "maxDeltaE": 14
+    },
+    "flags": [
+      "no_glasses",
+      "neutral_expression",
+      "no_head_covering"
+    ],
+    "seo": {
+      "title": "US Passport Photo Checker â€” Free, Private, In-Browser (2026)",
+      "desc": "Take a 2x2 inch US passport photo that passes. DIYPassPhoto guides you live and checks head size, white background and framing against State Department rules â€” free, nothing uploaded, no AI editing (2026 compliant).",
+      "keywords": "us passport photo, 2x2 passport photo, passport photo online free, us passport photo checker, passport photo at home",
+      "h1": "US passport photo checker",
+      "intro": "Square 2Ã—2 inch (51Ã—51 mm), white background, head 50â€“69% of the frame. DIYPassPhoto lines you up live and confirms every rule before you submit â€” without editing your photo, so you stay compliant with the 2026 no-alteration rule."
+    },
+    "reqs": [
+      "2Ã—2 inches (51Ã—51 mm); digital 600Ã—600 to 1200Ã—1200 px, JPEG",
+      "Head 50â€“69% of photo height (chin to crown)",
+      "Plain white or off-white background, no shadows",
+      "Neutral expression, both eyes open, facing forward",
+      "No glasses (since 2016) unless a signed medical waiver",
+      "Taken within the last 6 months"
+    ],
+    "rejections": [
+      "Background reads grey because the wall was underexposed",
+      "Head too small or too large for the 50â€“69% band",
+      "Shadows under the nose, chin, or on the wall",
+      "Smiling or open mouth",
+      "Photo digitally enhanced or AI-edited â€” rejected in 2026"
+    ],
+    "faq": [
+      {
+        "q": "What size is a US passport photo?",
+        "a": "2 Ã— 2 inches (51 Ã— 51 mm). For online submission it must be square, 600Ã—600 to 1200Ã—1200 pixels, in JPEG format."
+      },
+      {
+        "q": "Can I edit my US passport photo with AI in 2026?",
+        "a": "No. As of January 1, 2026 the US Department of State rejects digitally enhanced or AI-altered passport photos, including background replacement and beautification."
+      },
+      {
+        "q": "How big should my head be?",
+        "a": "Chin to crown must be 50% to 69% of the photo height â€” roughly 1 to 1 3/8 inches."
+      }
+    ],
+    "emblem": {
+      "icon": "ðŸ¦…",
+      "name": "Bald eagle",
+      "kind": "National bird"
+    },
+    "officialUrl": "https://travel.state.gov/content/travel/en/passports/how-apply/photos.html"
+  },
+  "dv-lottery": {
+    "label": "US Visa / DV Lottery",
+    "flag": "ðŸ‡ºðŸ‡¸",
+    "country": "United States",
+    "docName": "Visa / DV Lottery (DS-160 / DS-260)",
+    "out": {
+      "wPx": 600,
+      "hPx": 600,
+      "aspect": 1,
+      "format": "jpeg",
+      "maxKB": 240,
+      "dpi": 300,
+      "printMM": [
+        51,
+        51
+      ]
+    },
+    "headRatio": [
+      0.5,
+      0.69
+    ],
+    "eyeFromBottom": [
+      0.56,
+      0.69
+    ],
+    "background": {
+      "target": [
+        255,
+        255,
+        255
+      ],
+      "maxDeltaE": 14
+    },
+    "flags": [
+      "no_glasses",
+      "neutral_expression",
+      "no_head_covering"
+    ],
+    "seo": {
+      "title": "DV Lottery Photo Checker 2026 â€” Free, Under 240KB, In-Browser",
+      "desc": "Check your DV Lottery / US visa photo before you submit. DIYPassPhoto verifies the 600â€“1200px square, â‰¤240KB, white-background spec and catches what the official form misses â€” free, private, no uploads.",
+      "keywords": "dv lottery photo, dv lottery photo checker, green card photo, ds-160 photo, us visa photo, dv lottery photo requirements 2026",
+      "h1": "DV Lottery & US visa photo checker",
+      "intro": "Square, 600â€“1200 px, JPEG, under 240 KB, white background. The official entry form won't tell you your background or head size is wrong â€” it just rejects you later. DIYPassPhoto catches it first, and formats to spec in your browser."
+    },
+    "reqs": [
+      "Square (1:1), 600Ã—600 to 1200Ã—1200 px, JPEG",
+      "File size 240 KB or less",
+      "Head 50â€“69% of image height",
+      "Plain white or off-white background",
+      "Neutral expression, eyes open, one person only",
+      "Taken within the last 6 months"
+    ],
+    "rejections": [
+      "Accepted at upload, rejected later â€” the form doesn't check background or head size",
+      "Background not truly white",
+      "File over 240 KB or not square",
+      "Shadows on face or background",
+      "AI-edited photo (not allowed for US documents in 2026)"
+    ],
+    "faq": [
+      {
+        "q": "What are the DV Lottery photo requirements?",
+        "a": "A digital DV Lottery photo must be square (1:1), 600Ã—600 to 1200Ã—1200 pixels, JPEG, and 240 KB or smaller, with a plain white background and the head 50â€“69% of the height."
+      },
+      {
+        "q": "Why was my photo accepted at upload but rejected later?",
+        "a": "The entry form only checks technical fields like size and format. It does not detect a bad background or wrong head size, so a non-compliant photo passes upload and is rejected at review."
+      },
+      {
+        "q": "Is DIYPassPhoto free for DV Lottery photos?",
+        "a": "Yes â€” completely free, no signup, and your photo never leaves your device."
+      }
+    ],
+    "emblem": {
+      "icon": "ðŸ¦…",
+      "name": "Bald eagle",
+      "kind": "National bird"
+    },
+    "officialUrl": "https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/photos.html"
+  },
+  "uk-passport": {
+    "label": "UK Passport",
+    "flag": "ðŸ‡¬ðŸ‡§",
+    "country": "United Kingdom",
+    "docName": "Passport",
+    "out": {
+      "wPx": 900,
+      "hPx": 1129,
+      "aspect": 0.797,
+      "format": "jpeg",
+      "maxKB": 10240,
+      "dpi": 300,
+      "printMM": [
+        35,
+        45
+      ]
+    },
+    "headRatio": [
+      0.64,
+      0.74
+    ],
+    "eyeFromBottom": [
+      0.5,
+      0.62
+    ],
+    "background": {
+      "target": [
+        245,
+        245,
+        240
+      ],
+      "maxDeltaE": 16
+    },
+    "flags": [
+      "no_glasses",
+      "neutral_expression"
+    ],
+    "seo": {
+      "title": "UK Passport Photo Checker â€” Free, Private, In-Browser",
+      "desc": "Take a compliant UK passport photo at home. DIYPassPhoto checks the 35Ã—45mm framing, light-grey background and head size live in your browser â€” free, nothing uploaded.",
+      "keywords": "uk passport photo, uk passport photo online, uk passport photo checker, passport photo size uk, 35x45mm photo",
+      "h1": "UK passport photo checker",
+      "intro": "35Ã—45 mm, plain light-grey or cream background, head 29â€“34 mm. DIYPassPhoto frames you live and confirms the digital size and background before you upload to HM Passport Office."
+    },
+    "reqs": [
+      "35Ã—45 mm print; digital at least 600Ã—750 px",
+      "Head 29â€“34 mm (about 64â€“74% of height)",
+      "Plain light grey or cream background",
+      "Neutral expression, mouth closed, eyes open",
+      "No glasses unless medically required"
+    ],
+    "rejections": [
+      "Pure white background (light grey/cream preferred)",
+      "Head outside the 29â€“34 mm range",
+      "Shadows or reflections",
+      "Hair across the eyes"
+    ],
+    "faq": [
+      {
+        "q": "What background does a UK passport photo need?",
+        "a": "A plain light-grey or cream background â€” not pure white. It must be uniform with no shadows or patterns."
+      },
+      {
+        "q": "What size is a UK passport photo?",
+        "a": "45 mm tall by 35 mm wide for prints; the digital photo should be at least 600Ã—750 pixels."
+      }
+    ],
+    "emblem": {
+      "icon": "ðŸ¦",
+      "name": "Lion",
+      "kind": "National animal"
+    },
+    "officialUrl": "https://www.gov.uk/photos-for-passports"
+  },
+  "schengen-eu": {
+    "label": "Schengen / EU Visa",
+    "flag": "ðŸ‡ªðŸ‡º",
+    "country": "Schengen / EU",
+    "docName": "Visa & Passport (35Ã—45mm)",
+    "out": {
+      "wPx": 413,
+      "hPx": 531,
+      "aspect": 0.778,
+      "format": "jpeg",
+      "maxKB": null,
+      "dpi": 300,
+      "printMM": [
+        35,
+        45
+      ]
+    },
+    "headRatio": [
+      0.7,
+      0.8
+    ],
+    "eyeFromBottom": [
+      0.5,
+      0.6
+    ],
+    "background": {
+      "target": [
+        240,
+        240,
+        240
+      ],
+      "maxDeltaE": 18
+    },
+    "flags": [
+      "no_glasses",
+      "neutral_expression"
+    ],
+    "seo": {
+      "title": "Schengen / EU Visa Photo Checker â€” 35Ã—45mm, Free & Private",
+      "desc": "Check your Schengen or EU visa photo against the 35Ã—45mm biometric spec. DIYPassPhoto verifies head size, light background and framing live, free and in your browser.",
+      "keywords": "schengen visa photo, eu passport photo, 35x45mm photo, biometric photo eu, schengen photo checker",
+      "h1": "Schengen & EU visa photo checker",
+      "intro": "35Ã—45 mm, light grey background, face 70â€“80% of the frame. DIYPassPhoto checks the biometric framing most consulates require â€” live, free, nothing uploaded."
+    },
+    "reqs": [
+      "35Ã—45 mm, light grey or pale background",
+      "Face 70â€“80% of the frame height (32â€“36 mm)",
+      "Neutral expression, looking straight ahead",
+      "Even lighting, no shadows",
+      "No glasses recommended"
+    ],
+    "rejections": [
+      "Pure white background rejected by some consulates",
+      "Face too small in the frame",
+      "Tilted head or off-centre",
+      "Shadows behind the head"
+    ],
+    "faq": [
+      {
+        "q": "What is the Schengen visa photo size?",
+        "a": "35 mm wide by 45 mm tall, with the face taking up 70â€“80% of the height (about 32â€“36 mm)."
+      },
+      {
+        "q": "Can the background be white?",
+        "a": "A light grey or pale background is safest; some consulates reject pure white."
+      }
+    ],
+    "emblem": {
+      "icon": "ðŸ¦‰",
+      "name": "Owl",
+      "kind": "Emblem"
+    },
+    "officialUrl": "https://home-affairs.ec.europa.eu/policies/schengen-borders-and-visa/visa-policy_en"
+  },
+  "india-passport": {
+    "label": "India Passport",
+    "flag": "ðŸ‡®ðŸ‡³",
+    "country": "India",
+    "docName": "Passport (2Ã—2in)",
+    "out": {
+      "wPx": 600,
+      "hPx": 600,
+      "aspect": 1,
+      "format": "jpeg",
+      "maxKB": null,
+      "dpi": 300,
+      "printMM": [
+        51,
+        51
+      ]
+    },
+    "headRatio": [
+      0.62,
+      0.8
+    ],
+    "eyeFromBottom": [
+      0.5,
+      0.62
+    ],
+    "background": {
+      "target": [
+        255,
+        255,
+        255
+      ],
+      "maxDeltaE": 16
+    },
+    "flags": [
+      "neutral_expression"
+    ],
+    "seo": {
+      "title": "India Passport Photo Checker â€” 2Ã—2in, Free & Private",
+      "desc": "Make a compliant Indian passport photo at home. DIYPassPhoto checks the 2Ã—2 inch white-background spec and head size live, free and fully in your browser.",
+      "keywords": "india passport photo, indian passport photo size, passport photo india online, india passport photo checker, 2x2 photo india",
+      "h1": "India passport photo checker",
+      "intro": "2Ã—2 inches, white background, face filling most of the frame. DIYPassPhoto lines you up and confirms the spec â€” useful whether you submit on Passport Seva or print at a studio."
+    },
+    "reqs": [
+      "2Ã—2 inches (51Ã—51 mm), white background",
+      "Face covers most of the frame, centred",
+      "Neutral expression, both eyes open",
+      "Even lighting, no shadows or red-eye"
+    ],
+    "rejections": [
+      "Off-white or shadowed background",
+      "Face too small or off-centre",
+      "Some Seva services want 4.5Ã—3.5 cm â€” check your form"
+    ],
+    "faq": [
+      {
+        "q": "What size is an Indian passport photo?",
+        "a": "2Ã—2 inches (51Ã—51 mm) with a white background for most applications. Some online Passport Seva services request 4.5Ã—3.5 cm â€” check your specific form."
+      },
+      {
+        "q": "What background colour is required?",
+        "a": "A plain white background with no shadows or patterns."
+      }
+    ],
+    "emblem": {
+      "icon": "ðŸ…",
+      "name": "Bengal tiger",
+      "kind": "National animal"
+    },
+    "officialUrl": "https://www.passportindia.gov.in/"
+  },
+  "canada-passport": {
+    "label": "Canada Passport",
+    "flag": "ðŸ‡¨ðŸ‡¦",
+    "country": "Canada",
+    "docName": "Passport (50Ã—70mm)",
+    "out": {
+      "wPx": 420,
+      "hPx": 540,
+      "aspect": 0.778,
+      "format": "jpeg",
+      "maxKB": null,
+      "dpi": 300,
+      "printMM": [
+        50,
+        70
+      ]
+    },
+    "headRatio": [
+      0.44,
+      0.51
+    ],
+    "eyeFromBottom": [
+      0.6,
+      0.72
+    ],
+    "background": {
+      "target": [
+        255,
+        255,
+        255
+      ],
+      "maxDeltaE": 14
+    },
+    "flags": [
+      "neutral_expression",
+      "no_head_covering"
+    ],
+    "seo": {
+      "title": "Canada Passport Photo Checker â€” 50Ã—70mm, Free & Private",
+      "desc": "Check your Canadian passport photo against the 50Ã—70mm spec with 31â€“36mm face height. DIYPassPhoto verifies framing and background live â€” free, nothing uploaded.",
+      "keywords": "canada passport photo, canadian passport photo size, 50x70mm photo, canada passport photo checker, passport photo canada",
+      "h1": "Canada passport photo checker",
+      "intro": "50Ã—70 mm with a 31â€“36 mm face height and a white background. Canada's tall format trips people up â€” DIYPassPhoto frames it correctly and checks the rest live."
+    },
+    "reqs": [
+      "50Ã—70 mm photo, white or light background",
+      "Face height 31â€“36 mm (chin to crown)",
+      "Neutral expression, mouth closed",
+      "Even lighting, no shadows"
+    ],
+    "rejections": [
+      "Wrong aspect ratio (it's tall, 50Ã—70mm â€” not square)",
+      "Face height outside 31â€“36 mm",
+      "Shadows on the background"
+    ],
+    "faq": [
+      {
+        "q": "What size is a Canadian passport photo?",
+        "a": "50 mm wide by 70 mm tall, with the face (chin to crown) measuring 31â€“36 mm."
+      },
+      {
+        "q": "Is the Canadian passport photo square?",
+        "a": "No â€” it is a tall 50Ã—70 mm rectangle, which is why square crops from other countries don't work."
+      }
+    ],
+    "emblem": {
+      "icon": "ðŸ¦«",
+      "name": "Beaver",
+      "kind": "National animal"
+    },
+    "officialUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-passports/photos.html"
+  },
+  "australia-passport": {
+    "label": "Australia Passport",
+    "flag": "ðŸ‡¦ðŸ‡º",
+    "country": "Australia",
+    "docName": "Passport (35Ã—45mm)",
+    "out": {
+      "wPx": 413,
+      "hPx": 531,
+      "aspect": 0.778,
+      "format": "jpeg",
+      "maxKB": null,
+      "dpi": 300,
+      "printMM": [
+        35,
+        45
+      ]
+    },
+    "headRatio": [
+      0.71,
+      0.8
+    ],
+    "eyeFromBottom": [
+      0.5,
+      0.6
+    ],
+    "background": {
+      "target": [
+        245,
+        245,
+        245
+      ],
+      "maxDeltaE": 16
+    },
+    "flags": [
+      "neutral_expression"
+    ],
+    "seo": {
+      "title": "Australia Passport Photo Checker â€” 35Ã—45mm, Free & Private",
+      "desc": "Take a compliant Australian passport photo. DIYPassPhoto checks the 35Ã—45mm framing, light background and head size live in your browser â€” free, no uploads.",
+      "keywords": "australia passport photo, australian passport photo size, 35x45mm photo australia, passport photo australia checker",
+      "h1": "Australia passport photo checker",
+      "intro": "35Ã—45 mm, plain light background, face 32â€“36 mm. DIYPassPhoto frames you live and confirms the spec before you submit or print."
+    },
+    "reqs": [
+      "35Ã—45 mm, plain light-coloured background",
+      "Face 32â€“36 mm (about 71â€“80% of height)",
+      "Neutral expression, eyes open, mouth closed",
+      "Even lighting"
+    ],
+    "rejections": [
+      "Background too dark or patterned",
+      "Face too small in the frame",
+      "Smiling or tilted head"
+    ],
+    "faq": [
+      {
+        "q": "What size is an Australian passport photo?",
+        "a": "35 mm wide by 45 mm tall, with the face measuring 32â€“36 mm from chin to crown."
+      }
+    ],
+    "emblem": {
+      "icon": "ðŸ¦˜",
+      "name": "Kangaroo",
+      "kind": "National animal"
+    },
+    "officialUrl": "https://www.passports.gov.au/getting-passport-how-to/photo-guidelines"
+  },
+  "china-visa": {
+    "label": "China Visa",
+    "flag": "ðŸ‡¨ðŸ‡³",
+    "country": "China",
+    "docName": "Visa (33Ã—48mm)",
+    "out": {
+      "wPx": 354,
+      "hPx": 472,
+      "aspect": 0.75,
+      "format": "jpeg",
+      "maxKB": 120,
+      "dpi": 300,
+      "printMM": [
+        33,
+        48
+      ]
+    },
+    "headRatio": [
+      0.6,
+      0.69
+    ],
+    "eyeFromBottom": [
+      0.5,
+      0.62
+    ],
+    "background": {
+      "target": [
+        255,
+        255,
+        255
+      ],
+      "maxDeltaE": 12
+    },
+    "flags": [
+      "no_glasses",
+      "neutral_expression",
+      "no_head_covering"
+    ],
+    "seo": {
+      "title": "China Visa Photo Checker â€” 33Ã—48mm, Under 120KB, Free",
+      "desc": "Check your China visa photo against the 33Ã—48mm, pure-white, â‰¤120KB spec. DIYPassPhoto verifies framing and background live in your browser â€” free, nothing uploaded.",
+      "keywords": "china visa photo, china visa photo size, 33x48mm photo, china visa photo requirements, china visa photo checker",
+      "h1": "China visa photo checker",
+      "intro": "33Ã—48 mm, pure white background, ears visible, online file 40â€“120 KB. China's spec is strict â€” DIYPassPhoto checks it precisely and compresses to fit."
+    },
+    "reqs": [
+      "33Ã—48 mm print; online 354Ã—472 to 420Ã—560 px",
+      "Pure white background, ears visible",
+      "Online file 40â€“120 KB",
+      "Neutral expression, no glasses",
+      "Head 28â€“33 mm"
+    ],
+    "rejections": [
+      "Background not pure white",
+      "Ears covered by hair",
+      "File over 120 KB",
+      "Glasses or head covering"
+    ],
+    "faq": [
+      {
+        "q": "What size is a China visa photo?",
+        "a": "33 mm wide by 48 mm tall for prints; online photos are 354Ã—472 to 420Ã—560 pixels and 40â€“120 KB."
+      },
+      {
+        "q": "Does the China visa photo need ears visible?",
+        "a": "Yes â€” both ears should generally be visible, with a pure white background."
+      }
+    ],
+    "emblem": {
+      "icon": "ðŸ¼",
+      "name": "Giant panda",
+      "kind": "National animal"
+    },
+    "officialUrl": "http://www.visaforchina.cn/"
+  },
+  "japan-passport": {
+    "label": "Japan Passport",
+    "flag": "ðŸ‡¯ðŸ‡µ",
+    "country": "Japan",
+    "docName": "Passport (35Ã—45mm)",
+    "out": {
+      "wPx": 413,
+      "hPx": 531,
+      "aspect": 0.778,
+      "format": "jpeg",
+      "maxKB": null,
+      "dpi": 300,
+      "printMM": [
+        35,
+        45
+      ]
+    },
+    "headRatio": [
+      0.7,
+      0.8
+    ],
+    "eyeFromBottom": [
+      0.5,
+      0.6
+    ],
+    "background": {
+      "target": [
+        250,
+        250,
+        250
+      ],
+      "maxDeltaE": 16
+    },
+    "flags": [
+      "neutral_expression"
+    ],
+    "seo": {
+      "title": "Japan Passport Photo Checker â€” 35Ã—45mm, Free & Private",
+      "desc": "Take a compliant Japanese passport photo. DIYPassPhoto checks the 35Ã—45mm framing, plain background and 34mm face height live in your browser â€” free, no uploads.",
+      "keywords": "japan passport photo, japanese passport photo size, 35x45mm photo japan, passport photo japan checker",
+      "h1": "Japan passport photo checker",
+      "intro": "35Ã—45 mm, plain light background, face about 34 mm. DIYPassPhoto frames the precise Japanese spec and checks the rest live."
+    },
+    "reqs": [
+      "35Ã—45 mm, plain light background",
+      "Face height about 32â€“36 mm",
+      "Neutral expression, eyes open",
+      "Even lighting, no shadows"
+    ],
+    "rejections": [
+      "Background too dark or coloured",
+      "Face too small or large",
+      "Shadows on the background"
+    ],
+    "faq": [
+      {
+        "q": "What size is a Japanese passport photo?",
+        "a": "35 mm wide by 45 mm tall, with the face roughly 32â€“36 mm from chin to crown."
+      }
+    ],
+    "emblem": {
+      "icon": "ðŸ¦",
+      "name": "Green pheasant",
+      "kind": "National bird"
+    },
+    "officialUrl": "https://www.mofa.go.jp/ca/pss/"
+  },
+  "germany-passport": {
+    "label": "Germany Passport",
+    "flag": "ðŸ‡©ðŸ‡ª",
+    "country": "Germany",
+    "docName": "Passport (35Ã—45mm)",
+    "out": {
+      "wPx": 413,
+      "hPx": 531,
+      "aspect": 0.778,
+      "format": "jpeg",
+      "maxKB": null,
+      "dpi": 300,
+      "printMM": [
+        35,
+        45
+      ]
+    },
+    "headRatio": [
+      0.7,
+      0.8
+    ],
+    "eyeFromBottom": [
+      0.5,
+      0.6
+    ],
+    "background": {
+      "target": [
+        240,
+        240,
+        240
+      ],
+      "maxDeltaE": 16
+    },
+    "flags": [
+      "neutral_expression"
+    ],
+    "seo": {
+      "title": "Germany Passport Photo Checker â€” 35Ã—45mm, Free & Private",
+      "desc": "Check your German biometric passport photo against the 35Ã—45mm spec with a light-grey background. DIYPassPhoto verifies framing and head size live â€” free, in your browser.",
+      "keywords": "germany passport photo, german passport photo size, biometric photo germany, 35x45mm photo, germany passport photo checker",
+      "h1": "Germany passport photo checker",
+      "intro": "35Ã—45 mm biometric, light-grey background, face 70â€“80% of the frame. DIYPassPhoto checks the German biometric framing live, free, with nothing uploaded."
+    },
+    "reqs": [
+      "35Ã—45 mm biometric, light grey background",
+      "Face 70â€“80% of height (32â€“36 mm)",
+      "Neutral expression, looking straight at camera",
+      "Even lighting, no shadows"
+    ],
+    "rejections": [
+      "Pure white or coloured background",
+      "Face too small",
+      "Smiling or tilted head",
+      "Shadows behind the head"
+    ],
+    "faq": [
+      {
+        "q": "What background does a German passport photo need?",
+        "a": "A light grey background is standard for German biometric passport photos; pure white or coloured backgrounds are often rejected."
+      }
+    ],
+    "emblem": {
+      "icon": "ðŸ¦…",
+      "name": "Federal eagle",
+      "kind": "National animal"
+    },
+    "officialUrl": "https://www.bundesdruckerei.de/en/Photo-template"
+  }
+};
+
+</script>
+<script type="module">
+// GreenFrame app — shared across home + all country pages.
+// Reads window.COUNTRY_SPECS (from countries.js) and window.GF_START (page default).
+import { FaceLandmarker, FilesetResolver }
+  from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.18";
+
+const SPECS = window.COUNTRY_SPECS || {};
+const $ = id => document.getElementById(id);
+const el = {
+  video:$("video"), feed:$("feed"), hud:$("hud"), frame:$("framewrap"),
+  vfEmpty:$("vfEmpty"), badge:$("vfBadge"), gates:$("gates"), verdict:$("verdict"),
+  score:$("scoreNum"), status:$("status"), country:$("country"),
+  startCam:$("startCam"), capture:$("capture"), upload:$("upload"),
+  result:$("result"), resultImg:$("resultImg"), rmeta:$("rmeta"),
+  download:$("download"), sheet:$("sheet"), report:$("report"), retake:$("retake")
+};
+if(!el.gates){ /* page has no tool */ } else { boot(); }
+
+let landmarker=null, imageLandmarker=null, modelReady=false;
+let running=false, stream=null, mode="idle", stillImage=null, lastResults=null, prevStatus={}, lastChecks=[];
+
+const FLAG_LABELS={ no_glasses:"Remove glasses (not permitted)", neutral_expression:"Neutral expression — confirm", no_head_covering:"No hat / head covering (unless religious)" };
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const setStatus=t=>{ if(el.status) el.status.textContent=t; };
+
+function boot(){
+  // dropdown
+  for(const [k,s] of Object.entries(SPECS)){
+    const o=document.createElement("option"); o.value=k; o.textContent=`${s.flag} ${s.label}`; el.country.appendChild(o);
+  }
+  el.country.value = (window.GF_START && SPECS[window.GF_START]) ? window.GF_START : Object.keys(SPECS)[0];
+  el.country.addEventListener("change",()=>{ prevStatus={}; renderGates(currentGates()); if(mode==="still"&&stillImage) runStill(); });
+  el.startCam.addEventListener("click",()=> running?stopCam():startCam());
+  el.capture.addEventListener("click",captureLive);
+  el.upload.addEventListener("change",onUpload);
+  if(el.retake) el.retake.onclick=()=> el.result.classList.remove("on");
+  renderGates(currentGates());
+  loadModel();
+}
+
+async function loadModel(){
+  try{
+    const fs=await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.18/wasm");
+    landmarker=await FaceLandmarker.createFromOptions(fs,{
+      baseOptions:{ modelAssetPath:"https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task" },
+      runningMode:"VIDEO", numFaces:2, outputFacialTransformationMatrixes:true });
+    modelReady=true; setStatus("Ready. Start the live guide, or check a photo you already have.");
+  }catch(e){
+    modelReady=false;
+    setStatus("The live face model couldn't load here. File, background, sharpness and lighting checks still work on an uploaded photo.");
+  }
+}
+
+/* ---------- colour / pixel helpers ---------- */
+function rgb2lab([r,g,b]){r/=255;g/=255;b/=255;
+  r=r>.04045?((r+.055)/1.055)**2.4:r/12.92;g=g>.04045?((g+.055)/1.055)**2.4:g/12.92;b=b>.04045?((b+.055)/1.055)**2.4:b/12.92;
+  let x=(r*.4124+g*.3576+b*.1805)/.95047,y=r*.2126+g*.7152+b*.0722,z=(r*.0193+g*.1192+b*.9505)/1.08883;
+  const f=t=>t>.008856?Math.cbrt(t):7.787*t+16/116;x=f(x);y=f(y);z=f(z);
+  return[116*y-16,500*(x-y),200*(y-z)];}
+const deltaE=(a,b)=>{const A=rgb2lab(a),B=rgb2lab(b);return Math.hypot(A[0]-B[0],A[1]-B[1],A[2]-B[2]);};
+
+function analyzeBackground(ctx,w,h,target){
+  const b=Math.max(4,Math.round(Math.min(w,h)*.06)), step=Math.max(2,Math.round(w/120)), pts=[];
+  for(let x=0;x<w;x+=step){pts.push([x,b>>1]);pts.push([x,h-1-(b>>1)]);}
+  for(let y=0;y<h;y+=step){pts.push([b>>1,y]);pts.push([w-1-(b>>1),y]);}
+  let r=0,g=0,bl=0,n=0,lum=[];
+  for(const[x,y]of pts){const d=ctx.getImageData(x,y,1,1).data;r+=d[0];g+=d[1];bl+=d[2];lum.push(.299*d[0]+.587*d[1]+.114*d[2]);n++;}
+  const mean=[r/n,g/n,bl/n],mL=lum.reduce((a,c)=>a+c,0)/n;
+  const variance=Math.sqrt(lum.reduce((a,c)=>a+(c-mL)**2,0)/n);
+  return{mean,dE:deltaE(mean,target),variance};
+}
+function analyzeSharpness(ctx,w,h){
+  const s=Math.min(256,w),sc=s/w,hh=Math.round(h*sc);
+  const t=document.createElement("canvas");t.width=s;t.height=hh;
+  const tc=t.getContext("2d");tc.drawImage(ctx.canvas,0,0,s,hh);
+  const d=tc.getImageData(0,0,s,hh).data,g=new Float32Array(s*hh);
+  for(let i=0;i<s*hh;i++)g[i]=.299*d[i*4]+.587*d[i*4+1]+.114*d[i*4+2];
+  let m=0,c=0,v=[];
+  for(let y=1;y<hh-1;y++)for(let x=1;x<s-1;x++){const i=y*s+x;const l=4*g[i]-g[i-1]-g[i+1]-g[i-s]-g[i+s];v.push(l);m+=l;c++;}
+  m/=c;let va=0;for(const x of v)va+=(x-m)**2;return va/c;
+}
+function analyzeLighting(ctx,box){
+  if(!box)return null;const{x,y,w,h}=box;
+  const s=(sx,sy,sw,sh)=>{const d=ctx.getImageData(clamp(sx,0,ctx.canvas.width-1),clamp(sy,0,ctx.canvas.height-1),Math.max(1,sw),Math.max(1,sh)).data;let l=0;for(let i=0;i<d.length;i+=4)l+=.299*d[i]+.587*d[i+1]+.114*d[i+2];return l/(d.length/4);};
+  const L=s(x,y,w/2,h),R=s(x+w/2,y,w/2,h);
+  return{sideDiff:Math.abs(L-R)/((L+R)/2||1),overall:(L+R)/2};
+}
+
+/* ---------- geometry ---------- */
+function geometry(lm,w,h){
+  const p=i=>({x:lm[i].x*w,y:lm[i].y*h});
+  const chin=p(152),brow=p(10),b2c=Math.hypot(chin.x-brow.x,chin.y-brow.y);
+  const dir={x:(brow.x-chin.x)/b2c,y:(brow.y-chin.y)/b2c};
+  const crown={x:brow.x+dir.x*b2c*.36,y:brow.y+dir.y*b2c*.36};
+  const headH=Math.hypot(chin.x-crown.x,chin.y-crown.y);
+  const le={x:(lm[159].x+lm[145].x)/2*w,y:(lm[159].y+lm[145].y)/2*h};
+  const re={x:(lm[386].x+lm[374].x)/2*w,y:(lm[386].y+lm[374].y)/2*h};
+  const eyeY=(le.y+re.y)/2,eyeX=(le.x+re.x)/2;
+  const ear=(a,b,c,d)=>Math.abs(lm[a].y-lm[b].y)/(Math.abs(lm[c].x-lm[d].x)||1e-6);
+  return{
+    headRatio:headH/h, eyeFromBottom:(h-eyeY)/h, centerX:eyeX/w,
+    roll:Math.atan2(re.y-le.y,re.x-le.x)*180/Math.PI,
+    eyesOpen:(ear(159,145,33,133)+ear(386,374,263,362))/2,
+    mouthOpen:Math.abs(lm[13].y-lm[14].y)/(Math.abs(lm[61].x-lm[291].x)||1e-6),
+    faceBox:{x:Math.min(crown.x,chin.x)-headH*.4,y:crown.y,w:headH*.8,h:headH}
+  };
+}
+
+/* ---------- check engine ---------- */
+function buildChecks({geo,bg,sharp,light,faceCount,out,spec}){
+  const C=[],push=(id,label,status,measured,coach)=>C.push({id,label,status,measured,coach});
+  if(geo!==undefined) push("face","One face detected",faceCount===1?"pass":"fail",faceCount===1?"1 face":`${faceCount||0} faces`,faceCount===0?"No face found — move closer and face the camera.":"Only one person may be in frame.");
+  if(geo){
+    const[hmin,hmax]=spec.headRatio,hr=geo.headRatio;
+    push("head","Head size",hr>=hmin&&hr<=hmax?"pass":"fail",`${(hr*100).toFixed(0)}% · ${Math.round(hmin*100)}–${Math.round(hmax*100)}%`,hr<hmin?"Move closer — your head is too small in the frame.":hr>hmax?"Move back — your head fills too much of the frame.":"");
+    push("center","Centering",Math.abs(geo.centerX-.5)<.06?"pass":"warn",`${(geo.centerX*100).toFixed(0)}% across`,"Centre your face left-to-right.");
+    if(spec.eyeFromBottom){const[a,b]=spec.eyeFromBottom;push("eyes_pos","Eye height",geo.eyeFromBottom>=a&&geo.eyeFromBottom<=b?"pass":"warn",`${(geo.eyeFromBottom*100).toFixed(0)}% up`,"Raise or lower the camera so your eyes sit in the required band.");}
+    push("tilt","Head level",Math.abs(geo.roll)<5?"pass":"fail",`${geo.roll.toFixed(1)}°`,"Straighten your head — don't tilt.");
+    push("open","Eyes open",geo.eyesOpen>.18?"pass":"warn",geo.eyesOpen>.18?"open":"narrow","Open your eyes fully and look at the lens.");
+    push("mouth","Neutral mouth",geo.mouthOpen<.08?"pass":"warn",geo.mouthOpen<.08?"closed":"smiling","Close your mouth — neutral expression.");
+  }
+  if(bg){
+    push("bg_color","Background colour",bg.dE<=spec.background.maxDeltaE?"pass":"fail",`ΔE ${bg.dE.toFixed(0)} · ≤${spec.background.maxDeltaE}`,bg.dE>spec.background.maxDeltaE?"Background reads off-target — usually underexposure. Brighten the scene (face a window) rather than editing.":"");
+    push("bg_even","Background even",bg.variance<14?"pass":"warn",`var ${bg.variance.toFixed(0)}`,"Smooth the background — shadows or texture cause rejections.");
+  }
+  if(light) push("shadow","Even lighting",light.sideDiff<.14?"pass":"warn",`${(light.sideDiff*100).toFixed(0)}% L/R`,"Lighting is uneven — turn toward soft, frontal light.");
+  if(sharp!=null) push("sharp","Sharpness",sharp>120?"pass":sharp>60?"warn":"fail",`${sharp.toFixed(0)}`,sharp<=120?"Looks soft — hold steady, use the rear camera, lock focus on your face.":"");
+  if(out){
+    push("dims","Pixel size",out.okDims?"pass":out.dims?"warn":"idle",out.dims||"—","Auto-sized to spec on export.");
+    if(spec.out.maxKB) push("filesize","File size",out.kb==null?"idle":(out.kb<=spec.out.maxKB?"pass":"fail"),out.kb==null?`≤ ${spec.out.maxKB} KB`:`${out.kb} KB · ≤${spec.out.maxKB}`,"Compressed to fit on export.");
+  }
+  for(const f of(spec.flags||[])) push("flag_"+f,FLAG_LABELS[f]||f,"manual","confirm","GreenFrame can't reliably judge this — check it yourself.");
+  return C;
+}
+const currentGates=()=>buildChecks({geo:null,bg:null,sharp:null,light:null,faceCount:undefined,out:null,spec:SPECS[el.country.value]});
+
+function renderGates(checks){
+  lastChecks=checks;
+  el.gates.innerHTML="";let pass=0,req=0,fail=0;
+  for(const c of checks){
+    const justPassed = c.status==="pass" && prevStatus[c.id] && prevStatus[c.id]!=="pass";
+    const row=document.createElement("div");
+    row.className="gate"+(((c.status==="fail"||c.status==="warn")&&c.coach)?" show-coach":"")+(justPassed?" just-passed":"");
+    const sym=c.status==="pass"?"✓":c.status==="fail"?"✕":c.status==="warn"?"!":c.status==="manual"?"?":"·";
+    row.innerHTML=`<div class="dot ${c.status}">${sym}</div><div class="body">
+      <div class="glabel"><span>${c.label}</span><span class="measured">${c.measured||""}</span></div>
+      ${(c.coach&&(c.status==="fail"||c.status==="warn"))?`<div class="coach">${c.coach}</div>`:""}</div>`;
+    el.gates.appendChild(row);
+    if(justPassed) setTimeout(()=>row.classList.remove("just-passed"),700);
+    prevStatus[c.id]=c.status;
+    if(c.status!=="manual"&&c.status!=="idle"){req++;if(c.status==="pass")pass++;if(c.status==="fail")fail++;}
+  }
+  const go=req>0&&fail===0;
+  el.frame&&el.frame.classList.toggle("go",go&&mode!=="idle");
+  el.badge.className="vf-badge "+(go&&mode!=="idle"?"go":"");
+  el.badge.innerHTML=`<span class="blink"></span>${mode==="idle"?"CAMERA OFF":go?"GREEN — CAPTURE":"HOLD"}`;
+  el.verdict.className="verdict "+(go?"go":"hold");
+  el.verdict.textContent=req===0?"Waiting for a photo…":go?"All required checks pass":"Not ready yet";
+  el.score.textContent=req?`${pass}/${req}`:"";
+  el.capture.disabled=!(mode==="live"&&go&&modelReady);
+}
+
+/* ---------- live ---------- */
+async function startCam(){
+  if(running)return;
+  try{ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user",width:{ideal:1280},height:{ideal:1280}},audio:false}); }
+  catch(e){ setStatus("Camera permission denied. You can still check an existing photo."); return; }
+  el.video.srcObject=stream; await el.video.play();
+  el.video.style.display="block"; el.feed.style.display="none"; el.vfEmpty.style.display="none";
+  mode="live"; running=true; el.startCam.textContent="Stop camera";
+  setStatus("Line up with the guide. The frame turns green and Capture unlocks when every check passes.");
+  sizeHud(); requestAnimationFrame(loop);
+}
+function stopCam(){
+  running=false; mode="idle";
+  if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
+  el.video.style.display="none"; el.vfEmpty.style.display="block";
+  el.startCam.textContent="Start live guide";
+  el.hud.getContext("2d").clearRect(0,0,el.hud.width,el.hud.height);
+  prevStatus={}; renderGates(currentGates());
+}
+function sizeHud(){ const r=el.video.parentElement.getBoundingClientRect(); el.hud.width=r.width; el.hud.height=r.height; }
+window.addEventListener("resize",()=>{ if(mode==="live")sizeHud(); });
+
+let lastTs=-1;
+function loop(){
+  if(!running)return;
+  const spec=SPECS[el.country.value], vw=el.video.videoWidth, vh=el.video.videoHeight;
+  if(vw&&modelReady){
+    const now=performance.now(); let res=null;
+    if(now!==lastTs){ res=landmarker.detectForVideo(el.video,now); lastTs=now; lastResults=res; }
+    drawHud(spec,res||lastResults);
+    if(res){
+      const mc=document.createElement("canvas");mc.width=vw;mc.height=vh;
+      const mx=mc.getContext("2d");mx.drawImage(el.video,0,0,vw,vh);
+      const geo=res.faceLandmarks&&res.faceLandmarks[0]?geometry(res.faceLandmarks[0],vw,vh):null;
+      const bg=analyzeBackground(mx,vw,vh,spec.background.target), sharp=analyzeSharpness(mx,vw,vh);
+      const light=geo?analyzeLighting(mx,geo.faceBox):null;
+      renderGates(buildChecks({geo,bg,sharp,light,faceCount:res.faceLandmarks?res.faceLandmarks.length:0,
+        out:{okDims:true,dims:`${spec.out.wPx}×${spec.out.hPx}`,kb:null},spec}));
+    }
+  }
+  requestAnimationFrame(loop);
+}
+function drawHud(spec,res){
+  const ctx=el.hud.getContext("2d"),W=el.hud.width,H=el.hud.height; ctx.clearRect(0,0,W,H);
+  const midH=(spec.headRatio[0]+spec.headRatio[1])/2*H, cx=W/2, cy=H*.46;
+  ctx.save();
+  ctx.strokeStyle="rgba(255,255,255,.5)";ctx.lineWidth=2;ctx.setLineDash([7,8]);
+  ctx.beginPath();ctx.ellipse(cx,cy,midH*.36,midH*.5,0,0,7);ctx.stroke();
+  ctx.setLineDash([2,7]);ctx.strokeStyle="rgba(255,255,255,.16)";
+  ctx.beginPath();ctx.moveTo(W/2,0);ctx.lineTo(W/2,H);ctx.stroke();
+  ctx.restore();
+  if(res&&res.faceLandmarks&&res.faceLandmarks[0]){
+    const lm=res.faceLandmarks[0];
+    const le={x:(lm[159].x+lm[145].x)/2,y:(lm[159].y+lm[145].y)/2},re={x:(lm[386].x+lm[374].x)/2,y:(lm[386].y+lm[374].y)/2};
+    ctx.strokeStyle="rgba(17,168,97,.95)";ctx.lineWidth=2;ctx.setLineDash([]);
+    ctx.beginPath();ctx.moveTo(le.x*W,le.y*H);ctx.lineTo(re.x*W,re.y*H);ctx.stroke();
+  }
+}
+
+/* ---------- upload ---------- */
+function onUpload(e){
+  const f=e.target.files[0]; if(!f)return;
+  if(running) stopCam();
+  const img=new Image(); img.onload=()=>{ stillImage=img; mode="still"; runStill(); }; img.src=URL.createObjectURL(f);
+  el.vfEmpty.style.display="none";
+}
+function runStill(){
+  const spec=SPECS[el.country.value], img=stillImage, w=img.naturalWidth, h=img.naturalHeight;
+  const mc=document.createElement("canvas");mc.width=w;mc.height=h;const mx=mc.getContext("2d");mx.drawImage(img,0,0);
+  el.feed.style.display="block";el.video.style.display="none";el.feed.width=w;el.feed.height=h;el.feed.getContext("2d").drawImage(img,0,0,w,h);
+  const bg=analyzeBackground(mx,w,h,spec.background.target), sharp=analyzeSharpness(mx,w,h);
+  detectStill(img,w,h).then(det=>{
+    const geo=det.geo, light=geo?analyzeLighting(mx,geo.faceBox):null;
+    lastResults=det.raw||null;
+    renderGates(buildChecks({geo,bg,sharp,light,faceCount:det.count,
+      out:{okDims:false,dims:`${w}×${h} → ${spec.out.wPx}×${spec.out.hPx}`,kb:null},spec}));
+    setStatus("Checked. Fix any red items, or capture fresh with the live guide for real-time help.");
+  });
+}
+async function detectStill(img,w,h){
+  if(!modelReady)return{geo:null,count:undefined};
+  try{
+    if(!imageLandmarker){
+      const fs=await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.18/wasm");
+      imageLandmarker=await FaceLandmarker.createFromOptions(fs,{baseOptions:{modelAssetPath:"https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task"},runningMode:"IMAGE",numFaces:2,outputFacialTransformationMatrixes:true});
+    }
+    const r=imageLandmarker.detect(img), count=r.faceLandmarks?r.faceLandmarks.length:0;
+    return{geo:count?geometry(r.faceLandmarks[0],w,h):null,count,raw:r};
+  }catch(e){ return{geo:null,count:undefined}; }
+}
+
+/* ---------- export + print sheet ---------- */
+function makePhoto(src,sw,sh){
+  const spec=SPECS[el.country.value], aspect=spec.out.wPx/spec.out.hPx;
+  const g=lastResults&&lastResults.faceLandmarks&&lastResults.faceLandmarks[0]?geometry(lastResults.faceLandmarks[0],sw,sh):null;
+  const mid=(spec.headRatio[0]+spec.headRatio[1])/2;
+  let cropH,cropW,cx,cy;
+  if(g){ cropH=(g.headRatio*sh)/mid; cropW=cropH*aspect; cx=g.centerX*sw; cy=g.faceBox.y+g.faceBox.h*.5-cropH*.04; }
+  else { cropH=Math.min(sh,sw/aspect); cropW=cropH*aspect; cx=sw/2; cy=sh/2; }
+  const sx=clamp(cx-cropW/2,0,sw-cropW), sy=clamp(cy-cropH/2,0,sh-cropH);
+  const out=document.createElement("canvas");out.width=spec.out.wPx;out.height=spec.out.hPx;
+  out.getContext("2d").drawImage(src,sx,sy,cropW,cropH,0,0,spec.out.wPx,spec.out.hPx);
+  let q=.92,url=out.toDataURL("image/jpeg",q);
+  if(spec.out.maxKB){let lo=.4,hi=.95;for(let i=0;i<7;i++){q=(lo+hi)/2;url=out.toDataURL("image/jpeg",q);(Math.round(url.length*.75/1024)>spec.out.maxKB)?hi=q:lo=q;}}
+  return{url,kb:Math.round(url.length*.75/1024),spec,canvas:out};
+}
+function captureLive(){
+  const vw=el.video.videoWidth,vh=el.video.videoHeight;
+  const c=document.createElement("canvas");c.width=vw;c.height=vh;c.getContext("2d").drawImage(el.video,0,0,vw,vh);
+  showResult(makePhoto(c,vw,vh));
+}
+let lastResult=null;
+function showResult(r){
+  lastResult=r; el.result.classList.add("on"); el.resultImg.src=r.url;
+  const km=r.spec.out.maxKB?` · ${r.kb} KB (≤${r.spec.out.maxKB})`:"";
+  el.rmeta.innerHTML=`<b>${r.spec.flag} ${r.spec.label}</b><br>${r.spec.out.wPx}×${r.spec.out.hPx} px · JPEG${km}<br>print ${r.spec.out.printMM[0]}×${r.spec.out.printMM[1]} mm @ ${r.spec.out.dpi} dpi`;
+  el.download.onclick=()=>{const a=document.createElement("a");a.href=r.url;a.download=`greenframe-${el.country.value}.jpg`;a.click();};
+  if(el.sheet) el.sheet.onclick=()=>printSheet(r);
+  if(el.report) el.report.onclick=()=>downloadReport(r);
+  el.result.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+
+// Downloadable compliance report card (PNG) — the "proof" artifact.
+function downloadReport(r){
+  const checks=lastChecks.filter(c=>c.status!=="idle");
+  const W=1000, pad=48, rowH=54, headH=210, footH=170;
+  const H=headH + checks.length*rowH + footH;
+  const c=document.createElement("canvas"); c.width=W; c.height=H;
+  const x=c.getContext("2d");
+  const COL={pass:"#11A861",fail:"#CC5544",warn:"#C2871F",manual:"#8A988F",ink:"#0E1A14",mist:"#5A6B61",line:"#D6DDD3"};
+  x.fillStyle="#FBFCFA"; x.fillRect(0,0,W,H);
+  // mark
+  x.strokeStyle=COL.pass; x.lineWidth=4; roundRect(x,pad,pad,40,40,9); x.stroke();
+  x.fillStyle=COL.ink; x.font="800 30px Inter,Arial,sans-serif"; x.fillText("GreenFrame", pad+56, pad+30);
+  x.fillStyle=COL.mist; x.font="600 16px Inter,Arial,sans-serif"; x.fillText("Compliance report", pad+56, pad+52);
+  // country + date
+  x.fillStyle=COL.ink; x.font="700 22px Inter,Arial,sans-serif";
+  x.fillText(`${r.spec.flag}  ${r.spec.label}`, pad, pad+108);
+  x.fillStyle=COL.mist; x.font="400 15px Inter,Arial,sans-serif";
+  x.fillText(new Date().toLocaleString(), pad, pad+134);
+  // photo thumb
+  const tw=150, th=Math.round(tw*(r.spec.out.hPx/r.spec.out.wPx));
+  x.drawImage(r.canvas, W-pad-tw, pad, tw, th);
+  x.strokeStyle=COL.line; x.lineWidth=1; x.strokeRect(W-pad-tw, pad, tw, th);
+  // divider
+  x.strokeStyle=COL.line; x.beginPath(); x.moveTo(pad,headH-16); x.lineTo(W-pad,headH-16); x.stroke();
+  // rows
+  let y=headH+8, passN=0, reqN=0;
+  for(const ch of checks){
+    if(ch.status!=="manual"){reqN++; if(ch.status==="pass")passN++;}
+    const cy=y+rowH/2;
+    x.fillStyle=COL[ch.status]||COL.mist;
+    x.beginPath(); x.arc(pad+14, cy, 12, 0, 7); x.fill();
+    x.fillStyle="#fff"; x.font="700 14px Inter,Arial,sans-serif"; x.textAlign="center";
+    x.fillText(ch.status==="pass"?"✓":ch.status==="fail"?"✕":ch.status==="warn"?"!":"?", pad+14, cy+5);
+    x.textAlign="left";
+    x.fillStyle=COL.ink; x.font="600 17px Inter,Arial,sans-serif"; x.fillText(ch.label, pad+40, cy+6);
+    x.fillStyle=COL.mist; x.font="400 15px Inter,Arial,sans-serif"; x.textAlign="right";
+    x.fillText(ch.measured||"", W-pad, cy+6); x.textAlign="left";
+    x.strokeStyle="#EEF2EC"; x.beginPath(); x.moveTo(pad,y+rowH); x.lineTo(W-pad,y+rowH); x.stroke();
+    y+=rowH;
+  }
+  // verdict
+  const go=reqN>0 && passN===reqN;
+  y+=24;
+  x.fillStyle=go?"#E1F2E8":"#F6ECD7"; roundRect(x,pad,y,W-pad*2,52,12); x.fill();
+  x.fillStyle=go?COL.pass:COL.warn; x.font="800 19px Inter,Arial,sans-serif";
+  x.fillText(go?`✓  All ${reqN} required checks pass`:`${passN}/${reqN} required checks pass — review the items above`, pad+18, y+33);
+  // footer
+  y+=80;
+  x.fillStyle=COL.mist; x.font="400 13px Inter,Arial,sans-serif";
+  wrapText(x,"GreenFrame measures the published specification and cannot guarantee acceptance — the issuing authority makes the final call. No AI edits were applied to the photo.",pad,y,W-pad*2,18);
+  x.fillStyle=COL.pass; x.font="600 14px Inter,Arial,sans-serif";
+  x.fillText(`Official requirements: ${r.spec.officialUrl||""}`, pad, y+54);
+  const a=document.createElement("a"); a.href=c.toDataURL("image/png"); a.download=`greenframe-${el.country.value}-report.png`; a.click();
+}
+function roundRect(x,X,Y,w,h,r){x.beginPath();x.moveTo(X+r,Y);x.arcTo(X+w,Y,X+w,Y+h,r);x.arcTo(X+w,Y+h,X,Y+h,r);x.arcTo(X,Y+h,X,Y,r);x.arcTo(X,Y,X+w,Y,r);x.closePath();}
+function wrapText(x,t,X,Y,maxW,lh){const words=t.split(" ");let line="",yy=Y;for(const w of words){const test=line+w+" ";if(x.measureText(test).width>maxW&&line){x.fillText(line,X,yy);line=w+" ";yy+=lh;}else line=test;}x.fillText(line,X,yy);}
+// 4x6in @300dpi print sheet, tiled with the photo at its physical mm size
+function printSheet(r){
+  const DPI=300, sheetW=Math.round(6*DPI), sheetH=Math.round(4*DPI);
+  const pw=Math.round(r.spec.out.printMM[0]/25.4*DPI), ph=Math.round(r.spec.out.printMM[1]/25.4*DPI);
+  const gap=Math.round(.08*DPI), cols=Math.floor((sheetW+gap)/(pw+gap)), rows=Math.floor((sheetH+gap)/(ph+gap));
+  const c=document.createElement("canvas");c.width=sheetW;c.height=sheetH;const x=c.getContext("2d");
+  x.fillStyle="#fff";x.fillRect(0,0,sheetW,sheetH);
+  const totW=cols*pw+(cols-1)*gap, totH=rows*ph+(rows-1)*gap, ox=(sheetW-totW)/2, oy=(sheetH-totH)/2;
+  for(let rI=0;rI<rows;rI++)for(let cI=0;cI<cols;cI++){
+    const px=ox+cI*(pw+gap), py=oy+rI*(ph+gap);
+    x.drawImage(r.canvas,px,py,pw,ph);
+    x.strokeStyle="#D6DDD3";x.lineWidth=1;x.strokeRect(px,py,pw,ph);
+  }
+  const a=document.createElement("a");a.href=c.toDataURL("image/jpeg",.92);a.download=`greenframe-${el.country.value}-4x6sheet.jpg`;a.click();
+}
+
+</script>
+</body>
+</html>
