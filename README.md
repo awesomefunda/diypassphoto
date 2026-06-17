@@ -1,4 +1,4 @@
-# GreenFrame
+# DIYPassPhoto
 
 **The passport photo checker that tells you when it's right.** Point your camera; the frame turns
 green when your passport/visa photo meets the spec. Live guidance + spec-accurate compliance checks

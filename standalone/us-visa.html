@@ -20,7 +20,7 @@
 <meta name="robots" content="index,follow"/>
 <style>
 /* ============================================================
-   GreenFrame design system  ·  "the instrument that says yes"
+   DIYPassPhoto design system  ·  "the instrument that says yes"
    Palette: spruce-ink + emerald signal + cool optical white
    Type: Bricolage Grotesque (display) · Inter (body) · Spline Sans Mono (readouts)
    Motif: crop-marks (corner ticks) + a frame that goes green
@@ -1795,7 +1795,7 @@ window.COUNTRY_SPECS = {
 
 </script>
 <script type="module">
-// GreenFrame app — shared across home + all country pages.
+// DIYPassPhoto app — shared across home + all country pages.
 // Reads window.COUNTRY_SPECS (from countries.js) and window.GF_START (page default).
 import { FaceLandmarker, FilesetResolver }
   from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.18";
@@ -1925,7 +1925,7 @@ function buildChecks({geo,bg,sharp,light,faceCount,out,spec}){
     push("dims","Pixel size",out.okDims?"pass":out.dims?"warn":"idle",out.dims||"—","Auto-sized to spec on export.");
     if(spec.out.maxKB) push("filesize","File size",out.kb==null?"idle":(out.kb<=spec.out.maxKB?"pass":"fail"),out.kb==null?`≤ ${spec.out.maxKB} KB`:`${out.kb} KB · ≤${spec.out.maxKB}`,"Compressed to fit on export.");
   }
-  for(const f of(spec.flags||[])) push("flag_"+f,FLAG_LABELS[f]||f,"manual","confirm","GreenFrame can't reliably judge this — check it yourself.");
+  for(const f of(spec.flags||[])) push("flag_"+f,FLAG_LABELS[f]||f,"manual","confirm","DIYPassPhoto can't reliably judge this — check it yourself.");
   return C;
 }
 const currentGates=()=>buildChecks({geo:null,bg:null,sharp:null,light:null,faceCount:undefined,out:null,spec:SPECS[el.country.value]});
@@ -2072,7 +2072,7 @@ function showResult(r){
   lastResult=r; el.result.classList.add("on"); el.resultImg.src=r.url;
   const km=r.spec.out.maxKB?` · ${r.kb} KB (≤${r.spec.out.maxKB})`:"";
   el.rmeta.innerHTML=`<b>${r.spec.flag} ${r.spec.label}</b><br>${r.spec.out.wPx}×${r.spec.out.hPx} px · JPEG${km}<br>print ${r.spec.out.printMM[0]}×${r.spec.out.printMM[1]} mm @ ${r.spec.out.dpi} dpi`;
-  el.download.onclick=()=>{const a=document.createElement("a");a.href=r.url;a.download=`greenframe-${el.country.value}.jpg`;a.click();};
+  el.download.onclick=()=>{const a=document.createElement("a");a.href=r.url;a.download=`diypassphoto-${el.country.value}.jpg`;a.click();};
   if(el.sheet) el.sheet.onclick=()=>printSheet(r);
   if(el.report) el.report.onclick=()=>downloadReport(r);
   el.result.scrollIntoView({behavior:"smooth",block:"nearest"});
@@ -2089,7 +2089,7 @@ function downloadReport(r){
   x.fillStyle="#FBFCFA"; x.fillRect(0,0,W,H);
   // mark
   x.strokeStyle=COL.pass; x.lineWidth=4; roundRect(x,pad,pad,40,40,9); x.stroke();
-  x.fillStyle=COL.ink; x.font="800 30px Inter,Arial,sans-serif"; x.fillText("GreenFrame", pad+56, pad+30);
+  x.fillStyle=COL.ink; x.font="800 30px Inter,Arial,sans-serif"; x.fillText("DIYPassPhoto", pad+56, pad+30);
   x.fillStyle=COL.mist; x.font="600 16px Inter,Arial,sans-serif"; x.fillText("Compliance report", pad+56, pad+52);
   // country + date
   x.fillStyle=COL.ink; x.font="700 22px Inter,Arial,sans-serif";
@@ -2127,10 +2127,10 @@ function downloadReport(r){
   // footer
   y+=80;
   x.fillStyle=COL.mist; x.font="400 13px Inter,Arial,sans-serif";
-  wrapText(x,"GreenFrame measures the published specification and cannot guarantee acceptance — the issuing authority makes the final call. No AI edits were applied to the photo.",pad,y,W-pad*2,18);
+  wrapText(x,"DIYPassPhoto measures the published specification and cannot guarantee acceptance — the issuing authority makes the final call. No AI edits were applied to the photo.",pad,y,W-pad*2,18);
   x.fillStyle=COL.pass; x.font="600 14px Inter,Arial,sans-serif";
   x.fillText(`Official requirements: ${r.spec.officialUrl||""}`, pad, y+54);
-  const a=document.createElement("a"); a.href=c.toDataURL("image/png"); a.download=`greenframe-${el.country.value}-report.png`; a.click();
+  const a=document.createElement("a"); a.href=c.toDataURL("image/png"); a.download=`diypassphoto-${el.country.value}-report.png`; a.click();
 }
 function roundRect(x,X,Y,w,h,r){x.beginPath();x.moveTo(X+r,Y);x.arcTo(X+w,Y,X+w,Y+h,r);x.arcTo(X+w,Y+h,X,Y+h,r);x.arcTo(X,Y+h,X,Y,r);x.arcTo(X,Y,X+w,Y,r);x.closePath();}
 function wrapText(x,t,X,Y,maxW,lh){const words=t.split(" ");let line="",yy=Y;for(const w of words){const test=line+w+" ";if(x.measureText(test).width>maxW&&line){x.fillText(line,X,yy);line=w+" ";yy+=lh;}else line=test;}x.fillText(line,X,yy);}
@@ -2147,7 +2147,7 @@ function printSheet(r){
     x.drawImage(r.canvas,px,py,pw,ph);
     x.strokeStyle="#D6DDD3";x.lineWidth=1;x.strokeRect(px,py,pw,ph);
   }
-  const a=document.createElement("a");a.href=c.toDataURL("image/jpeg",.92);a.download=`greenframe-${el.country.value}-4x6sheet.jpg`;a.click();
+  const a=document.createElement("a");a.href=c.toDataURL("image/jpeg",.92);a.download=`diypassphoto-${el.country.value}-4x6sheet.jpg`;a.click();
 }
 
 </script>
