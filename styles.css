@@ -231,7 +231,7 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
 .ccard .fl .ani{font-size:15px;margin-left:-6px}
 
 /* 2026 AI-rule notice (right panel top) */
-.notice2026{background:#FFFBEB;border:1px solid #F5D87E;border-radius:10px;padding:11px 14px;font-size:13.5px;line-height:1.55;margin-bottom:12px;color:#6B4F00}
+.notice2026{background:#FFFBEB;border:1px solid #F5D87E;border-radius:10px;padding:11px 14px;font-size:13.5px;line-height:1.55;margin-top:-10px;margin-bottom:12px;color:#6B4F00}
 .notice2026 b{color:#3D2C00}
 .notice2026 a{color:#2A4D9B;font-weight:600;white-space:nowrap;margin-left:4px}
 
