@@ -1948,7 +1948,7 @@ function renderGates(checks){
   el.verdict.className="verdict "+(go?"go":"hold");
   el.verdict.textContent=req===0?"Waiting for a photo…":go?"All required checks pass":"Not ready yet";
   el.score.textContent=req?`${pass}/${req}`:"";
-  el.capture.disabled=!(mode==="live"&&go&&modelReady);
+  el.capture.disabled=!(mode==="live"&&go);
 }
 
 /* ---------- live ---------- */
