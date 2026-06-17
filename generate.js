@@ -140,7 +140,7 @@ for (const slug of slugs){
 <body>
 <header class="bar"><div class="wrap">
   <a class="brand" href="../"><span class="mark"></span>DIYPassPhoto</a>
-  <nav class="navlinks"><a href="../#how">How it works</a><a href="../#checks">What we check</a><a href="../#countries">Countries</a><a href="../#guides">Guides</a></nav>
+  <nav class="navlinks"><a href="../#how">How it works</a><a href="../#checks">What we check</a><a href="../#countries">Countries</a><a href="../blog/">Guides</a></nav>
 </div></header>
 
 <main class="wrap">
@@ -208,6 +208,7 @@ const today = new Date().toISOString().slice(0,10);
 const blogs = ["us-passport-photo-at-home","dv-lottery-photo-requirements","white-wall-gray-background-fix"];
 const urls = [
   `  <url><loc>${SITE}/</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>`,
+  `  <url><loc>${SITE}/blog/</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`,
   ...slugs.map(s => `  <url><loc>${SITE}/c/${s}.html</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>`),
   ...blogs.map(b => `  <url><loc>${SITE}/blog/${b}.html</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`)
 ];
