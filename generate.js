@@ -179,7 +179,7 @@ ${footerCountries()}
 </div></footer>
 
 <script>window.GF_START="${slug}";</script>
-<script src="../countries.js"></script>
+<script src="../countries.js?v=3"></script>
 <script type="module" src="../app.js"></script>
 </body>
 </html>`;
