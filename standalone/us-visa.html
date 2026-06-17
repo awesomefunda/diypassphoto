@@ -302,7 +302,7 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
         <span class="cropmark tl"></span><span class="cropmark tr"></span><span class="cropmark bl"></span><span class="cropmark br"></span>
         <div class="viewfinder">
           <div class="vf-badge" id="vfBadge"><span class="blink"></span>CAMERA OFF</div>
-          <video id="video" playsinline muted style="display:none"></video>
+          <video id="video" autoplay playsinline muted style="display:none"></video>
           <canvas class="feed" id="feed" style="display:none"></canvas>
           <canvas class="hud" id="hud"></canvas>
           <div class="vf-empty" id="vfEmpty"><span class="big">Start the live guide</span>Use the rear camera if someone can take it for you — it's sharper than the selfie cam.</div>
@@ -1959,7 +1959,7 @@ function renderGates(checks){
 /* ---------- live ---------- */
 async function startCam(){
   if(running)return;
-  try{ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user",width:{ideal:1280},height:{ideal:1280}},audio:false}); }
+  try{ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"},width:{ideal:1920},height:{ideal:1080}},audio:false}); }
   catch(e){ setStatus("Camera not available ("+e.name+"). Use 'Check a photo' below to upload one instead."); return; }
   try{ el.video.srcObject=stream; await el.video.play(); }
   catch(e){ setStatus("Camera started but couldn't play ("+e.name+"). Try 'Check a photo' instead."); stopCam(); return; }

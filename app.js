@@ -162,7 +162,7 @@ function renderGates(checks){
 /* ---------- live ---------- */
 async function startCam(){
   if(running)return;
-  try{ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user",width:{ideal:1280},height:{ideal:1280}},audio:false}); }
+  try{ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"},width:{ideal:1920},height:{ideal:1080}},audio:false}); }
   catch(e){ setStatus("Camera not available ("+e.name+"). Use 'Check a photo' below to upload one instead."); return; }
   try{ el.video.srcObject=stream; await el.video.play(); }
   catch(e){ setStatus("Camera started but couldn't play ("+e.name+"). Try 'Check a photo' instead."); stopCam(); return; }
