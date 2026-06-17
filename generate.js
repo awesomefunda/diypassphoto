@@ -79,7 +79,7 @@ function countryNav(current){
   return slugs.map(s => {
     const c = data[s];
     const active = s === current ? ' style="border-color:var(--go-line)"' : "";
-    return `<a class="ccard" href="${s}.html"${active}><span class="fl">${c.flag}<span class="ani">${c.emblem.icon}</span></span><span class="cinfo"><span class="cn">${esc(c.label)}</span><span class="cs">${esc(c.country)}</span></span><span class="go-arrow">→</span></a>`;
+    return `<a class="ccard" href="${s}.html"${active}><span class="fl">${c.flag}</span><span class="cinfo"><span class="cn">${esc(c.label)}</span><span class="cs">${esc(c.country)}</span></span><span class="go-arrow">→</span></a>`;
   }).join("\n        ");
 }
 function footerCountries(){
@@ -147,7 +147,7 @@ for (const slug of slugs){
   <div class="crumb"><a href="../">DIYPassPhoto</a> / ${esc(c.country)} / ${esc(c.docName)}</div>
 
   <section class="hero" id="tool">
-    <div class="emblem"><span class="flag">${c.flag}</span><span class="sep"></span><span class="ani">${c.emblem.icon}</span><span class="lbl">${esc(c.emblem.kind)}<b>${esc(c.emblem.name)}</b></span></div>
+    <div class="emblem"><span class="flag">${c.flag}</span></div>
     <h1>${esc(c.seo.h1)}</h1>
     <p class="lede">Snap it from your phone, get the green light, download your photo and a compliance report. Checked against the official ${esc(c.country)} spec before you submit — nothing uploaded.</p>
 ${TOOL}
