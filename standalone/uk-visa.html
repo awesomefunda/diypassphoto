@@ -1805,8 +1805,6 @@ const el = {
   result:$("result"), resultImg:$("resultImg"), rmeta:$("rmeta"),
   download:$("download"), sheet:$("sheet"), report:$("report"), retake:$("retake")
 };
-if(!el.gates){ /* page has no tool */ } else { boot(); }
-
 let landmarker=null, imageLandmarker=null, modelReady=false;
 let running=false, stream=null, mode="idle", stillImage=null, lastResults=null, prevStatus={}, lastChecks=[];
 
@@ -2136,7 +2134,7 @@ function downloadReport(r){
 }
 function roundRect(x,X,Y,w,h,r){x.beginPath();x.moveTo(X+r,Y);x.arcTo(X+w,Y,X+w,Y+h,r);x.arcTo(X+w,Y+h,X,Y+h,r);x.arcTo(X,Y+h,X,Y,r);x.arcTo(X,Y,X+w,Y,r);x.closePath();}
 function wrapText(x,t,X,Y,maxW,lh){const words=t.split(" ");let line="",yy=Y;for(const w of words){const test=line+w+" ";if(x.measureText(test).width>maxW&&line){x.fillText(line,X,yy);line=w+" ";yy+=lh;}else line=test;}x.fillText(line,X,yy);}
-// 4x6in @300dpi print sheet, tiled with the photo at its physical mm size
+// 4×6in @300dpi print sheet, tiled with the photo at its physical mm size
 function printSheet(r){
   const DPI=300, sheetW=Math.round(6*DPI), sheetH=Math.round(4*DPI);
   const pw=Math.round(r.spec.out.printMM[0]/25.4*DPI), ph=Math.round(r.spec.out.printMM[1]/25.4*DPI);
@@ -2151,6 +2149,8 @@ function printSheet(r){
   }
   const a=document.createElement("a");a.href=c.toDataURL("image/jpeg",.92);a.download=`diypassphoto-${el.country.value}-4x6sheet.jpg`;a.click();
 }
+
+if(!el.gates){ /* page has no tool */ } else { boot(); }
 
 </script>
 </body>
