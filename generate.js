@@ -211,8 +211,8 @@ ${footerCountries()}
 </div></footer>
 
 <script>window.GF_START="${slug}";</script>
-<script src="../countries.js?v=8"></script>
-<script type="module" src="../app.js?v=8"></script>
+<script src="../countries.js?v=9"></script>
+<script type="module" src="../app.js?v=9"></script>
 </body>
 </html>`;
   fs.writeFileSync(path.join(cdir, `${slug}.html`), html);

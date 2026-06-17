@@ -1893,7 +1893,7 @@ async function loadModel(){
     landmarker=await FaceLandmarker.createFromOptions(fs,{
       baseOptions:{ modelAssetPath:"https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task" },
       runningMode:"VIDEO", numFaces:2, outputFacialTransformationMatrixes:true });
-    modelReady=true; setStatus("Ready. Start the live guide, or check a photo you already have.");
+    modelReady=true; setStatus("Ready. Tap the camera button to start, or check a photo you already have.");
   }catch(e){
     modelReady=false;
     setStatus("The live face model couldn't load here. File, background, sharpness and lighting checks still work on an uploaded photo.");
