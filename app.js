@@ -121,7 +121,12 @@ function buildChecks({geo,bg,sharp,light,faceCount,out,spec}){
     push("mouth","Neutral mouth",geo.mouthOpen<.08?"pass":"warn",geo.mouthOpen<.08?"closed":"smiling","Close your mouth — neutral expression.");
   }
   if(bg){
-    push("bg_color","Background colour",bg.dE<=spec.background.maxDeltaE?"pass":"fail",`ΔE ${bg.dE.toFixed(0)} · ≤${spec.background.maxDeltaE}`,bg.dE>spec.background.maxDeltaE?"Background reads off-target — usually underexposure. Brighten the scene (face a window) rather than editing.":"");
+    const m=spec.background.maxDeltaE;
+    const bst=bg.dE<=m?"pass":(bg.dE<=m*2?"warn":"fail");
+    push("bg_color","Background colour",bst,`ΔE ${bg.dE.toFixed(0)} · ≤${m}`,
+      bst==="pass"?"":(bst==="warn"
+        ?"Background is close — brighten the scene a little (face a window) for a cleaner white."
+        :"Background reads off-target — usually underexposure. Brighten the scene (face a window) rather than editing."));
     push("bg_even","Background even",bg.variance<14?"pass":"warn",`var ${bg.variance.toFixed(0)}`,"Smooth the background — shadows or texture cause rejections.");
   }
   if(light) push("shadow","Even lighting",light.sideDiff<.14?"pass":"warn",`${(light.sideDiff*100).toFixed(0)}% L/R`,"Lighting is uneven — turn toward soft, frontal light.");
@@ -165,17 +170,31 @@ function renderGates(checks){
   el.verdict.textContent=req===0?"Waiting for a photo…":go?"All required checks pass":"Not ready yet";
   el.score.textContent=req?`${pass}/${req}`:"";
   if(el.vfCapture) el.vfCapture.disabled=!canCap;
-  // in-frame coaching message — the single most useful thing to fix right now
+  // in-frame issue list — every gate that needs attention, each with how to fix it
   if(el.vfMsg){
-    if(mode!=="live"){ el.vfMsg.className="vf-msg"; el.vfMsg.textContent=""; }
-    else if(go){ el.vfMsg.className="vf-msg show go"; el.vfMsg.textContent="✓ Looks good — tap the shutter"; }
-    else if(!faceOk&&modelReady){ el.vfMsg.className="vf-msg show"; el.vfMsg.textContent="Position your face inside the oval."; }
-    else{
-      const f=checks.find(c=>c.status==="fail"&&c.coach)||checks.find(c=>c.status==="warn"&&c.coach);
+    el.vfMsg.innerHTML="";
+    if(mode!=="live"){ el.vfMsg.className="vf-msg"; }
+    else if(!faceOk&&modelReady){
       el.vfMsg.className="vf-msg show";
-      el.vfMsg.textContent=(f?f.coach+" — ":"")+"you can still capture & review.";
+      el.vfMsg.appendChild(chip("warn","Position your face inside the oval."));
+    } else if(go){
+      el.vfMsg.className="vf-msg show";
+      el.vfMsg.appendChild(chip("go","✓ Looks good — tap the shutter"));
+    } else {
+      el.vfMsg.className="vf-msg show";
+      const issues=checks.filter(c=>(c.status==="fail"||c.status==="warn")&&c.coach&&c.id!=="face")
+        .sort((a,b)=>(a.status==="fail"?0:1)-(b.status==="fail"?0:1)); // fails first
+      const MAX=3;
+      issues.slice(0,MAX).forEach(c=>el.vfMsg.appendChild(chip(c.status,c.coach)));
+      if(issues.length>MAX) el.vfMsg.appendChild(chip("more",`+${issues.length-MAX} more to fix`));
     }
   }
+}
+function chip(status,text){
+  const d=document.createElement("div"); d.className="vf-chip "+status;
+  if(status!=="go"&&status!=="more"){ const dot=document.createElement("span"); dot.className="cdot"; d.appendChild(dot); }
+  const s=document.createElement("span"); s.textContent=text; d.appendChild(s);
+  return d;
 }
 
 /* ---------- live ---------- */
