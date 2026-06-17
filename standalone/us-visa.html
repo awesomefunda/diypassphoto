@@ -255,6 +255,18 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
 .official{margin:18px 0 0;font-size:14.5px}
 .official a{font-weight:600}
 
+/* requirements / rejections / faq sections (country pages) */
+.reqlist,.rejlist{padding-left:20px;margin:0}
+.reqlist li,.rejlist li{font-size:15.5px;line-height:1.65;padding:5px 0;border-bottom:1px solid var(--line)}
+.reqlist li:last-child,.rejlist li:last-child{border-bottom:none}
+.rejlist li{color:var(--mist)}
+.rejlist li::marker{color:#DC2626}
+.faqlist{display:flex;flex-direction:column;gap:0}
+.faqitem{padding:16px 0;border-bottom:1px solid var(--line)}
+.faqitem:last-child{border-bottom:none}
+.faqitem h4{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:16px;margin:0 0 6px;color:var(--ink)}
+.faqitem p{margin:0;font-size:15px;color:var(--mist);line-height:1.65}
+
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"DIYPassPhoto — US Visa (DS-160) photo checker","applicationCategory":"PhotographyApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://diypassphoto.com/c/us-visa.html","description":"Check your US non-immigrant visa (B1/B2, F1, H1B) photo against the official DS-160 requirements. 2×2 inch, white background, no glasses. Free, nothing uploaded."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DIYPassPhoto","item":"https://diypassphoto.com/"},{"@type":"ListItem","position":2,"name":"US Visa (DS-160) photo checker","item":"https://diypassphoto.com/c/us-visa.html"}]}</script>
@@ -315,7 +327,38 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
         <div class="disclaimer">Measured against the published spec — not a guarantee of acceptance. Confirm any “?” items yourself. No AI edits applied.</div>
       </div>
     </div>
-    <p class="official"><a href="https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/photos.html" target="_blank" rel="noopener noreferrer">Want the official rules? Read the United States requirements ↗</a></p>
+    <p class="official"><a href="https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/photos.html" target="_blank" rel="noopener noreferrer">Official United States photo requirements ↗</a></p>
+  </section>
+
+  <section class="block" id="reqs">
+    <h2 class="sec">US Visa (DS-160) photo requirements</h2>
+    <p class="sec-sub">2×2 inches (51×51 mm), white or off-white background, head 50–69% of the frame. The same photo spec applies to all US non-immigrant visas (B1/B2, F1, H1B, J1, etc.) on the DS-160 form. Verified from the US State Department.</p>
+    <ul class="reqlist">
+      <li>2×2 inches (51×51 mm), JPEG, colour</li>
+      <li>Head 50–69% of photo height (chin to crown: 22–35 mm)</li>
+      <li>Plain white or off-white background, no shadows or objects</li>
+      <li>Neutral expression, both eyes open, facing camera directly</li>
+      <li>No glasses; no sunglasses or tinted lenses</li>
+      <li>No head coverings unless religious</li>
+      <li>Taken within the last 6 months</li>
+      <li>No digital enhancements or AI edits</li>
+    </ul>
+
+    <h3 class="sec" style="margin-top:36px">Common rejection reasons</h3>
+    <ul class="rejlist">
+      <li>Background not plain white or off-white</li>
+      <li>Head too small or too large for the 50–69% band</li>
+      <li>Glasses in the photo</li>
+      <li>Shadows on the face or background</li>
+      <li>Photo older than 6 months</li>
+    </ul>
+
+    <h3 class="sec" style="margin-top:36px">Frequently asked questions</h3>
+    <div class="faqlist">
+      <div class="faqitem"><h4>What size is a DS-160 US visa photo?</h4><p>2×2 inches (51×51 mm), the same size as a US passport photo, with a white or off-white background.</p></div>
+      <div class="faqitem"><h4>Is the US visa photo the same as the passport photo?</h4><p>Yes — the dimensions, background, and all other requirements are identical. A photo that passes the passport spec will pass the visa spec.</p></div>
+      <div class="faqitem"><h4>Are glasses allowed for a US visa photo?</h4><p>No. Eyeglasses are not permitted in US visa photos except in rare medical cases with documentation.</p></div>
+    </div>
   </section>
 
   <section class="block" id="countries">

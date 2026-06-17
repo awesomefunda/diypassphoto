@@ -151,7 +151,25 @@ for (const slug of slugs){
     <h1>${esc(c.seo.h1)}</h1>
     <p class="lede">Snap it from your phone, get the green light, download your photo and a compliance report. Checked against the official ${esc(c.country)} spec before you submit — nothing uploaded.</p>
 ${TOOL}
-    <p class="official"><a href="${c.officialUrl}" target="_blank" rel="noopener noreferrer">Want the official rules? Read the ${esc(c.country)} requirements ↗</a></p>
+    <p class="official"><a href="${c.officialUrl}" target="_blank" rel="noopener noreferrer">Official ${esc(c.country)} photo requirements ↗</a></p>
+  </section>
+
+  <section class="block" id="reqs">
+    <h2 class="sec">${esc(c.label)} photo requirements</h2>
+    <p class="sec-sub">${esc(c.seo.intro)}</p>
+    <ul class="reqlist">
+      ${c.reqs.map(r => `<li>${esc(r)}</li>`).join("\n      ")}
+    </ul>
+
+    <h3 class="sec" style="margin-top:36px">Common rejection reasons</h3>
+    <ul class="rejlist">
+      ${c.rejections.map(r => `<li>${esc(r)}</li>`).join("\n      ")}
+    </ul>
+
+    <h3 class="sec" style="margin-top:36px">Frequently asked questions</h3>
+    <div class="faqlist">
+      ${c.faq.map(f => `<div class="faqitem"><h4>${esc(f.q)}</h4><p>${esc(f.a)}</p></div>`).join("\n      ")}
+    </div>
   </section>
 
   <section class="block" id="countries">

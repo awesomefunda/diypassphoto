@@ -255,6 +255,18 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
 .official{margin:18px 0 0;font-size:14.5px}
 .official a{font-weight:600}
 
+/* requirements / rejections / faq sections (country pages) */
+.reqlist,.rejlist{padding-left:20px;margin:0}
+.reqlist li,.rejlist li{font-size:15.5px;line-height:1.65;padding:5px 0;border-bottom:1px solid var(--line)}
+.reqlist li:last-child,.rejlist li:last-child{border-bottom:none}
+.rejlist li{color:var(--mist)}
+.rejlist li::marker{color:#DC2626}
+.faqlist{display:flex;flex-direction:column;gap:0}
+.faqitem{padding:16px 0;border-bottom:1px solid var(--line)}
+.faqitem:last-child{border-bottom:none}
+.faqitem h4{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:16px;margin:0 0 6px;color:var(--ink)}
+.faqitem p{margin:0;font-size:15px;color:var(--mist);line-height:1.65}
+
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"DIYPassPhoto — Germany Passport photo checker","applicationCategory":"PhotographyApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://diypassphoto.com/c/germany-passport.html","description":"Take a compliant German biometric passport photo. DIYPassPhoto checks the 35×45mm ISO biometric spec: light-grey background, 32–36mm face height, no glasses — free, nothing uploaded."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DIYPassPhoto","item":"https://diypassphoto.com/"},{"@type":"ListItem","position":2,"name":"Germany Passport photo checker","item":"https://diypassphoto.com/c/germany-passport.html"}]}</script>
@@ -315,7 +327,38 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
         <div class="disclaimer">Measured against the published spec — not a guarantee of acceptance. Confirm any “?” items yourself. No AI edits applied.</div>
       </div>
     </div>
-    <p class="official"><a href="https://www.bundesdruckerei.de/en/Photo-template" target="_blank" rel="noopener noreferrer">Want the official rules? Read the Germany requirements ↗</a></p>
+    <p class="official"><a href="https://www.bundesdruckerei.de/en/Photo-template" target="_blank" rel="noopener noreferrer">Official Germany photo requirements ↗</a></p>
+  </section>
+
+  <section class="block" id="reqs">
+    <h2 class="sec">Germany Passport photo requirements</h2>
+    <p class="sec-sub">35 mm wide × 45 mm tall, light grey background, face 32–36 mm, no glasses. Germany uses the ISO/IEC 19794-5 biometric standard. Verified from Bundesdruckerei (bundesdruckerei.de).</p>
+    <ul class="reqlist">
+      <li>35 mm wide × 45 mm tall, colour, JPEG</li>
+      <li>Face 32–36 mm from chin to crown (70–80% of height)</li>
+      <li>Light grey background (not pure white — ISO biometric standard)</li>
+      <li>Neutral expression, mouth closed, eyes open and looking forward</li>
+      <li>No glasses (banned since January 2017 for German documents)</li>
+      <li>No head coverings (except for documented religious reasons)</li>
+      <li>Even lighting, no shadows on face or background</li>
+      <li>Taken within the last 6 months</li>
+    </ul>
+
+    <h3 class="sec" style="margin-top:36px">Common rejection reasons</h3>
+    <ul class="rejlist">
+      <li>Pure white background — German biometric standard requires light grey</li>
+      <li>Glasses in the photo (not allowed since 2017)</li>
+      <li>Face outside 32–36 mm</li>
+      <li>Shadows or uneven lighting</li>
+      <li>Smiling or open mouth</li>
+    </ul>
+
+    <h3 class="sec" style="margin-top:36px">Frequently asked questions</h3>
+    <div class="faqlist">
+      <div class="faqitem"><h4>What background does a German passport photo need?</h4><p>A light grey background — not pure white. Germany follows the ISO biometric standard which specifies a uniformly light grey background to ensure consistent face detection.</p></div>
+      <div class="faqitem"><h4>Are glasses allowed in a German passport photo?</h4><p>No. Germany banned glasses in passport and ID photos since January 2017, with no exceptions for prescription glasses.</p></div>
+      <div class="faqitem"><h4>What size is a German passport photo?</h4><p>35 mm wide × 45 mm tall (the standard European biometric format), with the face 32–36 mm from chin to crown.</p></div>
+    </div>
   </section>
 
   <section class="block" id="countries">

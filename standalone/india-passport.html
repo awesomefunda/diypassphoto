@@ -255,6 +255,18 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
 .official{margin:18px 0 0;font-size:14.5px}
 .official a{font-weight:600}
 
+/* requirements / rejections / faq sections (country pages) */
+.reqlist,.rejlist{padding-left:20px;margin:0}
+.reqlist li,.rejlist li{font-size:15.5px;line-height:1.65;padding:5px 0;border-bottom:1px solid var(--line)}
+.reqlist li:last-child,.rejlist li:last-child{border-bottom:none}
+.rejlist li{color:var(--mist)}
+.rejlist li::marker{color:#DC2626}
+.faqlist{display:flex;flex-direction:column;gap:0}
+.faqitem{padding:16px 0;border-bottom:1px solid var(--line)}
+.faqitem:last-child{border-bottom:none}
+.faqitem h4{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:16px;margin:0 0 6px;color:var(--ink)}
+.faqitem p{margin:0;font-size:15px;color:var(--mist);line-height:1.65}
+
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"DIYPassPhoto — India Passport photo checker","applicationCategory":"PhotographyApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://diypassphoto.com/c/india-passport.html","description":"Take a compliant Indian passport photo at home. DIYPassPhoto checks the 2×2 inch white-background spec and face size against Passport Seva rules — free, nothing uploaded."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DIYPassPhoto","item":"https://diypassphoto.com/"},{"@type":"ListItem","position":2,"name":"India Passport photo checker","item":"https://diypassphoto.com/c/india-passport.html"}]}</script>
@@ -315,7 +327,37 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
         <div class="disclaimer">Measured against the published spec — not a guarantee of acceptance. Confirm any “?” items yourself. No AI edits applied.</div>
       </div>
     </div>
-    <p class="official"><a href="https://www.passportindia.gov.in/" target="_blank" rel="noopener noreferrer">Want the official rules? Read the India requirements ↗</a></p>
+    <p class="official"><a href="https://www.passportindia.gov.in/" target="_blank" rel="noopener noreferrer">Official India photo requirements ↗</a></p>
+  </section>
+
+  <section class="block" id="reqs">
+    <h2 class="sec">India Passport photo requirements</h2>
+    <p class="sec-sub">51×51 mm (2×2 inches), plain white background, face covering most of the frame. Verified from Passport Seva / Ministry of External Affairs (passportindia.gov.in).</p>
+    <ul class="reqlist">
+      <li>51×51 mm (2×2 inches), colour JPEG, under 500 KB</li>
+      <li>Face should cover 70–80% of the photo area, centred</li>
+      <li>Plain white background, no shadows or patterns</li>
+      <li>Neutral expression, both eyes open</li>
+      <li>No glasses recommended</li>
+      <li>Religious head coverings allowed if face is clearly visible</li>
+      <li>Taken within the last 6 months</li>
+    </ul>
+
+    <h3 class="sec" style="margin-top:36px">Common rejection reasons</h3>
+    <ul class="rejlist">
+      <li>Off-white, cream, or shadowed background</li>
+      <li>Face too small or off-centre</li>
+      <li>Glasses causing glare or shadow</li>
+      <li>Shadows on the background</li>
+      <li>Photo older than 6 months</li>
+    </ul>
+
+    <h3 class="sec" style="margin-top:36px">Frequently asked questions</h3>
+    <div class="faqlist">
+      <div class="faqitem"><h4>What size is an Indian passport photo?</h4><p>51×51 mm (2×2 inches) with a plain white background. Some Passport Seva services also accept 45×35 mm — always check the specific form.</p></div>
+      <div class="faqitem"><h4>Are glasses allowed in an Indian passport photo?</h4><p>Glasses are not recommended but not explicitly banned. If worn, they must not create glare or shadow on the eyes.</p></div>
+      <div class="faqitem"><h4>Are head coverings allowed?</h4><p>Religious head coverings are permitted as long as the full face — from forehead to chin, ear to ear — is clearly visible.</p></div>
+    </div>
   </section>
 
   <section class="block" id="countries">

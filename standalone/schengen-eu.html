@@ -255,6 +255,18 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
 .official{margin:18px 0 0;font-size:14.5px}
 .official a{font-weight:600}
 
+/* requirements / rejections / faq sections (country pages) */
+.reqlist,.rejlist{padding-left:20px;margin:0}
+.reqlist li,.rejlist li{font-size:15.5px;line-height:1.65;padding:5px 0;border-bottom:1px solid var(--line)}
+.reqlist li:last-child,.rejlist li:last-child{border-bottom:none}
+.rejlist li{color:var(--mist)}
+.rejlist li::marker{color:#DC2626}
+.faqlist{display:flex;flex-direction:column;gap:0}
+.faqitem{padding:16px 0;border-bottom:1px solid var(--line)}
+.faqitem:last-child{border-bottom:none}
+.faqitem h4{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:16px;margin:0 0 6px;color:var(--ink)}
+.faqitem p{margin:0;font-size:15px;color:var(--mist);line-height:1.65}
+
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"DIYPassPhoto — Schengen / EU Visa photo checker","applicationCategory":"PhotographyApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://diypassphoto.com/c/schengen-eu.html","description":"Check your Schengen or EU visa photo against the 35×45mm biometric spec. DIYPassPhoto verifies head size (32–36mm), light background and framing live — free, nothing uploaded."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DIYPassPhoto","item":"https://diypassphoto.com/"},{"@type":"ListItem","position":2,"name":"Schengen / EU Visa photo checker","item":"https://diypassphoto.com/c/schengen-eu.html"}]}</script>
@@ -315,7 +327,37 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
         <div class="disclaimer">Measured against the published spec — not a guarantee of acceptance. Confirm any “?” items yourself. No AI edits applied.</div>
       </div>
     </div>
-    <p class="official"><a href="https://home-affairs.ec.europa.eu/policies/schengen-borders-and-visa/visa-policy_en" target="_blank" rel="noopener noreferrer">Want the official rules? Read the Schengen Area requirements ↗</a></p>
+    <p class="official"><a href="https://home-affairs.ec.europa.eu/policies/schengen-borders-and-visa/visa-policy_en" target="_blank" rel="noopener noreferrer">Official Schengen Area photo requirements ↗</a></p>
+  </section>
+
+  <section class="block" id="reqs">
+    <h2 class="sec">Schengen / EU Visa photo requirements</h2>
+    <p class="sec-sub">35 mm wide × 45 mm tall, light grey or white background, face 32–36 mm. The Schengen Visa Code (Regulation EC 810/2009) mandates the ISO/IEC 19794-5 biometric photo standard. Applies to all 27 Schengen member states.</p>
+    <ul class="reqlist">
+      <li>35 mm wide × 45 mm tall, colour, JPEG</li>
+      <li>Face 32–36 mm from chin to crown (70–80% of height)</li>
+      <li>White or very light grey background, uniform, no shadows</li>
+      <li>Neutral expression, looking straight ahead</li>
+      <li>No glasses recommended (many consulates now refuse them)</li>
+      <li>No head coverings except for religious reasons</li>
+      <li>Taken within the last 6 months</li>
+    </ul>
+
+    <h3 class="sec" style="margin-top:36px">Common rejection reasons</h3>
+    <ul class="rejlist">
+      <li>Background too dark, coloured, or patterned</li>
+      <li>Face too small in the frame</li>
+      <li>Shadows behind the head</li>
+      <li>Head tilted or off-centre</li>
+      <li>Glasses (refused by increasing number of Schengen consulates)</li>
+    </ul>
+
+    <h3 class="sec" style="margin-top:36px">Frequently asked questions</h3>
+    <div class="faqlist">
+      <div class="faqitem"><h4>What is the Schengen visa photo size?</h4><p>35 mm wide × 45 mm tall, with the face (chin to crown) 32–36 mm. This biometric standard applies to all 27 Schengen member states.</p></div>
+      <div class="faqitem"><h4>Can the background be white for a Schengen visa photo?</h4><p>White or very light grey is acceptable. Avoid pure bright white or any tinted background. Light grey is safest across all Schengen consulates.</p></div>
+      <div class="faqitem"><h4>Which countries accept the same photo spec?</h4><p>All 27 Schengen member states use the same 35×45 mm biometric photo standard, though individual consulates may have minor additional preferences.</p></div>
+    </div>
   </section>
 
   <section class="block" id="countries">

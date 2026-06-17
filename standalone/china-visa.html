@@ -255,6 +255,18 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
 .official{margin:18px 0 0;font-size:14.5px}
 .official a{font-weight:600}
 
+/* requirements / rejections / faq sections (country pages) */
+.reqlist,.rejlist{padding-left:20px;margin:0}
+.reqlist li,.rejlist li{font-size:15.5px;line-height:1.65;padding:5px 0;border-bottom:1px solid var(--line)}
+.reqlist li:last-child,.rejlist li:last-child{border-bottom:none}
+.rejlist li{color:var(--mist)}
+.rejlist li::marker{color:#DC2626}
+.faqlist{display:flex;flex-direction:column;gap:0}
+.faqitem{padding:16px 0;border-bottom:1px solid var(--line)}
+.faqitem:last-child{border-bottom:none}
+.faqitem h4{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:16px;margin:0 0 6px;color:var(--ink)}
+.faqitem p{margin:0;font-size:15px;color:var(--mist);line-height:1.65}
+
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"DIYPassPhoto — China Visa photo checker","applicationCategory":"PhotographyApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://diypassphoto.com/c/china-visa.html","description":"Check your China visa photo against the 33×48mm, pure-white, ≤120KB spec. Ears visible, no glasses. DIYPassPhoto verifies and formats it free in your browser."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DIYPassPhoto","item":"https://diypassphoto.com/"},{"@type":"ListItem","position":2,"name":"China Visa photo checker","item":"https://diypassphoto.com/c/china-visa.html"}]}</script>
@@ -315,7 +327,36 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
         <div class="disclaimer">Measured against the published spec — not a guarantee of acceptance. Confirm any “?” items yourself. No AI edits applied.</div>
       </div>
     </div>
-    <p class="official"><a href="http://www.visaforchina.cn/" target="_blank" rel="noopener noreferrer">Want the official rules? Read the China requirements ↗</a></p>
+    <p class="official"><a href="http://www.visaforchina.cn/" target="_blank" rel="noopener noreferrer">Official China photo requirements ↗</a></p>
+  </section>
+
+  <section class="block" id="reqs">
+    <h2 class="sec">China Visa photo requirements</h2>
+    <p class="sec-sub">33 mm wide × 48 mm tall, pure white background, ears visible, 40–120 KB. The same spec applies to the passport. Verified from visaforchina.cn / Chinese Embassy photo standards.</p>
+    <ul class="reqlist">
+      <li>33 mm wide × 48 mm tall; digital 354×472 to 420×560 px, JPEG, 40–120 KB</li>
+      <li>Pure white background, no shadows</li>
+      <li>Head height 28–33 mm, both ears visible</li>
+      <li>Neutral expression, eyes open, mouth closed</li>
+      <li>No glasses, no head coverings</li>
+      <li>Taken within the last 6 months</li>
+    </ul>
+
+    <h3 class="sec" style="margin-top:36px">Common rejection reasons</h3>
+    <ul class="rejlist">
+      <li>Background not pure white (any grey or shadow causes rejection)</li>
+      <li>Ears covered by hair or head covering</li>
+      <li>File over 120 KB</li>
+      <li>Glasses in the photo</li>
+      <li>Head outside 28–33 mm range</li>
+    </ul>
+
+    <h3 class="sec" style="margin-top:36px">Frequently asked questions</h3>
+    <div class="faqlist">
+      <div class="faqitem"><h4>What size is a China visa photo?</h4><p>33 mm wide × 48 mm tall for prints; online submissions must be 354×472 to 420×560 pixels and 40–120 KB.</p></div>
+      <div class="faqitem"><h4>Does the background need to be pure white?</h4><p>Yes — China's visa spec requires a pure white background, strictly enforced. Even a slightly grey background is rejected.</p></div>
+      <div class="faqitem"><h4>Do ears need to be visible?</h4><p>Yes — both ears must be visible in Chinese visa and passport photos.</p></div>
+    </div>
   </section>
 
   <section class="block" id="countries">
