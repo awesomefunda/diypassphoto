@@ -179,7 +179,7 @@ ${footerCountries()}
 </div></footer>
 
 <script>window.GF_START="${slug}";</script>
-<script src="../countries.js?v=3"></script>
+<script src="../countries.js?v=4"></script>
 <script type="module" src="../app.js"></script>
 </body>
 </html>`;
@@ -195,7 +195,7 @@ const APP = fs.readFileSync(path.join(ROOT,"app.js"),"utf8");
 function inline(html){
   return html
     .replace(/<link rel="stylesheet" href="(\.\.\/)?styles\.css"\/>/, "<style>\n"+CSS+"\n</style>")
-    .replace(/<script src="(\.\.\/)?countries\.js"><\/script>/, "<script>\n"+REG+"\n</script>")
+    .replace(/<script src="(\.\.\/)?countries\.js(\?[^"]*)?"><\/script>/, "<script>\n"+REG+"\n</script>")
     .replace(/<script type="module" src="(\.\.\/)?app\.js"><\/script>/, '<script type="module">\n'+APP+"\n</script>");
 }
 for (const slug of slugs){
