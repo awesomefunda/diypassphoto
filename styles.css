@@ -109,6 +109,17 @@ header.bar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .vf-shot:disabled{opacity:.45;cursor:not-allowed}
 .framewrap.go .vf-shot:not(:disabled){border-color:var(--go);background:var(--go)}
 
+/* on-frame start-camera button (replaces the old external buttons) */
+.vf-startbtn{display:flex;align-items:center;justify-content:center;width:80px;height:80px;margin:0 auto 16px;
+  border:none;border-radius:50%;background:var(--go);color:#fff;cursor:pointer;
+  box-shadow:0 10px 26px rgba(0,0,0,.32);transition:transform .15s var(--ease)}
+.vf-startbtn:hover{transform:scale(1.05)} .vf-startbtn:active{transform:scale(.96)}
+.vf-uploadlink{display:inline-block;margin-top:16px;color:#B9CBBE;text-decoration:underline;cursor:pointer;font-size:13px}
+.vf-uploadlink:hover{color:#E7F0E9}
+
+/* the shutter bar is shown whenever the camera is live (desktop keeps its square frame) */
+body.cam-live .vf-shutter{display:flex}
+
 /* phone: live camera fills the screen so feedback + shutter need no scroll */
 @media(max-width:900px){
   body.cam-live{overflow:hidden}

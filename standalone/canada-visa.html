@@ -130,6 +130,17 @@ header.bar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .vf-shot:disabled{opacity:.45;cursor:not-allowed}
 .framewrap.go .vf-shot:not(:disabled){border-color:var(--go);background:var(--go)}
 
+/* on-frame start-camera button (replaces the old external buttons) */
+.vf-startbtn{display:flex;align-items:center;justify-content:center;width:80px;height:80px;margin:0 auto 16px;
+  border:none;border-radius:50%;background:var(--go);color:#fff;cursor:pointer;
+  box-shadow:0 10px 26px rgba(0,0,0,.32);transition:transform .15s var(--ease)}
+.vf-startbtn:hover{transform:scale(1.05)} .vf-startbtn:active{transform:scale(.96)}
+.vf-uploadlink{display:inline-block;margin-top:16px;color:#B9CBBE;text-decoration:underline;cursor:pointer;font-size:13px}
+.vf-uploadlink:hover{color:#E7F0E9}
+
+/* the shutter bar is shown whenever the camera is live (desktop keeps its square frame) */
+body.cam-live .vf-shutter{display:flex}
+
 /* phone: live camera fills the screen so feedback + shutter need no scroll */
 @media(max-width:900px){
   body.cam-live{overflow:hidden}
@@ -335,7 +346,15 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
           <canvas class="feed" id="feed" style="display:none"></canvas>
           <canvas class="hud" id="hud"></canvas>
           <div class="vf-msg" id="vfMsg"></div>
-          <div class="vf-empty" id="vfEmpty"><span class="big">Start the live guide</span>Use the rear camera if someone can take it for you — it's sharper than the selfie cam.</div>
+          <div class="vf-empty" id="vfEmpty">
+            <button class="vf-startbtn" id="vfStart" aria-label="Start camera" title="Start camera">
+              <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </button>
+            <span class="big">Tap to start the camera</span>
+            Use the rear camera if someone can take it for you — it's sharper than the selfie cam.
+            <label class="vf-uploadlink" for="upload">or check a photo you already have</label>
+            <input type="file" id="upload" accept="image/*"/>
+          </div>
           <div class="vf-shutter" id="vfShutter">
             <button class="vf-btn" id="vfFlip" aria-label="Flip camera" title="Flip camera">⟲</button>
             <button class="vf-shot" id="vfCapture" aria-label="Capture photo" disabled></button>
@@ -348,13 +367,6 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
           <div class="phead"><span class="ttl">Compliance gates</span><select class="country" id="country" aria-label="Document type"></select></div>
           <div class="gates" id="gates"></div>
           <div class="score"><span class="verdict hold" id="verdict">Waiting for a photo…</span><span class="mono" id="scoreNum" style="color:var(--mist)"></span></div>
-        </div>
-        <div class="controls">
-          <button class="btn primary" id="startCam">Start live guide</button>
-          <button class="btn go" id="capture" disabled>Capture &amp; format</button>
-          <button class="btn" id="flipCam" disabled>Flip camera</button>
-          <label class="btn" for="upload">Check a photo</label>
-          <input type="file" id="upload" accept="image/*"/>
         </div>
         <div class="hint" id="status">Tip: face a window for soft, even light. Overhead lights cause the shadows that get photos rejected.</div>
       </div>
@@ -1838,7 +1850,7 @@ const el = {
   video:$("video"), feed:$("feed"), hud:$("hud"), frame:$("framewrap"),
   vfEmpty:$("vfEmpty"), badge:$("vfBadge"), gates:$("gates"), verdict:$("verdict"),
   score:$("scoreNum"), status:$("status"), country:$("country"),
-  startCam:$("startCam"), capture:$("capture"), flipCam:$("flipCam"), upload:$("upload"),
+  vfStart:$("vfStart"), upload:$("upload"),
   vfMsg:$("vfMsg"), vfShutter:$("vfShutter"), vfCapture:$("vfCapture"), vfFlip:$("vfFlip"), vfClose:$("vfClose"),
   result:$("result"), resultImg:$("resultImg"), rmeta:$("rmeta"),
   download:$("download"), sheet:$("sheet"), report:$("report"), retake:$("retake")
@@ -1858,12 +1870,10 @@ function boot(){
   }
   el.country.value = (window.GF_START && SPECS[window.GF_START]) ? window.GF_START : Object.keys(SPECS)[0];
   el.country.addEventListener("change",()=>{ prevStatus={}; renderGates(currentGates()); if(mode==="still"&&stillImage) runStill(); });
-  el.startCam.addEventListener("click",()=> running?stopCam():startCam());
-  if(el.flipCam) el.flipCam.addEventListener("click",flipCamera);
+  if(el.vfStart) el.vfStart.addEventListener("click",startCam);
   if(el.vfFlip) el.vfFlip.addEventListener("click",flipCamera);
   if(el.vfCapture) el.vfCapture.addEventListener("click",captureLive);
   if(el.vfClose) el.vfClose.addEventListener("click",stopCam);
-  el.capture.addEventListener("click",captureLive);
   el.upload.addEventListener("change",onUpload);
   if(el.retake) el.retake.onclick=()=> el.result.classList.remove("on");
   renderGates(currentGates());
@@ -1989,7 +1999,6 @@ function renderGates(checks){
   el.verdict.className="verdict "+(go?"go":"hold");
   el.verdict.textContent=req===0?"Waiting for a photo…":go?"All required checks pass":"Not ready yet";
   el.score.textContent=req?`${pass}/${req}`:"";
-  el.capture.disabled=!(mode==="live"&&go);
   if(el.vfCapture) el.vfCapture.disabled=!(mode==="live"&&go);
   // in-frame coaching message — the single most useful thing to fix right now
   if(el.vfMsg){
@@ -2013,8 +2022,7 @@ async function startCam(){
   // Mirror the selfie view so it reads naturally; rear camera shows un-mirrored.
   el.video.style.transform = facing==="user" ? "scaleX(-1)" : "none";
   el.video.style.display="block"; el.feed.style.display="none"; el.vfEmpty.style.display="none";
-  mode="live"; running=true; el.startCam.textContent="Stop camera";
-  if(el.flipCam) el.flipCam.disabled=false;
+  mode="live"; running=true;
   document.body.classList.add("cam-live");
   setStatus("Line up with the guide. The frame turns green and Capture unlocks when every check passes.");
   sizeHud(); requestAnimationFrame(loop);
@@ -2023,8 +2031,6 @@ function stopCam(){
   running=false; mode="idle";
   if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
   el.video.style.display="none"; el.vfEmpty.style.display="block";
-  el.startCam.textContent="Start live guide";
-  if(el.flipCam) el.flipCam.disabled=true;
   document.body.classList.remove("cam-live");
   if(el.vfMsg) el.vfMsg.className="vf-msg";
   el.hud.getContext("2d").clearRect(0,0,el.hud.width,el.hud.height);

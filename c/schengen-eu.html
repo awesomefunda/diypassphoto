@@ -18,7 +18,7 @@
 <meta name="twitter:description" content="Check your Schengen or EU visa photo against the 35×45mm biometric spec. DIYPassPhoto verifies head size (32–36mm), light background and framing live — free, nothing uploaded."/>
 <meta name="twitter:image" content="https://diypassphoto.com/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="../styles.css?v=7"/>
+<link rel="stylesheet" href="../styles.css?v=8"/>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"DIYPassPhoto — Schengen / EU Visa photo checker","applicationCategory":"PhotographyApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://diypassphoto.com/c/schengen-eu.html","description":"Check your Schengen or EU visa photo against the 35×45mm biometric spec. DIYPassPhoto verifies head size (32–36mm), light background and framing live — free, nothing uploaded."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DIYPassPhoto","item":"https://diypassphoto.com/"},{"@type":"ListItem","position":2,"name":"Schengen / EU Visa photo checker","item":"https://diypassphoto.com/c/schengen-eu.html"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the Schengen visa photo size?","acceptedAnswer":{"@type":"Answer","text":"35 mm wide × 45 mm tall, with the face (chin to crown) 32–36 mm. This biometric standard applies to all 27 Schengen member states."}},{"@type":"Question","name":"Can the background be white for a Schengen visa photo?","acceptedAnswer":{"@type":"Answer","text":"White or very light grey is acceptable. Avoid pure bright white or any tinted background. Light grey is safest across all Schengen consulates."}},{"@type":"Question","name":"Which countries accept the same photo spec?","acceptedAnswer":{"@type":"Answer","text":"All 27 Schengen member states use the same 35×45 mm biometric photo standard, though individual consulates may have minor additional preferences."}}]}</script>
@@ -48,7 +48,15 @@
           <canvas class="feed" id="feed" style="display:none"></canvas>
           <canvas class="hud" id="hud"></canvas>
           <div class="vf-msg" id="vfMsg"></div>
-          <div class="vf-empty" id="vfEmpty"><span class="big">Start the live guide</span>Use the rear camera if someone can take it for you — it's sharper than the selfie cam.</div>
+          <div class="vf-empty" id="vfEmpty">
+            <button class="vf-startbtn" id="vfStart" aria-label="Start camera" title="Start camera">
+              <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </button>
+            <span class="big">Tap to start the camera</span>
+            Use the rear camera if someone can take it for you — it's sharper than the selfie cam.
+            <label class="vf-uploadlink" for="upload">or check a photo you already have</label>
+            <input type="file" id="upload" accept="image/*"/>
+          </div>
           <div class="vf-shutter" id="vfShutter">
             <button class="vf-btn" id="vfFlip" aria-label="Flip camera" title="Flip camera">⟲</button>
             <button class="vf-shot" id="vfCapture" aria-label="Capture photo" disabled></button>
@@ -61,13 +69,6 @@
           <div class="phead"><span class="ttl">Compliance gates</span><select class="country" id="country" aria-label="Document type"></select></div>
           <div class="gates" id="gates"></div>
           <div class="score"><span class="verdict hold" id="verdict">Waiting for a photo…</span><span class="mono" id="scoreNum" style="color:var(--mist)"></span></div>
-        </div>
-        <div class="controls">
-          <button class="btn primary" id="startCam">Start live guide</button>
-          <button class="btn go" id="capture" disabled>Capture &amp; format</button>
-          <button class="btn" id="flipCam" disabled>Flip camera</button>
-          <label class="btn" for="upload">Check a photo</label>
-          <input type="file" id="upload" accept="image/*"/>
         </div>
         <div class="hint" id="status">Tip: face a window for soft, even light. Overhead lights cause the shadows that get photos rejected.</div>
       </div>
@@ -166,7 +167,7 @@
 </div></footer>
 
 <script>window.GF_START="schengen-eu";</script>
-<script src="../countries.js?v=7"></script>
-<script type="module" src="../app.js?v=7"></script>
+<script src="../countries.js?v=8"></script>
+<script type="module" src="../app.js?v=8"></script>
 </body>
 </html>

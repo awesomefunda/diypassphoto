@@ -9,7 +9,7 @@ const el = {
   video:$("video"), feed:$("feed"), hud:$("hud"), frame:$("framewrap"),
   vfEmpty:$("vfEmpty"), badge:$("vfBadge"), gates:$("gates"), verdict:$("verdict"),
   score:$("scoreNum"), status:$("status"), country:$("country"),
-  startCam:$("startCam"), capture:$("capture"), flipCam:$("flipCam"), upload:$("upload"),
+  vfStart:$("vfStart"), upload:$("upload"),
   vfMsg:$("vfMsg"), vfShutter:$("vfShutter"), vfCapture:$("vfCapture"), vfFlip:$("vfFlip"), vfClose:$("vfClose"),
   result:$("result"), resultImg:$("resultImg"), rmeta:$("rmeta"),
   download:$("download"), sheet:$("sheet"), report:$("report"), retake:$("retake")
@@ -29,12 +29,10 @@ function boot(){
   }
   el.country.value = (window.GF_START && SPECS[window.GF_START]) ? window.GF_START : Object.keys(SPECS)[0];
   el.country.addEventListener("change",()=>{ prevStatus={}; renderGates(currentGates()); if(mode==="still"&&stillImage) runStill(); });
-  el.startCam.addEventListener("click",()=> running?stopCam():startCam());
-  if(el.flipCam) el.flipCam.addEventListener("click",flipCamera);
+  if(el.vfStart) el.vfStart.addEventListener("click",startCam);
   if(el.vfFlip) el.vfFlip.addEventListener("click",flipCamera);
   if(el.vfCapture) el.vfCapture.addEventListener("click",captureLive);
   if(el.vfClose) el.vfClose.addEventListener("click",stopCam);
-  el.capture.addEventListener("click",captureLive);
   el.upload.addEventListener("change",onUpload);
   if(el.retake) el.retake.onclick=()=> el.result.classList.remove("on");
   renderGates(currentGates());
@@ -160,7 +158,6 @@ function renderGates(checks){
   el.verdict.className="verdict "+(go?"go":"hold");
   el.verdict.textContent=req===0?"Waiting for a photo…":go?"All required checks pass":"Not ready yet";
   el.score.textContent=req?`${pass}/${req}`:"";
-  el.capture.disabled=!(mode==="live"&&go);
   if(el.vfCapture) el.vfCapture.disabled=!(mode==="live"&&go);
   // in-frame coaching message — the single most useful thing to fix right now
   if(el.vfMsg){
@@ -184,8 +181,7 @@ async function startCam(){
   // Mirror the selfie view so it reads naturally; rear camera shows un-mirrored.
   el.video.style.transform = facing==="user" ? "scaleX(-1)" : "none";
   el.video.style.display="block"; el.feed.style.display="none"; el.vfEmpty.style.display="none";
-  mode="live"; running=true; el.startCam.textContent="Stop camera";
-  if(el.flipCam) el.flipCam.disabled=false;
+  mode="live"; running=true;
   document.body.classList.add("cam-live");
   setStatus("Line up with the guide. The frame turns green and Capture unlocks when every check passes.");
   sizeHud(); requestAnimationFrame(loop);
@@ -194,8 +190,6 @@ function stopCam(){
   running=false; mode="idle";
   if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
   el.video.style.display="none"; el.vfEmpty.style.display="block";
-  el.startCam.textContent="Start live guide";
-  if(el.flipCam) el.flipCam.disabled=true;
   document.body.classList.remove("cam-live");
   if(el.vfMsg) el.vfMsg.className="vf-msg";
   el.hud.getContext("2d").clearRect(0,0,el.hud.width,el.hud.height);

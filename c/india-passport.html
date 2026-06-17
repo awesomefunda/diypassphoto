@@ -18,7 +18,7 @@
 <meta name="twitter:description" content="Take a compliant Indian passport photo at home. DIYPassPhoto checks the 2×2 inch white-background spec and face size against Passport Seva rules — free, nothing uploaded."/>
 <meta name="twitter:image" content="https://diypassphoto.com/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="../styles.css?v=7"/>
+<link rel="stylesheet" href="../styles.css?v=8"/>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"DIYPassPhoto — India Passport photo checker","applicationCategory":"PhotographyApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://diypassphoto.com/c/india-passport.html","description":"Take a compliant Indian passport photo at home. DIYPassPhoto checks the 2×2 inch white-background spec and face size against Passport Seva rules — free, nothing uploaded."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DIYPassPhoto","item":"https://diypassphoto.com/"},{"@type":"ListItem","position":2,"name":"India Passport photo checker","item":"https://diypassphoto.com/c/india-passport.html"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What size is an Indian passport photo?","acceptedAnswer":{"@type":"Answer","text":"51×51 mm (2×2 inches) with a plain white background. Some Passport Seva services also accept 45×35 mm — always check the specific form."}},{"@type":"Question","name":"Are glasses allowed in an Indian passport photo?","acceptedAnswer":{"@type":"Answer","text":"Glasses are not recommended but not explicitly banned. If worn, they must not create glare or shadow on the eyes."}},{"@type":"Question","name":"Are head coverings allowed?","acceptedAnswer":{"@type":"Answer","text":"Religious head coverings are permitted as long as the full face — from forehead to chin, ear to ear — is clearly visible."}}]}</script>
@@ -48,7 +48,15 @@
           <canvas class="feed" id="feed" style="display:none"></canvas>
           <canvas class="hud" id="hud"></canvas>
           <div class="vf-msg" id="vfMsg"></div>
-          <div class="vf-empty" id="vfEmpty"><span class="big">Start the live guide</span>Use the rear camera if someone can take it for you — it's sharper than the selfie cam.</div>
+          <div class="vf-empty" id="vfEmpty">
+            <button class="vf-startbtn" id="vfStart" aria-label="Start camera" title="Start camera">
+              <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </button>
+            <span class="big">Tap to start the camera</span>
+            Use the rear camera if someone can take it for you — it's sharper than the selfie cam.
+            <label class="vf-uploadlink" for="upload">or check a photo you already have</label>
+            <input type="file" id="upload" accept="image/*"/>
+          </div>
           <div class="vf-shutter" id="vfShutter">
             <button class="vf-btn" id="vfFlip" aria-label="Flip camera" title="Flip camera">⟲</button>
             <button class="vf-shot" id="vfCapture" aria-label="Capture photo" disabled></button>
@@ -61,13 +69,6 @@
           <div class="phead"><span class="ttl">Compliance gates</span><select class="country" id="country" aria-label="Document type"></select></div>
           <div class="gates" id="gates"></div>
           <div class="score"><span class="verdict hold" id="verdict">Waiting for a photo…</span><span class="mono" id="scoreNum" style="color:var(--mist)"></span></div>
-        </div>
-        <div class="controls">
-          <button class="btn primary" id="startCam">Start live guide</button>
-          <button class="btn go" id="capture" disabled>Capture &amp; format</button>
-          <button class="btn" id="flipCam" disabled>Flip camera</button>
-          <label class="btn" for="upload">Check a photo</label>
-          <input type="file" id="upload" accept="image/*"/>
         </div>
         <div class="hint" id="status">Tip: face a window for soft, even light. Overhead lights cause the shadows that get photos rejected.</div>
       </div>
@@ -166,7 +167,7 @@
 </div></footer>
 
 <script>window.GF_START="india-passport";</script>
-<script src="../countries.js?v=7"></script>
-<script type="module" src="../app.js?v=7"></script>
+<script src="../countries.js?v=8"></script>
+<script type="module" src="../app.js?v=8"></script>
 </body>
 </html>

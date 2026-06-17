@@ -43,7 +43,15 @@ const TOOL = `
           <canvas class="feed" id="feed" style="display:none"></canvas>
           <canvas class="hud" id="hud"></canvas>
           <div class="vf-msg" id="vfMsg"></div>
-          <div class="vf-empty" id="vfEmpty"><span class="big">Start the live guide</span>Use the rear camera if someone can take it for you — it's sharper than the selfie cam.</div>
+          <div class="vf-empty" id="vfEmpty">
+            <button class="vf-startbtn" id="vfStart" aria-label="Start camera" title="Start camera">
+              <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </button>
+            <span class="big">Tap to start the camera</span>
+            Use the rear camera if someone can take it for you — it's sharper than the selfie cam.
+            <label class="vf-uploadlink" for="upload">or check a photo you already have</label>
+            <input type="file" id="upload" accept="image/*"/>
+          </div>
           <div class="vf-shutter" id="vfShutter">
             <button class="vf-btn" id="vfFlip" aria-label="Flip camera" title="Flip camera">⟲</button>
             <button class="vf-shot" id="vfCapture" aria-label="Capture photo" disabled></button>
@@ -56,13 +64,6 @@ const TOOL = `
           <div class="phead"><span class="ttl">Compliance gates</span><select class="country" id="country" aria-label="Document type"></select></div>
           <div class="gates" id="gates"></div>
           <div class="score"><span class="verdict hold" id="verdict">Waiting for a photo…</span><span class="mono" id="scoreNum" style="color:var(--mist)"></span></div>
-        </div>
-        <div class="controls">
-          <button class="btn primary" id="startCam">Start live guide</button>
-          <button class="btn go" id="capture" disabled>Capture &amp; format</button>
-          <button class="btn" id="flipCam" disabled>Flip camera</button>
-          <label class="btn" for="upload">Check a photo</label>
-          <input type="file" id="upload" accept="image/*"/>
         </div>
         <div class="hint" id="status">Tip: face a window for soft, even light. Overhead lights cause the shadows that get photos rejected.</div>
       </div>
@@ -138,7 +139,7 @@ for (const slug of slugs){
 <meta name="twitter:description" content="${esc(c.seo.desc)}"/>
 <meta name="twitter:image" content="${SITE}/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="../styles.css?v=7"/>
+<link rel="stylesheet" href="../styles.css?v=8"/>
 <script type="application/ld+json">${JSON.stringify(appLd)}</script>
 <script type="application/ld+json">${JSON.stringify(crumbLd)}</script>
 <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
@@ -210,8 +211,8 @@ ${footerCountries()}
 </div></footer>
 
 <script>window.GF_START="${slug}";</script>
-<script src="../countries.js?v=7"></script>
-<script type="module" src="../app.js?v=7"></script>
+<script src="../countries.js?v=8"></script>
+<script type="module" src="../app.js?v=8"></script>
 </body>
 </html>`;
   fs.writeFileSync(path.join(cdir, `${slug}.html`), html);
