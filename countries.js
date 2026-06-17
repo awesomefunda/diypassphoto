@@ -2,7 +2,7 @@
 window.COUNTRY_SPECS = {
   "us-passport": {
     "label": "US Passport",
-    "flag": "🇺🇸",
+    "flag": "\ud83c\uddfa\ud83c\uddf8",
     "country": "United States",
     "docName": "Passport",
     "out": {
@@ -39,15 +39,15 @@ window.COUNTRY_SPECS = {
       "no_head_covering"
     ],
     "seo": {
-      "title": "US Passport Photo Checker — Free, Private, In-Browser (2026)",
-      "desc": "Take a 2x2 inch US passport photo that passes. DIYPassPhoto guides you live and checks head size, white background and framing against State Department rules — free, nothing uploaded, no AI editing (2026 compliant).",
+      "title": "US Passport Photo Checker \u2014 Free, Private, In-Browser (2026)",
+      "desc": "Take a 2x2 inch US passport photo that passes. DIYPassPhoto guides you live and checks head size, white background and framing against State Department rules \u2014 free, nothing uploaded, no AI editing (2026 compliant).",
       "keywords": "us passport photo, 2x2 passport photo, passport photo online free, us passport photo checker, passport photo at home",
       "h1": "US passport photo checker",
-      "intro": "Square 2×2 inch (51×51 mm), white background, head 50–69% of the frame. DIYPassPhoto lines you up live and confirms every rule before you submit — without editing your photo, so you stay compliant with the 2026 no-alteration rule."
+      "intro": "Square 2\u00d72 inch (51\u00d751 mm), white background, head 50\u201369% of the frame. DIYPassPhoto lines you up live and confirms every rule before you submit \u2014 without editing your photo, so you stay compliant with the 2026 no-alteration rule."
     },
     "reqs": [
-      "2×2 inches (51×51 mm); digital 600×600 to 1200×1200 px, JPEG",
-      "Head 50–69% of photo height (chin to crown)",
+      "2\u00d72 inches (51\u00d751 mm); digital 600\u00d7600 to 1200\u00d71200 px, JPEG",
+      "Head 50\u201369% of photo height (chin to crown)",
       "Plain white or off-white background, no shadows",
       "Neutral expression, both eyes open, facing forward",
       "No glasses (since 2016) unless a signed medical waiver",
@@ -55,15 +55,15 @@ window.COUNTRY_SPECS = {
     ],
     "rejections": [
       "Background reads grey because the wall was underexposed",
-      "Head too small or too large for the 50–69% band",
+      "Head too small or too large for the 50\u201369% band",
       "Shadows under the nose, chin, or on the wall",
       "Smiling or open mouth",
-      "Photo digitally enhanced or AI-edited — rejected in 2026"
+      "Photo digitally enhanced or AI-edited \u2014 rejected in 2026"
     ],
     "faq": [
       {
         "q": "What size is a US passport photo?",
-        "a": "2 × 2 inches (51 × 51 mm). For online submission it must be square, 600×600 to 1200×1200 pixels, in JPEG format."
+        "a": "2 \u00d7 2 inches (51 \u00d7 51 mm). For online submission it must be square, 600\u00d7600 to 1200\u00d71200 pixels, in JPEG format."
       },
       {
         "q": "Can I edit my US passport photo with AI in 2026?",
@@ -71,11 +71,11 @@ window.COUNTRY_SPECS = {
       },
       {
         "q": "How big should my head be?",
-        "a": "Chin to crown must be 50% to 69% of the photo height — roughly 1 to 1 3/8 inches."
+        "a": "Chin to crown must be 50% to 69% of the photo height \u2014 roughly 1 to 1 3/8 inches."
       }
     ],
     "emblem": {
-      "icon": "🦅",
+      "icon": "\ud83e\udd85",
       "name": "Bald eagle",
       "kind": "National bird"
     },
@@ -83,7 +83,7 @@ window.COUNTRY_SPECS = {
   },
   "dv-lottery": {
     "label": "US Visa / DV Lottery",
-    "flag": "🇺🇸",
+    "flag": "\ud83c\uddfa\ud83c\uddf8",
     "country": "United States",
     "docName": "Visa / DV Lottery (DS-160 / DS-260)",
     "out": {
@@ -120,22 +120,22 @@ window.COUNTRY_SPECS = {
       "no_head_covering"
     ],
     "seo": {
-      "title": "DV Lottery Photo Checker 2026 — Free, Under 240KB, In-Browser",
-      "desc": "Check your DV Lottery / US visa photo before you submit. DIYPassPhoto verifies the 600–1200px square, ≤240KB, white-background spec and catches what the official form misses — free, private, no uploads.",
+      "title": "DV Lottery Photo Checker 2026 \u2014 Free, Under 240KB, In-Browser",
+      "desc": "Check your DV Lottery / US visa photo before you submit. DIYPassPhoto verifies the 600\u20131200px square, \u2264240KB, white-background spec and catches what the official form misses \u2014 free, private, no uploads.",
       "keywords": "dv lottery photo, dv lottery photo checker, green card photo, ds-160 photo, us visa photo, dv lottery photo requirements 2026",
       "h1": "DV Lottery & US visa photo checker",
-      "intro": "Square, 600–1200 px, JPEG, under 240 KB, white background. The official entry form won't tell you your background or head size is wrong — it just rejects you later. DIYPassPhoto catches it first, and formats to spec in your browser."
+      "intro": "Square, 600\u20131200 px, JPEG, under 240 KB, white background. The official entry form won't tell you your background or head size is wrong \u2014 it just rejects you later. DIYPassPhoto catches it first, and formats to spec in your browser."
     },
     "reqs": [
-      "Square (1:1), 600×600 to 1200×1200 px, JPEG",
+      "Square (1:1), 600\u00d7600 to 1200\u00d71200 px, JPEG",
       "File size 240 KB or less",
-      "Head 50–69% of image height",
+      "Head 50\u201369% of image height",
       "Plain white or off-white background",
       "Neutral expression, eyes open, one person only",
       "Taken within the last 6 months"
     ],
     "rejections": [
-      "Accepted at upload, rejected later — the form doesn't check background or head size",
+      "Accepted at upload, rejected later \u2014 the form doesn't check background or head size",
       "Background not truly white",
       "File over 240 KB or not square",
       "Shadows on face or background",
@@ -144,7 +144,7 @@ window.COUNTRY_SPECS = {
     "faq": [
       {
         "q": "What are the DV Lottery photo requirements?",
-        "a": "A digital DV Lottery photo must be square (1:1), 600×600 to 1200×1200 pixels, JPEG, and 240 KB or smaller, with a plain white background and the head 50–69% of the height."
+        "a": "A digital DV Lottery photo must be square (1:1), 600\u00d7600 to 1200\u00d71200 pixels, JPEG, and 240 KB or smaller, with a plain white background and the head 50\u201369% of the height."
       },
       {
         "q": "Why was my photo accepted at upload but rejected later?",
@@ -152,11 +152,11 @@ window.COUNTRY_SPECS = {
       },
       {
         "q": "Is DIYPassPhoto free for DV Lottery photos?",
-        "a": "Yes — completely free, no signup, and your photo never leaves your device."
+        "a": "Yes \u2014 completely free, no signup, and your photo never leaves your device."
       }
     ],
     "emblem": {
-      "icon": "🦅",
+      "icon": "\ud83e\udd85",
       "name": "Bald eagle",
       "kind": "National bird"
     },
@@ -164,7 +164,7 @@ window.COUNTRY_SPECS = {
   },
   "uk-passport": {
     "label": "UK Passport",
-    "flag": "🇬🇧",
+    "flag": "\ud83c\uddec\ud83c\udde7",
     "country": "United Kingdom",
     "docName": "Passport",
     "out": {
@@ -200,37 +200,37 @@ window.COUNTRY_SPECS = {
       "neutral_expression"
     ],
     "seo": {
-      "title": "UK Passport Photo Checker — Free, Private, In-Browser",
-      "desc": "Take a compliant UK passport photo at home. DIYPassPhoto checks the 35×45mm framing, light-grey background and head size live in your browser — free, nothing uploaded.",
+      "title": "UK Passport Photo Checker \u2014 Free, Private, In-Browser",
+      "desc": "Take a compliant UK passport photo at home. DIYPassPhoto checks the 35\u00d745mm framing, light-grey background and head size live in your browser \u2014 free, nothing uploaded.",
       "keywords": "uk passport photo, uk passport photo online, uk passport photo checker, passport photo size uk, 35x45mm photo",
       "h1": "UK passport photo checker",
-      "intro": "35×45 mm, plain light-grey or cream background, head 29–34 mm. DIYPassPhoto frames you live and confirms the digital size and background before you upload to HM Passport Office."
+      "intro": "35\u00d745 mm, plain light-grey or cream background, head 29\u201334 mm. DIYPassPhoto frames you live and confirms the digital size and background before you upload to HM Passport Office."
     },
     "reqs": [
-      "35×45 mm print; digital at least 600×750 px",
-      "Head 29–34 mm (about 64–74% of height)",
+      "35\u00d745 mm print; digital at least 600\u00d7750 px",
+      "Head 29\u201334 mm (about 64\u201374% of height)",
       "Plain light grey or cream background",
       "Neutral expression, mouth closed, eyes open",
       "No glasses unless medically required"
     ],
     "rejections": [
       "Pure white background (light grey/cream preferred)",
-      "Head outside the 29–34 mm range",
+      "Head outside the 29\u201334 mm range",
       "Shadows or reflections",
       "Hair across the eyes"
     ],
     "faq": [
       {
         "q": "What background does a UK passport photo need?",
-        "a": "A plain light-grey or cream background — not pure white. It must be uniform with no shadows or patterns."
+        "a": "A plain light-grey or cream background \u2014 not pure white. It must be uniform with no shadows or patterns."
       },
       {
         "q": "What size is a UK passport photo?",
-        "a": "45 mm tall by 35 mm wide for prints; the digital photo should be at least 600×750 pixels."
+        "a": "45 mm tall by 35 mm wide for prints; the digital photo should be at least 600\u00d7750 pixels."
       }
     ],
     "emblem": {
-      "icon": "�",
+      "icon": "\ufffd\u0081",
       "name": "Lion",
       "kind": "National animal"
     },
@@ -238,9 +238,9 @@ window.COUNTRY_SPECS = {
   },
   "schengen-eu": {
     "label": "Schengen / EU Visa",
-    "flag": "🇪🇺",
+    "flag": "\ud83c\uddea\ud83c\uddfa",
     "country": "Schengen / EU",
-    "docName": "Visa & Passport (35×45mm)",
+    "docName": "Visa & Passport (35\u00d745mm)",
     "out": {
       "wPx": 413,
       "hPx": 531,
@@ -274,15 +274,15 @@ window.COUNTRY_SPECS = {
       "neutral_expression"
     ],
     "seo": {
-      "title": "Schengen / EU Visa Photo Checker — 35×45mm, Free & Private",
-      "desc": "Check your Schengen or EU visa photo against the 35×45mm biometric spec. DIYPassPhoto verifies head size, light background and framing live, free and in your browser.",
+      "title": "Schengen / EU Visa Photo Checker \u2014 35\u00d745mm, Free & Private",
+      "desc": "Check your Schengen or EU visa photo against the 35\u00d745mm biometric spec. DIYPassPhoto verifies head size, light background and framing live, free and in your browser.",
       "keywords": "schengen visa photo, eu passport photo, 35x45mm photo, biometric photo eu, schengen photo checker",
       "h1": "Schengen & EU visa photo checker",
-      "intro": "35×45 mm, light grey background, face 70–80% of the frame. DIYPassPhoto checks the biometric framing most consulates require — live, free, nothing uploaded."
+      "intro": "35\u00d745 mm, light grey background, face 70\u201380% of the frame. DIYPassPhoto checks the biometric framing most consulates require \u2014 live, free, nothing uploaded."
     },
     "reqs": [
-      "35×45 mm, light grey or pale background",
-      "Face 70–80% of the frame height (32–36 mm)",
+      "35\u00d745 mm, light grey or pale background",
+      "Face 70\u201380% of the frame height (32\u201336 mm)",
       "Neutral expression, looking straight ahead",
       "Even lighting, no shadows",
       "No glasses recommended"
@@ -296,7 +296,7 @@ window.COUNTRY_SPECS = {
     "faq": [
       {
         "q": "What is the Schengen visa photo size?",
-        "a": "35 mm wide by 45 mm tall, with the face taking up 70–80% of the height (about 32–36 mm)."
+        "a": "35 mm wide by 45 mm tall, with the face taking up 70\u201380% of the height (about 32\u201336 mm)."
       },
       {
         "q": "Can the background be white?",
@@ -304,7 +304,7 @@ window.COUNTRY_SPECS = {
       }
     ],
     "emblem": {
-      "icon": "🦉",
+      "icon": "\ud83e\udd89",
       "name": "Owl",
       "kind": "Emblem"
     },
@@ -312,9 +312,9 @@ window.COUNTRY_SPECS = {
   },
   "india-passport": {
     "label": "India Passport",
-    "flag": "🇮🇳",
+    "flag": "\ud83c\uddee\ud83c\uddf3",
     "country": "India",
-    "docName": "Passport (2×2in)",
+    "docName": "Passport (2\u00d72in)",
     "out": {
       "wPx": 600,
       "hPx": 600,
@@ -347,14 +347,14 @@ window.COUNTRY_SPECS = {
       "neutral_expression"
     ],
     "seo": {
-      "title": "India Passport Photo Checker — 2×2in, Free & Private",
-      "desc": "Make a compliant Indian passport photo at home. DIYPassPhoto checks the 2×2 inch white-background spec and head size live, free and fully in your browser.",
+      "title": "India Passport Photo Checker \u2014 2\u00d72in, Free & Private",
+      "desc": "Make a compliant Indian passport photo at home. DIYPassPhoto checks the 2\u00d72 inch white-background spec and head size live, free and fully in your browser.",
       "keywords": "india passport photo, indian passport photo size, passport photo india online, india passport photo checker, 2x2 photo india",
       "h1": "India passport photo checker",
-      "intro": "2×2 inches, white background, face filling most of the frame. DIYPassPhoto lines you up and confirms the spec — useful whether you submit on Passport Seva or print at a studio."
+      "intro": "2\u00d72 inches, white background, face filling most of the frame. DIYPassPhoto lines you up and confirms the spec \u2014 useful whether you submit on Passport Seva or print at a studio."
     },
     "reqs": [
-      "2×2 inches (51×51 mm), white background",
+      "2\u00d72 inches (51\u00d751 mm), white background",
       "Face covers most of the frame, centred",
       "Neutral expression, both eyes open",
       "Even lighting, no shadows or red-eye"
@@ -362,12 +362,12 @@ window.COUNTRY_SPECS = {
     "rejections": [
       "Off-white or shadowed background",
       "Face too small or off-centre",
-      "Some Seva services want 4.5×3.5 cm — check your form"
+      "Some Seva services want 4.5\u00d73.5 cm \u2014 check your form"
     ],
     "faq": [
       {
         "q": "What size is an Indian passport photo?",
-        "a": "2×2 inches (51×51 mm) with a white background for most applications. Some online Passport Seva services request 4.5×3.5 cm — check your specific form."
+        "a": "2\u00d72 inches (51\u00d751 mm) with a white background for most applications. Some online Passport Seva services request 4.5\u00d73.5 cm \u2014 check your specific form."
       },
       {
         "q": "What background colour is required?",
@@ -375,7 +375,7 @@ window.COUNTRY_SPECS = {
       }
     ],
     "emblem": {
-      "icon": "��",
+      "icon": "\ufffd\u0090\ufffd",
       "name": "Bengal tiger",
       "kind": "National animal"
     },
@@ -383,9 +383,9 @@ window.COUNTRY_SPECS = {
   },
   "canada-passport": {
     "label": "Canada Passport",
-    "flag": "🇨🇦",
+    "flag": "\ud83c\udde8\ud83c\udde6",
     "country": "Canada",
-    "docName": "Passport (50×70mm)",
+    "docName": "Passport (50\u00d770mm)",
     "out": {
       "wPx": 420,
       "hPx": 540,
@@ -419,35 +419,35 @@ window.COUNTRY_SPECS = {
       "no_head_covering"
     ],
     "seo": {
-      "title": "Canada Passport Photo Checker — 50×70mm, Free & Private",
-      "desc": "Check your Canadian passport photo against the 50×70mm spec with 31–36mm face height. DIYPassPhoto verifies framing and background live — free, nothing uploaded.",
+      "title": "Canada Passport Photo Checker \u2014 50\u00d770mm, Free & Private",
+      "desc": "Check your Canadian passport photo against the 50\u00d770mm spec with 31\u201336mm face height. DIYPassPhoto verifies framing and background live \u2014 free, nothing uploaded.",
       "keywords": "canada passport photo, canadian passport photo size, 50x70mm photo, canada passport photo checker, passport photo canada",
       "h1": "Canada passport photo checker",
-      "intro": "50×70 mm with a 31–36 mm face height and a white background. Canada's tall format trips people up — DIYPassPhoto frames it correctly and checks the rest live."
+      "intro": "50\u00d770 mm with a 31\u201336 mm face height and a white background. Canada's tall format trips people up \u2014 DIYPassPhoto frames it correctly and checks the rest live."
     },
     "reqs": [
-      "50×70 mm photo, white or light background",
-      "Face height 31–36 mm (chin to crown)",
+      "50\u00d770 mm photo, white or light background",
+      "Face height 31\u201336 mm (chin to crown)",
       "Neutral expression, mouth closed",
       "Even lighting, no shadows"
     ],
     "rejections": [
-      "Wrong aspect ratio (it's tall, 50×70mm — not square)",
-      "Face height outside 31–36 mm",
+      "Wrong aspect ratio (it's tall, 50\u00d770mm \u2014 not square)",
+      "Face height outside 31\u201336 mm",
       "Shadows on the background"
     ],
     "faq": [
       {
         "q": "What size is a Canadian passport photo?",
-        "a": "50 mm wide by 70 mm tall, with the face (chin to crown) measuring 31–36 mm."
+        "a": "50 mm wide by 70 mm tall, with the face (chin to crown) measuring 31\u201336 mm."
       },
       {
         "q": "Is the Canadian passport photo square?",
-        "a": "No — it is a tall 50×70 mm rectangle, which is why square crops from other countries don't work."
+        "a": "No \u2014 it is a tall 50\u00d770 mm rectangle, which is why square crops from other countries don't work."
       }
     ],
     "emblem": {
-      "icon": "🦫",
+      "icon": "\ud83e\uddab",
       "name": "Beaver",
       "kind": "National animal"
     },
@@ -455,9 +455,9 @@ window.COUNTRY_SPECS = {
   },
   "australia-passport": {
     "label": "Australia Passport",
-    "flag": "🇦🇺",
+    "flag": "\ud83c\udde6\ud83c\uddfa",
     "country": "Australia",
-    "docName": "Passport (35×45mm)",
+    "docName": "Passport (35\u00d745mm)",
     "out": {
       "wPx": 413,
       "hPx": 531,
@@ -490,15 +490,15 @@ window.COUNTRY_SPECS = {
       "neutral_expression"
     ],
     "seo": {
-      "title": "Australia Passport Photo Checker — 35×45mm, Free & Private",
-      "desc": "Take a compliant Australian passport photo. DIYPassPhoto checks the 35×45mm framing, light background and head size live in your browser — free, no uploads.",
+      "title": "Australia Passport Photo Checker \u2014 35\u00d745mm, Free & Private",
+      "desc": "Take a compliant Australian passport photo. DIYPassPhoto checks the 35\u00d745mm framing, light background and head size live in your browser \u2014 free, no uploads.",
       "keywords": "australia passport photo, australian passport photo size, 35x45mm photo australia, passport photo australia checker",
       "h1": "Australia passport photo checker",
-      "intro": "35×45 mm, plain light background, face 32–36 mm. DIYPassPhoto frames you live and confirms the spec before you submit or print."
+      "intro": "35\u00d745 mm, plain light background, face 32\u201336 mm. DIYPassPhoto frames you live and confirms the spec before you submit or print."
     },
     "reqs": [
-      "35×45 mm, plain light-coloured background",
-      "Face 32–36 mm (about 71–80% of height)",
+      "35\u00d745 mm, plain light-coloured background",
+      "Face 32\u201336 mm (about 71\u201380% of height)",
       "Neutral expression, eyes open, mouth closed",
       "Even lighting"
     ],
@@ -510,11 +510,11 @@ window.COUNTRY_SPECS = {
     "faq": [
       {
         "q": "What size is an Australian passport photo?",
-        "a": "35 mm wide by 45 mm tall, with the face measuring 32–36 mm from chin to crown."
+        "a": "35 mm wide by 45 mm tall, with the face measuring 32\u201336 mm from chin to crown."
       }
     ],
     "emblem": {
-      "icon": "🦘",
+      "icon": "\ud83e\udd98",
       "name": "Kangaroo",
       "kind": "National animal"
     },
@@ -522,9 +522,9 @@ window.COUNTRY_SPECS = {
   },
   "china-visa": {
     "label": "China Visa",
-    "flag": "🇨🇳",
+    "flag": "\ud83c\udde8\ud83c\uddf3",
     "country": "China",
-    "docName": "Visa (33×48mm)",
+    "docName": "Visa (33\u00d748mm)",
     "out": {
       "wPx": 354,
       "hPx": 472,
@@ -559,18 +559,18 @@ window.COUNTRY_SPECS = {
       "no_head_covering"
     ],
     "seo": {
-      "title": "China Visa Photo Checker — 33×48mm, Under 120KB, Free",
-      "desc": "Check your China visa photo against the 33×48mm, pure-white, ≤120KB spec. DIYPassPhoto verifies framing and background live in your browser — free, nothing uploaded.",
+      "title": "China Visa Photo Checker \u2014 33\u00d748mm, Under 120KB, Free",
+      "desc": "Check your China visa photo against the 33\u00d748mm, pure-white, \u2264120KB spec. DIYPassPhoto verifies framing and background live in your browser \u2014 free, nothing uploaded.",
       "keywords": "china visa photo, china visa photo size, 33x48mm photo, china visa photo requirements, china visa photo checker",
       "h1": "China visa photo checker",
-      "intro": "33×48 mm, pure white background, ears visible, online file 40–120 KB. China's spec is strict — DIYPassPhoto checks it precisely and compresses to fit."
+      "intro": "33\u00d748 mm, pure white background, ears visible, online file 40\u2013120 KB. China's spec is strict \u2014 DIYPassPhoto checks it precisely and compresses to fit."
     },
     "reqs": [
-      "33×48 mm print; online 354×472 to 420×560 px",
+      "33\u00d748 mm print; online 354\u00d7472 to 420\u00d7560 px",
       "Pure white background, ears visible",
-      "Online file 40–120 KB",
+      "Online file 40\u2013120 KB",
       "Neutral expression, no glasses",
-      "Head 28–33 mm"
+      "Head 28\u201333 mm"
     ],
     "rejections": [
       "Background not pure white",
@@ -581,15 +581,15 @@ window.COUNTRY_SPECS = {
     "faq": [
       {
         "q": "What size is a China visa photo?",
-        "a": "33 mm wide by 48 mm tall for prints; online photos are 354×472 to 420×560 pixels and 40–120 KB."
+        "a": "33 mm wide by 48 mm tall for prints; online photos are 354\u00d7472 to 420\u00d7560 pixels and 40\u2013120 KB."
       },
       {
         "q": "Does the China visa photo need ears visible?",
-        "a": "Yes — both ears should generally be visible, with a pure white background."
+        "a": "Yes \u2014 both ears should generally be visible, with a pure white background."
       }
     ],
     "emblem": {
-      "icon": "��",
+      "icon": "\ufffd\u0090\ufffd",
       "name": "Giant panda",
       "kind": "National animal"
     },
@@ -597,9 +597,9 @@ window.COUNTRY_SPECS = {
   },
   "japan-passport": {
     "label": "Japan Passport",
-    "flag": "🇯🇵",
+    "flag": "\ud83c\uddef\ud83c\uddf5",
     "country": "Japan",
-    "docName": "Passport (35×45mm)",
+    "docName": "Passport (35\u00d745mm)",
     "out": {
       "wPx": 413,
       "hPx": 531,
@@ -632,15 +632,15 @@ window.COUNTRY_SPECS = {
       "neutral_expression"
     ],
     "seo": {
-      "title": "Japan Passport Photo Checker — 35×45mm, Free & Private",
-      "desc": "Take a compliant Japanese passport photo. DIYPassPhoto checks the 35×45mm framing, plain background and 34mm face height live in your browser — free, no uploads.",
+      "title": "Japan Passport Photo Checker \u2014 35\u00d745mm, Free & Private",
+      "desc": "Take a compliant Japanese passport photo. DIYPassPhoto checks the 35\u00d745mm framing, plain background and 34mm face height live in your browser \u2014 free, no uploads.",
       "keywords": "japan passport photo, japanese passport photo size, 35x45mm photo japan, passport photo japan checker",
       "h1": "Japan passport photo checker",
-      "intro": "35×45 mm, plain light background, face about 34 mm. DIYPassPhoto frames the precise Japanese spec and checks the rest live."
+      "intro": "35\u00d745 mm, plain light background, face about 34 mm. DIYPassPhoto frames the precise Japanese spec and checks the rest live."
     },
     "reqs": [
-      "35×45 mm, plain light background",
-      "Face height about 32–36 mm",
+      "35\u00d745 mm, plain light background",
+      "Face height about 32\u201336 mm",
       "Neutral expression, eyes open",
       "Even lighting, no shadows"
     ],
@@ -652,11 +652,11 @@ window.COUNTRY_SPECS = {
     "faq": [
       {
         "q": "What size is a Japanese passport photo?",
-        "a": "35 mm wide by 45 mm tall, with the face roughly 32–36 mm from chin to crown."
+        "a": "35 mm wide by 45 mm tall, with the face roughly 32\u201336 mm from chin to crown."
       }
     ],
     "emblem": {
-      "icon": "��",
+      "icon": "\ufffd\u0090\ufffd",
       "name": "Green pheasant",
       "kind": "National bird"
     },
@@ -664,9 +664,9 @@ window.COUNTRY_SPECS = {
   },
   "germany-passport": {
     "label": "Germany Passport",
-    "flag": "🇩🇪",
+    "flag": "\ud83c\udde9\ud83c\uddea",
     "country": "Germany",
-    "docName": "Passport (35×45mm)",
+    "docName": "Passport (35\u00d745mm)",
     "out": {
       "wPx": 413,
       "hPx": 531,
@@ -699,15 +699,15 @@ window.COUNTRY_SPECS = {
       "neutral_expression"
     ],
     "seo": {
-      "title": "Germany Passport Photo Checker — 35×45mm, Free & Private",
-      "desc": "Check your German biometric passport photo against the 35×45mm spec with a light-grey background. DIYPassPhoto verifies framing and head size live — free, in your browser.",
+      "title": "Germany Passport Photo Checker \u2014 35\u00d745mm, Free & Private",
+      "desc": "Check your German biometric passport photo against the 35\u00d745mm spec with a light-grey background. DIYPassPhoto verifies framing and head size live \u2014 free, in your browser.",
       "keywords": "germany passport photo, german passport photo size, biometric photo germany, 35x45mm photo, germany passport photo checker",
       "h1": "Germany passport photo checker",
-      "intro": "35×45 mm biometric, light-grey background, face 70–80% of the frame. DIYPassPhoto checks the German biometric framing live, free, with nothing uploaded."
+      "intro": "35\u00d745 mm biometric, light-grey background, face 70\u201380% of the frame. DIYPassPhoto checks the German biometric framing live, free, with nothing uploaded."
     },
     "reqs": [
-      "35×45 mm biometric, light grey background",
-      "Face 70–80% of height (32–36 mm)",
+      "35\u00d745 mm biometric, light grey background",
+      "Face 70\u201380% of height (32\u201336 mm)",
       "Neutral expression, looking straight at camera",
       "Even lighting, no shadows"
     ],
@@ -724,7 +724,7 @@ window.COUNTRY_SPECS = {
       }
     ],
     "emblem": {
-      "icon": "🦅",
+      "icon": "\ud83e\udd85",
       "name": "Federal eagle",
       "kind": "National animal"
     },

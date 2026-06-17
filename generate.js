@@ -10,11 +10,22 @@ const SITE = "https://diypassphoto.com";
 const BRAND = "DIYPassPhoto";
 const TAGLINE = "Snap it. Verify it. Pass it.";
 
+/* escape all non-ASCII as \uXXXX so countries.js is pure ASCII — no encoding issues */
+function asciiSafe(str) {
+  return str.replace(/[^\x00-\x7F]/g, ch => {
+    const cp = ch.codePointAt(0);
+    if (cp <= 0xFFFF) return "\\u" + cp.toString(16).padStart(4,"0");
+    const hi = 0xD800 + ((cp - 0x10000) >> 10);
+    const lo = 0xDC00 + ((cp - 0x10000) & 0x3FF);
+    return "\\u" + hi.toString(16) + "\\u" + lo.toString(16);
+  });
+}
+
 /* 1) Browser registry --------------------------------------------------- */
 fs.writeFileSync(
   path.join(ROOT, "countries.js"),
   "// AUTO-GENERATED from data/countries.json by generate.js — do not edit by hand.\n" +
-  "window.COUNTRY_SPECS = " + JSON.stringify(data, null, 2) + ";\n"
+  "window.COUNTRY_SPECS = " + asciiSafe(JSON.stringify(data, null, 2)) + ";\n"
 );
 
 /* helpers --------------------------------------------------------------- */
