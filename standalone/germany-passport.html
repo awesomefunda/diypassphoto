@@ -2011,21 +2011,28 @@ function renderGates(checks){
     if(c.status!=="manual"&&c.status!=="idle"){req++;if(c.status==="pass")pass++;if(c.status==="fail")fail++;}
   }
   const go=req>0&&fail===0;
+  // The shutter unlocks as soon as a face is found — head size & eye height are
+  // auto-corrected when we crop to spec, so we never hard-block on them. The green
+  // ring still signals full compliance, but you can always capture and review.
+  const faceCheck=checks.find(c=>c.id==="face");
+  const faceOk=faceCheck?faceCheck.status==="pass":false;
+  const canCap=mode==="live"&&(faceOk||!modelReady);
   el.frame&&el.frame.classList.toggle("go",go&&mode!=="idle");
   el.badge.className="vf-badge "+(go&&mode!=="idle"?"go":"");
-  el.badge.innerHTML=`<span class="blink"></span>${mode==="idle"?"CAMERA OFF":go?"GREEN — CAPTURE":"HOLD"}`;
+  el.badge.innerHTML=`<span class="blink"></span>${mode==="idle"?"CAMERA OFF":go?"GREEN — CAPTURE":canCap?"TAP TO CAPTURE":"HOLD"}`;
   el.verdict.className="verdict "+(go?"go":"hold");
   el.verdict.textContent=req===0?"Waiting for a photo…":go?"All required checks pass":"Not ready yet";
   el.score.textContent=req?`${pass}/${req}`:"";
-  if(el.vfCapture) el.vfCapture.disabled=!(mode==="live"&&go);
+  if(el.vfCapture) el.vfCapture.disabled=!canCap;
   // in-frame coaching message — the single most useful thing to fix right now
   if(el.vfMsg){
     if(mode!=="live"){ el.vfMsg.className="vf-msg"; el.vfMsg.textContent=""; }
     else if(go){ el.vfMsg.className="vf-msg show go"; el.vfMsg.textContent="✓ Looks good — tap the shutter"; }
+    else if(!faceOk&&modelReady){ el.vfMsg.className="vf-msg show"; el.vfMsg.textContent="Position your face inside the oval."; }
     else{
       const f=checks.find(c=>c.status==="fail"&&c.coach)||checks.find(c=>c.status==="warn"&&c.coach);
       el.vfMsg.className="vf-msg show";
-      el.vfMsg.textContent=f?f.coach:"Line up your face inside the oval.";
+      el.vfMsg.textContent=(f?f.coach+" — ":"")+"you can still capture & review.";
     }
   }
 }
@@ -2043,7 +2050,7 @@ async function startCam(){
   mode="live"; running=true;
   document.body.classList.add("cam-live");
   setupZoom();
-  setStatus("Line up with the guide. The frame turns green and Capture unlocks when every check passes.");
+  setStatus("Line up with the guide. The shutter unlocks once your face is detected — green means fully compliant, but you can capture and review anytime.");
   sizeHud(); requestAnimationFrame(loop);
 }
 function stopCam(){
@@ -2187,6 +2194,7 @@ function makePhoto(src,sw,sh){
 }
 function captureLive(){
   const vw=el.video.videoWidth,vh=el.video.videoHeight;
+  if(!vw||!vh) return;
   const c=document.createElement("canvas");c.width=vw;c.height=vh;c.getContext("2d").drawImage(el.video,0,0,vw,vh);
   const onPhone=document.body.classList.contains("cam-live")&&matchMedia("(max-width:900px)").matches;
   showResult(makePhoto(c,vw,vh));
