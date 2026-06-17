@@ -166,7 +166,7 @@ addEventListener("DOMContentLoaded",()=>{
   Object.keys(S).forEach((slug,i)=>{
     const s=S[slug];
     const a=document.createElement("a"); a.className="ccard"; a.href=`c/${slug}.html`;
-    a.innerHTML=`<span class="fl">${s.flag}<span class="ani">${s.emblem.icon}</span></span><span class="cinfo"><span class="cn">${s.label}</span><span class="cs">${s.out.printMM[0]}×${s.out.printMM[1]}mm · ${s.out.wPx}×${s.out.hPx}px</span></span><span class="go-arrow">→</span>`;
+    a.innerHTML=`<span class="fl">${s.flag}<span class="ani">${s.emblem.icon}</span></span><span class="cinfo"><span class="cn">${s.label}</span><span class="cs">${s.country}</span></span><span class="go-arrow">→</span>`;
     grid.appendChild(a);
     if(i<6){ const f=document.createElement("a"); f.href=`c/${slug}.html`; f.textContent=s.label; fa.appendChild(f); }
   });

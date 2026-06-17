@@ -79,7 +79,7 @@ function countryNav(current){
   return slugs.map(s => {
     const c = data[s];
     const active = s === current ? ' style="border-color:var(--go-line)"' : "";
-    return `<a class="ccard" href="${s}.html"${active}><span class="fl">${c.flag}<span class="ani">${c.emblem.icon}</span></span><span class="cinfo"><span class="cn">${esc(c.label)}</span><span class="cs">${c.out.printMM[0]}×${c.out.printMM[1]}mm · ${c.out.wPx}×${c.out.hPx}px</span></span><span class="go-arrow">→</span></a>`;
+    return `<a class="ccard" href="${s}.html"${active}><span class="fl">${c.flag}<span class="ani">${c.emblem.icon}</span></span><span class="cinfo"><span class="cn">${esc(c.label)}</span><span class="cs">${esc(c.country)}</span></span><span class="go-arrow">→</span></a>`;
   }).join("\n        ");
 }
 function footerCountries(){
