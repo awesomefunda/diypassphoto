@@ -150,6 +150,11 @@ for (const slug of slugs){
     <div class="emblem"><span class="flag">${c.flag}</span></div>
     <h1>${esc(c.seo.h1)}</h1>
     <p class="lede">Snap it from your phone, get the green light, download your photo and a compliance report. Checked against the official ${esc(c.country)} spec before you submit — nothing uploaded.</p>
+${slug.startsWith("us-") || slug === "dv-lottery" ? `
+    <div class="notice2026">
+      <b>US 2026 rule:</b> The State Department now rejects AI-edited, background-swapped, or digitally enhanced photos. DIYPassPhoto never alters your photo — it measures and coaches only.
+      <a href="https://travel.state.gov/content/travel/en/passports/requirements/photos.html" target="_blank" rel="noopener noreferrer">Official source ↗</a>
+    </div>` : ""}
 ${TOOL}
     <p class="official"><a href="${c.officialUrl}" target="_blank" rel="noopener noreferrer">Official ${esc(c.country)} photo requirements ↗</a></p>
   </section>
