@@ -76,7 +76,8 @@ const TOOL = `
       <div>
         <div class="rmeta" id="rmeta"></div>
         <div class="controls" style="margin-top:14px">
-          <button class="btn go" id="download">Download photo</button>
+          <button class="btn go" id="share">Save / Share</button>
+          <button class="btn" id="download">Download</button>
           <button class="btn" id="report">Download report</button>
           <button class="btn" id="sheet">4×6 sheet</button>
           <button class="btn" id="retake">Retake</button>
@@ -142,7 +143,7 @@ for (const slug of slugs){
 <meta name="twitter:description" content="${esc(c.seo.desc)}"/>
 <meta name="twitter:image" content="${SITE}/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="../styles.css?v=17"/>
+<link rel="stylesheet" href="../styles.css?v=18"/>
 <script type="application/ld+json">${JSON.stringify(appLd)}</script>
 <script type="application/ld+json">${JSON.stringify(crumbLd)}</script>
 <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
@@ -214,8 +215,8 @@ ${footerCountries()}
 </div></footer>
 
 <script>window.GF_START="${slug}";</script>
-<script src="../countries.js?v=17"></script>
-<script type="module" src="../app.js?v=17"></script>
+<script src="../countries.js?v=18"></script>
+<script type="module" src="../app.js?v=18"></script>
 </body>
 </html>`;
   fs.writeFileSync(path.join(cdir, `${slug}.html`), html);

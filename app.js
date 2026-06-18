@@ -12,7 +12,7 @@ const el = {
   vfStart:$("vfStart"), upload:$("upload"),
   vfMsg:$("vfMsg"), vfShutter:$("vfShutter"), vfCapture:$("vfCapture"), vfFlip:$("vfFlip"), vfClose:$("vfClose"),
   result:$("result"), resultImg:$("resultImg"), rmeta:$("rmeta"),
-  download:$("download"), sheet:$("sheet"), report:$("report"), retake:$("retake")
+  download:$("download"), sheet:$("sheet"), report:$("report"), retake:$("retake"), share:$("share")
 };
 let landmarker=null, imageLandmarker=null, modelReady=false;
 let running=false, stream=null, mode="idle", stillImage=null, lastResults=null, prevStatus={}, lastChecks=[];
@@ -385,7 +385,28 @@ function showResult(r){
   el.download.onclick=()=>{const a=document.createElement("a");a.href=r.url;a.download=`diypassphoto-${el.country.value}.jpg`;a.click();};
   if(el.sheet) el.sheet.onclick=()=>printSheet(r);
   if(el.report) el.report.onclick=()=>downloadReport(r);
+  // One-tap Save/Share — native share sheet on mobile (Save to Photos, message, email, print).
+  if(el.share){
+    const supported = !!(navigator.canShare && navigator.share);
+    el.share.style.display = supported ? "" : "none";
+    el.download.classList.toggle("go", !supported); // download is primary only when share is unavailable
+    el.share.onclick=()=>sharePhoto(r);
+  }
   el.result.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function dataURLtoBlob(u){
+  const b64=u.split(",")[1], bin=atob(b64), arr=new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
+  return new Blob([arr],{type:"image/jpeg"});
+}
+function sharePhoto(r){
+  const name=`diypassphoto-${el.country.value}.jpg`;
+  const file=new File([dataURLtoBlob(r.url)],name,{type:"image/jpeg"});
+  if(navigator.canShare && navigator.canShare({files:[file]})){
+    navigator.share({files:[file],title:"Passport photo",text:`${r.spec.label} — made with DIYPassPhoto`}).catch(()=>{});
+  } else {
+    const a=document.createElement("a");a.href=r.url;a.download=name;a.click();
+  }
 }
 
 // Downloadable compliance report card (PNG) — the "proof" artifact.
