@@ -25,7 +25,7 @@ const setStatus=t=>{ if(el.status) el.status.textContent=t; };
 function boot(){
   // dropdown
   for(const [k,s] of Object.entries(SPECS)){
-    const o=document.createElement("option"); o.value=k; o.textContent=`${s.flag} ${s.label}`; el.country.appendChild(o);
+    const o=document.createElement("option"); o.value=k; o.textContent=s.label; el.country.appendChild(o);
   }
   el.country.value = (window.GF_START && SPECS[window.GF_START]) ? window.GF_START : Object.keys(SPECS)[0];
   el.country.addEventListener("change",()=>{ prevStatus={}; renderGates(currentGates()); if(mode==="still"&&stillImage) runStill(); });
@@ -34,7 +34,7 @@ function boot(){
   if(el.vfCapture) el.vfCapture.addEventListener("click",captureLive);
   if(el.vfClose) el.vfClose.addEventListener("click",stopCam);
   el.upload.addEventListener("change",onUpload);
-  if(el.retake) el.retake.onclick=()=>{ el.result.classList.remove("on"); document.body.classList.remove("has-shot"); prevStatus={}; renderGates(currentGates()); startCam(); };
+  if(el.retake) el.retake.onclick=resetToIdle;
   renderGates(currentGates());
   loadModel();
 }
@@ -279,6 +279,18 @@ function onUpload(e){
   if(running) stopCam();
   const img=new Image(); img.onload=()=>{ stillImage=img; mode="still"; runStill(); }; img.src=URL.createObjectURL(f);
   el.vfEmpty.style.display="none";
+  e.target.value=""; // allow re-selecting the same file later
+}
+// Return to the clean start screen (used by Retake) so the camera AND the
+// "check a photo" upload are both available again.
+function resetToIdle(){
+  if(running) stopCam();
+  mode="idle"; stillImage=null;
+  el.result.classList.remove("on"); document.body.classList.remove("has-shot");
+  el.feed.style.display="none"; el.video.style.display="none"; el.vfEmpty.style.display="block";
+  if(el.upload) el.upload.value="";
+  prevStatus={}; renderGates(currentGates());
+  el.frame && el.frame.scrollIntoView({behavior:"smooth",block:"center"});
 }
 function runStill(){
   const spec=SPECS[el.country.value], img=stillImage, w=img.naturalWidth, h=img.naturalHeight;
@@ -339,7 +351,7 @@ let lastResult=null;
 function showResult(r){
   lastResult=r; el.result.classList.add("on"); document.body.classList.add("has-shot"); el.resultImg.src=r.url;
   const km=r.spec.out.maxKB?` · ${r.kb} KB (≤${r.spec.out.maxKB})`:"";
-  el.rmeta.innerHTML=`<b>${r.spec.flag} ${r.spec.label}</b><br>${r.spec.out.wPx}×${r.spec.out.hPx} px · JPEG${km}<br>print ${r.spec.out.printMM[0]}×${r.spec.out.printMM[1]} mm @ ${r.spec.out.dpi} dpi`;
+  el.rmeta.innerHTML=`<b>${r.spec.label}</b><br>${r.spec.out.wPx}×${r.spec.out.hPx} px · JPEG${km}<br>print ${r.spec.out.printMM[0]}×${r.spec.out.printMM[1]} mm @ ${r.spec.out.dpi} dpi`;
   el.download.onclick=()=>{const a=document.createElement("a");a.href=r.url;a.download=`diypassphoto-${el.country.value}.jpg`;a.click();};
   if(el.sheet) el.sheet.onclick=()=>printSheet(r);
   if(el.report) el.report.onclick=()=>downloadReport(r);
@@ -361,7 +373,7 @@ function downloadReport(r){
   x.fillStyle=COL.mist; x.font="600 16px Inter,Arial,sans-serif"; x.fillText("Compliance report", pad+56, pad+52);
   // country + date
   x.fillStyle=COL.ink; x.font="700 22px Inter,Arial,sans-serif";
-  x.fillText(`${r.spec.flag}  ${r.spec.label}`, pad, pad+108);
+  x.fillText(`${r.spec.label}`, pad, pad+108);
   x.fillStyle=COL.mist; x.font="400 15px Inter,Arial,sans-serif";
   x.fillText(new Date().toLocaleString(), pad, pad+134);
   // photo thumb

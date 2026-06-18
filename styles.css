@@ -78,8 +78,8 @@ header.bar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .framewrap.go .viewfinder{box-shadow:0 0 0 3px var(--go), var(--sh-2)}
 .viewfinder video,.viewfinder canvas.feed{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .viewfinder canvas.hud{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
-.vf-empty{position:relative;z-index:2;text-align:center;color:#9DB3A4;padding:30px;font-size:14px;max-width:30ch}
-.vf-empty .big{display:block;font-family:"Bricolage Grotesque";font-weight:700;font-size:20px;color:#E7F0E9;margin-bottom:8px;letter-spacing:-.02em}
+.vf-empty{position:relative;z-index:2;text-align:center;color:#9DB3A4;padding:18px;font-size:13px;line-height:1.4;max-width:30ch}
+.vf-empty .big{display:block;font-family:"Bricolage Grotesque";font-weight:700;font-size:17px;color:#E7F0E9;margin-bottom:6px;letter-spacing:-.02em}
 .vf-badge{position:absolute;top:14px;left:14px;z-index:5;font-family:"Spline Sans Mono",monospace;
   font-size:11px;font-weight:600;letter-spacing:.1em;padding:7px 12px;border-radius:999px;
   background:rgba(11,19,14,.74);color:#fff;border:1px solid rgba(255,255,255,.16);transition:background .35s}
@@ -116,11 +116,12 @@ header.bar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .framewrap.go .vf-shot:not(:disabled){border-color:var(--go);background:var(--go)}
 
 /* on-frame start-camera button (replaces the old external buttons) */
-.vf-startbtn{display:flex;align-items:center;justify-content:center;width:80px;height:80px;margin:0 auto 16px;
+.vf-startbtn{display:flex;align-items:center;justify-content:center;width:62px;height:62px;margin:0 auto 10px;
   border:none;border-radius:50%;background:var(--go);color:#fff;cursor:pointer;
   box-shadow:0 10px 26px rgba(0,0,0,.32);transition:transform .15s var(--ease)}
+.vf-startbtn svg{width:28px;height:28px}
 .vf-startbtn:hover{transform:scale(1.05)} .vf-startbtn:active{transform:scale(.96)}
-.vf-uploadlink{display:inline-block;margin-top:16px;color:#B9CBBE;text-decoration:underline;cursor:pointer;font-size:13px}
+.vf-uploadlink{display:inline-block;margin-top:10px;color:#B9CBBE;text-decoration:underline;cursor:pointer;font-size:13px}
 .vf-uploadlink:hover{color:#E7F0E9}
 
 /* the shutter bar is shown whenever the camera is live (desktop keeps its square frame) */

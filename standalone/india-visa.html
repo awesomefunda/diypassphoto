@@ -100,8 +100,8 @@ header.bar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .framewrap.go .viewfinder{box-shadow:0 0 0 3px var(--go), var(--sh-2)}
 .viewfinder video,.viewfinder canvas.feed{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .viewfinder canvas.hud{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
-.vf-empty{position:relative;z-index:2;text-align:center;color:#9DB3A4;padding:30px;font-size:14px;max-width:30ch}
-.vf-empty .big{display:block;font-family:"Bricolage Grotesque";font-weight:700;font-size:20px;color:#E7F0E9;margin-bottom:8px;letter-spacing:-.02em}
+.vf-empty{position:relative;z-index:2;text-align:center;color:#9DB3A4;padding:18px;font-size:13px;line-height:1.4;max-width:30ch}
+.vf-empty .big{display:block;font-family:"Bricolage Grotesque";font-weight:700;font-size:17px;color:#E7F0E9;margin-bottom:6px;letter-spacing:-.02em}
 .vf-badge{position:absolute;top:14px;left:14px;z-index:5;font-family:"Spline Sans Mono",monospace;
   font-size:11px;font-weight:600;letter-spacing:.1em;padding:7px 12px;border-radius:999px;
   background:rgba(11,19,14,.74);color:#fff;border:1px solid rgba(255,255,255,.16);transition:background .35s}
@@ -138,11 +138,12 @@ header.bar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 .framewrap.go .vf-shot:not(:disabled){border-color:var(--go);background:var(--go)}
 
 /* on-frame start-camera button (replaces the old external buttons) */
-.vf-startbtn{display:flex;align-items:center;justify-content:center;width:80px;height:80px;margin:0 auto 16px;
+.vf-startbtn{display:flex;align-items:center;justify-content:center;width:62px;height:62px;margin:0 auto 10px;
   border:none;border-radius:50%;background:var(--go);color:#fff;cursor:pointer;
   box-shadow:0 10px 26px rgba(0,0,0,.32);transition:transform .15s var(--ease)}
+.vf-startbtn svg{width:28px;height:28px}
 .vf-startbtn:hover{transform:scale(1.05)} .vf-startbtn:active{transform:scale(.96)}
-.vf-uploadlink{display:inline-block;margin-top:16px;color:#B9CBBE;text-decoration:underline;cursor:pointer;font-size:13px}
+.vf-uploadlink{display:inline-block;margin-top:10px;color:#B9CBBE;text-decoration:underline;cursor:pointer;font-size:13px}
 .vf-uploadlink:hover{color:#E7F0E9}
 
 /* the shutter bar is shown whenever the camera is live (desktop keeps its square frame) */
@@ -370,7 +371,7 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
               <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
             </button>
             <span class="big">Tap to start the camera</span>
-            Use the rear camera if someone can take it for you — it's sharper than the selfie cam.
+            Rear camera is sharper — ask someone to take it for you.
             <label class="vf-uploadlink" for="upload">or check a photo you already have</label>
             <input type="file" id="upload" accept="image/*"/>
           </div>
@@ -1888,7 +1889,7 @@ const setStatus=t=>{ if(el.status) el.status.textContent=t; };
 function boot(){
   // dropdown
   for(const [k,s] of Object.entries(SPECS)){
-    const o=document.createElement("option"); o.value=k; o.textContent=`${s.flag} ${s.label}`; el.country.appendChild(o);
+    const o=document.createElement("option"); o.value=k; o.textContent=s.label; el.country.appendChild(o);
   }
   el.country.value = (window.GF_START && SPECS[window.GF_START]) ? window.GF_START : Object.keys(SPECS)[0];
   el.country.addEventListener("change",()=>{ prevStatus={}; renderGates(currentGates()); if(mode==="still"&&stillImage) runStill(); });
@@ -1897,7 +1898,7 @@ function boot(){
   if(el.vfCapture) el.vfCapture.addEventListener("click",captureLive);
   if(el.vfClose) el.vfClose.addEventListener("click",stopCam);
   el.upload.addEventListener("change",onUpload);
-  if(el.retake) el.retake.onclick=()=>{ el.result.classList.remove("on"); document.body.classList.remove("has-shot"); prevStatus={}; renderGates(currentGates()); startCam(); };
+  if(el.retake) el.retake.onclick=resetToIdle;
   renderGates(currentGates());
   loadModel();
 }
@@ -2142,6 +2143,18 @@ function onUpload(e){
   if(running) stopCam();
   const img=new Image(); img.onload=()=>{ stillImage=img; mode="still"; runStill(); }; img.src=URL.createObjectURL(f);
   el.vfEmpty.style.display="none";
+  e.target.value=""; // allow re-selecting the same file later
+}
+// Return to the clean start screen (used by Retake) so the camera AND the
+// "check a photo" upload are both available again.
+function resetToIdle(){
+  if(running) stopCam();
+  mode="idle"; stillImage=null;
+  el.result.classList.remove("on"); document.body.classList.remove("has-shot");
+  el.feed.style.display="none"; el.video.style.display="none"; el.vfEmpty.style.display="block";
+  if(el.upload) el.upload.value="";
+  prevStatus={}; renderGates(currentGates());
+  el.frame && el.frame.scrollIntoView({behavior:"smooth",block:"center"});
 }
 function runStill(){
   const spec=SPECS[el.country.value], img=stillImage, w=img.naturalWidth, h=img.naturalHeight;
@@ -2202,7 +2215,7 @@ let lastResult=null;
 function showResult(r){
   lastResult=r; el.result.classList.add("on"); document.body.classList.add("has-shot"); el.resultImg.src=r.url;
   const km=r.spec.out.maxKB?` · ${r.kb} KB (≤${r.spec.out.maxKB})`:"";
-  el.rmeta.innerHTML=`<b>${r.spec.flag} ${r.spec.label}</b><br>${r.spec.out.wPx}×${r.spec.out.hPx} px · JPEG${km}<br>print ${r.spec.out.printMM[0]}×${r.spec.out.printMM[1]} mm @ ${r.spec.out.dpi} dpi`;
+  el.rmeta.innerHTML=`<b>${r.spec.label}</b><br>${r.spec.out.wPx}×${r.spec.out.hPx} px · JPEG${km}<br>print ${r.spec.out.printMM[0]}×${r.spec.out.printMM[1]} mm @ ${r.spec.out.dpi} dpi`;
   el.download.onclick=()=>{const a=document.createElement("a");a.href=r.url;a.download=`diypassphoto-${el.country.value}.jpg`;a.click();};
   if(el.sheet) el.sheet.onclick=()=>printSheet(r);
   if(el.report) el.report.onclick=()=>downloadReport(r);
@@ -2224,7 +2237,7 @@ function downloadReport(r){
   x.fillStyle=COL.mist; x.font="600 16px Inter,Arial,sans-serif"; x.fillText("Compliance report", pad+56, pad+52);
   // country + date
   x.fillStyle=COL.ink; x.font="700 22px Inter,Arial,sans-serif";
-  x.fillText(`${r.spec.flag}  ${r.spec.label}`, pad, pad+108);
+  x.fillText(`${r.spec.label}`, pad, pad+108);
   x.fillStyle=COL.mist; x.font="400 15px Inter,Arial,sans-serif";
   x.fillText(new Date().toLocaleString(), pad, pad+134);
   // photo thumb
