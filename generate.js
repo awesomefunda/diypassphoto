@@ -141,7 +141,7 @@ for (const slug of slugs){
 <meta name="twitter:description" content="${esc(c.seo.desc)}"/>
 <meta name="twitter:image" content="${SITE}/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="../styles.css?v=14"/>
+<link rel="stylesheet" href="../styles.css?v=15"/>
 <script type="application/ld+json">${JSON.stringify(appLd)}</script>
 <script type="application/ld+json">${JSON.stringify(crumbLd)}</script>
 <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
