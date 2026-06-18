@@ -740,6 +740,7 @@ window.COUNTRY_SPECS = {
       "aspect": 1,
       "format": "jpeg",
       "maxKB": 500,
+      "uploadKB": 300,
       "dpi": 300,
       "printMM": [
         51,
@@ -820,6 +821,7 @@ window.COUNTRY_SPECS = {
       "aspect": 1,
       "format": "jpeg",
       "maxKB": 1024,
+      "uploadKB": 300,
       "dpi": 300,
       "printMM": [
         51,

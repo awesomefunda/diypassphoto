@@ -78,6 +78,7 @@ const TOOL = `
         <div class="controls" style="margin-top:14px">
           <button class="btn go" id="share">Save / Share</button>
           <button class="btn" id="download">Download</button>
+          <button class="btn" id="downloadUpload" style="display:none">Download for upload</button>
           <button class="btn" id="report">Download report</button>
           <button class="btn" id="sheet">4×6 sheet</button>
           <button class="btn" id="retake">Retake</button>
@@ -143,7 +144,7 @@ for (const slug of slugs){
 <meta name="twitter:description" content="${esc(c.seo.desc)}"/>
 <meta name="twitter:image" content="${SITE}/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="../styles.css?v=18"/>
+<link rel="stylesheet" href="../styles.css?v=19"/>
 <script type="application/ld+json">${JSON.stringify(appLd)}</script>
 <script type="application/ld+json">${JSON.stringify(crumbLd)}</script>
 <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
@@ -166,6 +167,11 @@ ${slug.startsWith("us-") || slug === "dv-lottery" ? `
     <div class="notice2026">
       <b>US 2026 rule:</b> The State Department now rejects AI-edited, background-swapped, or digitally enhanced photos. DIYPassPhoto never alters your photo — it measures and coaches only.
       <a href="https://travel.state.gov/content/travel/en/passports/requirements/photos.html" target="_blank" rel="noopener noreferrer">Official source ↗</a>
+    </div>` : ""}
+${slug.startsWith("india-") ? `
+    <div class="notice2026 noticeindia">
+      <b>India needs two files:</b> a <b>print copy</b> (2×2 in) and an <b>upload copy under 300 KB</b> for the online form. DIYPassPhoto gives you both — and can shrink a photo you already have under the KB limit, without editing your face.
+      <a href="../blog/india-passport-visa-photo-size-kb.html">India photo size guide (KB) →</a>
     </div>` : ""}
 ${TOOL}
     <p class="official"><a href="${c.officialUrl}" target="_blank" rel="noopener noreferrer">Official ${esc(c.country)} photo requirements ↗</a></p>
@@ -206,6 +212,7 @@ ${footerCountries()}
     </div>
     <div><h4>Guides</h4>
       <a href="../blog/ai-passport-photo-tools-non-compliant-2026.html">AI tools &amp; 2026 rule</a>
+      <a href="../blog/india-passport-visa-photo-size-kb.html">India photo size (KB)</a>
       <a href="../blog/us-passport-photo-at-home.html">US photo at home</a>
       <a href="../blog/dv-lottery-photo-requirements.html">DV Lottery rules</a>
       <a href="../blog/white-wall-gray-background-fix.html">Fix grey backgrounds</a>
@@ -215,8 +222,8 @@ ${footerCountries()}
 </div></footer>
 
 <script>window.GF_START="${slug}";</script>
-<script src="../countries.js?v=18"></script>
-<script type="module" src="../app.js?v=18"></script>
+<script src="../countries.js?v=19"></script>
+<script type="module" src="../app.js?v=19"></script>
 </body>
 </html>`;
   fs.writeFileSync(path.join(cdir, `${slug}.html`), html);
@@ -241,7 +248,7 @@ fs.writeFileSync(path.join(sdir, "index.html"), inline(fs.readFileSync(path.join
 
 /* 4) Sitemap ------------------------------------------------------------ */
 const today = new Date().toISOString().slice(0,10);
-const blogs = ["ai-passport-photo-tools-non-compliant-2026","us-passport-photo-at-home","dv-lottery-photo-requirements","white-wall-gray-background-fix"];
+const blogs = ["ai-passport-photo-tools-non-compliant-2026","india-passport-visa-photo-size-kb","us-passport-photo-at-home","dv-lottery-photo-requirements","white-wall-gray-background-fix"];
 const urls = [
   `  <url><loc>${SITE}/</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>`,
   `  <url><loc>${SITE}/blog/</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`,

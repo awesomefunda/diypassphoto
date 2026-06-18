@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="Passport & visa photos from your phone — checked against the official spec before you submit. Nothing uploaded."/>
 <meta name="twitter:image" content="https://www.diypassphoto.com/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="styles.css?v=18"/>
+<link rel="stylesheet" href="styles.css?v=19"/>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"DIYPassPhoto","applicationCategory":"PhotographyApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free passport and visa photo checker — take your photo from your phone, verify it meets the official spec, download and submit. 17 documents across 8 countries supported. Nothing uploaded.","url":"https://www.diypassphoto.com/","featureList":["Live camera guidance","Head size & position check","Background colour check","Sharpness check","Lighting check","File spec check","10 countries supported","Download formatted photo","Privacy-first — nothing uploaded"]}
 </script>
@@ -93,6 +93,7 @@
         <div class="controls" style="margin-top:14px">
           <button class="btn go" id="share">Save / Share</button>
           <button class="btn" id="download">Download</button>
+          <button class="btn" id="downloadUpload" style="display:none">Download for upload</button>
           <button class="btn" id="report">Download report</button>
           <button class="btn" id="sheet">4×6 sheet</button>
           <button class="btn" id="retake">Retake</button>
@@ -150,6 +151,7 @@
     <h2 class="sec">Learn the rules before you shoot.</h2>
     <ul class="bloglist">
       <li><a href="blog/ai-passport-photo-tools-non-compliant-2026.html"><span class="k">US · Policy · 2026</span><h3>Why AI passport photo tools are now non-compliant</h3><p>The State Dept rejects AI-edited photos. Most popular apps do exactly that. Here's what changed.</p></a></li>
+      <li><a href="blog/india-passport-visa-photo-size-kb.html"><span class="k">India · Passport &amp; e-Visa</span><h3>India photo size in KB: print + upload</h3><p>The e-Visa 10–300 KB rule and how to get a print copy and an upload copy under the limit.</p></a></li>
       <li><a href="blog/us-passport-photo-at-home.html"><span class="k">US · 2026</span><h3>Take a US passport photo at home</h3><p>The no-AI rule, the 50–69% head-size band, and the mistakes that cost a second trip.</p></a></li>
       <li><a href="blog/dv-lottery-photo-requirements.html"><span class="k">DV Lottery</span><h3>DV Lottery photo requirements 2026</h3><p>600–1200px, 240KB, square, white — and what the official tool won't warn you about.</p></a></li>
       <li><a href="blog/white-wall-gray-background-fix.html"><span class="k">Background</span><h3>Why your white wall photographs grey</h3><p>White balance, exposure, and a clean white background with no editing.</p></a></li>
@@ -164,6 +166,7 @@
     <div id="footCountriesA"><h4>Countries</h4></div>
     <div><h4><a href="blog/" style="color:inherit">Guides</a></h4>
       <a href="blog/ai-passport-photo-tools-non-compliant-2026.html">AI tools &amp; 2026 rule</a>
+      <a href="blog/india-passport-visa-photo-size-kb.html">India photo size (KB)</a>
       <a href="blog/us-passport-photo-at-home.html">US photo at home</a>
       <a href="blog/dv-lottery-photo-requirements.html">DV Lottery rules</a>
       <a href="blog/white-wall-gray-background-fix.html">Fix grey backgrounds</a>
@@ -173,8 +176,8 @@
 </div></footer>
 
 <script>window.GF_START="us-passport";</script>
-<script src="countries.js?v=18"></script>
-<script type="module" src="app.js?v=18"></script>
+<script src="countries.js?v=19"></script>
+<script type="module" src="app.js?v=19"></script>
 <script>
 addEventListener("DOMContentLoaded",()=>{
   const S=window.COUNTRY_SPECS||{}, grid=document.getElementById("countryGrid"), fa=document.getElementById("footCountriesA");

@@ -382,7 +382,7 @@ const countries = {
   /* ── INDIA ──────────────────────────────────────────────────────────────── */
   "india-passport": {
     label: "India Passport", flag: "IN", country: "India", docName: "Passport (51×51 mm)",
-    out: { wPx:600, hPx:600, aspect:1, format:"jpeg", maxKB:500, dpi:300, printMM:[51,51] },
+    out: { wPx:600, hPx:600, aspect:1, format:"jpeg", maxKB:500, uploadKB:300, dpi:300, printMM:[51,51] },
     headRatio: [0.60, 0.80],
     eyeFromBottom: [0.50, 0.66],
     background: { target:[255,255,255], maxDeltaE:14 },
@@ -421,7 +421,7 @@ const countries = {
 
   "india-visa": {
     label: "India e-Visa", flag: "IN", country: "India", docName: "e-Visa (Indian Visa Online)",
-    out: { wPx:600, hPx:600, aspect:1, format:"jpeg", maxKB:1024, dpi:300, printMM:[51,51] },
+    out: { wPx:600, hPx:600, aspect:1, format:"jpeg", maxKB:1024, uploadKB:300, dpi:300, printMM:[51,51] },
     headRatio: [0.70, 0.80],
     eyeFromBottom: [0.50, 0.66],
     background: { target:[255,255,255], maxDeltaE:12 },

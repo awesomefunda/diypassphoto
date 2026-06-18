@@ -320,6 +320,10 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
 .notice2026{background:#FFFBEB;border:1px solid #F5D87E;border-radius:10px;padding:11px 14px;font-size:13.5px;line-height:1.55;margin-top:-10px;margin-bottom:12px;color:#6B4F00}
 .notice2026 b{color:#3D2C00}
 .notice2026 a{color:#2A4D9B;font-weight:600;white-space:nowrap;margin-left:4px}
+/* India dual-size callout — saffron/green accent */
+.noticeindia{background:#FFF7EE;border-color:#F2C892;color:#6B3E00;border-left:4px solid #138808}
+.noticeindia b{color:#3D2200}
+.noticeindia a{white-space:normal}
 
 /* official requirements link (country pages) */
 .official{margin:18px 0 0;font-size:14.5px}
@@ -356,6 +360,7 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
     <div class="emblem"><span class="flag">UK</span></div>
     <h1>UK visa photo checker</h1>
     <p class="lede">Snap it from your phone, get the green light, download your photo and a compliance report. Checked against the official United Kingdom spec before you submit — nothing uploaded.</p>
+
 
 
     <div class="studio">
@@ -402,6 +407,7 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
         <div class="controls" style="margin-top:14px">
           <button class="btn go" id="share">Save / Share</button>
           <button class="btn" id="download">Download</button>
+          <button class="btn" id="downloadUpload" style="display:none">Download for upload</button>
           <button class="btn" id="report">Download report</button>
           <button class="btn" id="sheet">4×6 sheet</button>
           <button class="btn" id="retake">Retake</button>
@@ -480,6 +486,7 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
     </div>
     <div><h4>Guides</h4>
       <a href="../blog/ai-passport-photo-tools-non-compliant-2026.html">AI tools &amp; 2026 rule</a>
+      <a href="../blog/india-passport-visa-photo-size-kb.html">India photo size (KB)</a>
       <a href="../blog/us-passport-photo-at-home.html">US photo at home</a>
       <a href="../blog/dv-lottery-photo-requirements.html">DV Lottery rules</a>
       <a href="../blog/white-wall-gray-background-fix.html">Fix grey backgrounds</a>
@@ -1232,6 +1239,7 @@ window.COUNTRY_SPECS = {
       "aspect": 1,
       "format": "jpeg",
       "maxKB": 500,
+      "uploadKB": 300,
       "dpi": 300,
       "printMM": [
         51,
@@ -1312,6 +1320,7 @@ window.COUNTRY_SPECS = {
       "aspect": 1,
       "format": "jpeg",
       "maxKB": 1024,
+      "uploadKB": 300,
       "dpi": 300,
       "printMM": [
         51,
@@ -1880,7 +1889,7 @@ const el = {
   vfStart:$("vfStart"), upload:$("upload"),
   vfMsg:$("vfMsg"), vfShutter:$("vfShutter"), vfCapture:$("vfCapture"), vfFlip:$("vfFlip"), vfClose:$("vfClose"),
   result:$("result"), resultImg:$("resultImg"), rmeta:$("rmeta"),
-  download:$("download"), sheet:$("sheet"), report:$("report"), retake:$("retake"), share:$("share")
+  download:$("download"), downloadUpload:$("downloadUpload"), sheet:$("sheet"), report:$("report"), retake:$("retake"), share:$("share")
 };
 let landmarker=null, imageLandmarker=null, modelReady=false;
 let running=false, stream=null, mode="idle", stillImage=null, lastResults=null, prevStatus={}, lastChecks=[];
@@ -2226,9 +2235,14 @@ function makePhoto(src,sw,sh){
   const sx=clamp(cx-cropW/2,0,sw-cropW), sy=clamp(cy-cropH/2,0,sh-cropH);
   const out=document.createElement("canvas");out.width=spec.out.wPx;out.height=spec.out.hPx;
   out.getContext("2d").drawImage(src,sx,sy,cropW,cropH,0,0,spec.out.wPx,spec.out.hPx);
-  let q=.92,url=out.toDataURL("image/jpeg",q);
-  if(spec.out.maxKB){let lo=.4,hi=.95;for(let i=0;i<7;i++){q=(lo+hi)/2;url=out.toDataURL("image/jpeg",q);(Math.round(url.length*.75/1024)>spec.out.maxKB)?hi=q:lo=q;}}
-  return{url,kb:Math.round(url.length*.75/1024),spec,canvas:out};
+  const {url,kb}=encodeJPEG(out,spec.out.maxKB);
+  return{url,kb,spec,canvas:out};
+}
+// Encode a canvas to JPEG, binary-searching quality to land under maxKB (if given).
+function encodeJPEG(canvas,maxKB){
+  let q=.92,url=canvas.toDataURL("image/jpeg",q);
+  if(maxKB){let lo=.35,hi=.95;for(let i=0;i<8;i++){q=(lo+hi)/2;url=canvas.toDataURL("image/jpeg",q);(Math.round(url.length*.75/1024)>maxKB)?hi=q:lo=q;}}
+  return{url,kb:Math.round(url.length*.75/1024)};
 }
 function captureLive(){
   cancelAutoCapture();
@@ -2251,6 +2265,19 @@ function showResult(r){
   const km=r.spec.out.maxKB?` · ${r.kb} KB (≤${r.spec.out.maxKB})`:"";
   el.rmeta.innerHTML=`<b>${r.spec.label}</b><br>${r.spec.out.wPx}×${r.spec.out.hPx} px · JPEG${km}<br>print ${r.spec.out.printMM[0]}×${r.spec.out.printMM[1]} mm @ ${r.spec.out.dpi} dpi`;
   el.download.onclick=()=>{const a=document.createElement("a");a.href=r.url;a.download=`diypassphoto-${el.country.value}.jpg`;a.click();};
+  // Separate upload-sized file where the spec has a digital KB cap (e.g. India e-Visa ≤300 KB)
+  if(el.downloadUpload){
+    const uk=r.spec.out.uploadKB;
+    if(uk){
+      el.downloadUpload.style.display="";
+      el.downloadUpload.textContent=`Download for upload (≤${uk} KB)`;
+      el.download.textContent="Download for print";
+      el.downloadUpload.onclick=()=>{const {url}=encodeJPEG(r.canvas,uk);const a=document.createElement("a");a.href=url;a.download=`diypassphoto-${el.country.value}-upload.jpg`;a.click();};
+    } else {
+      el.downloadUpload.style.display="none";
+      el.download.textContent="Download";
+    }
+  }
   if(el.sheet) el.sheet.onclick=()=>printSheet(r);
   if(el.report) el.report.onclick=()=>downloadReport(r);
   // One-tap Save/Share — native share sheet on mobile (Save to Photos, message, email, print).

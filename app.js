@@ -12,7 +12,7 @@ const el = {
   vfStart:$("vfStart"), upload:$("upload"),
   vfMsg:$("vfMsg"), vfShutter:$("vfShutter"), vfCapture:$("vfCapture"), vfFlip:$("vfFlip"), vfClose:$("vfClose"),
   result:$("result"), resultImg:$("resultImg"), rmeta:$("rmeta"),
-  download:$("download"), sheet:$("sheet"), report:$("report"), retake:$("retake"), share:$("share")
+  download:$("download"), downloadUpload:$("downloadUpload"), sheet:$("sheet"), report:$("report"), retake:$("retake"), share:$("share")
 };
 let landmarker=null, imageLandmarker=null, modelReady=false;
 let running=false, stream=null, mode="idle", stillImage=null, lastResults=null, prevStatus={}, lastChecks=[];
@@ -358,9 +358,14 @@ function makePhoto(src,sw,sh){
   const sx=clamp(cx-cropW/2,0,sw-cropW), sy=clamp(cy-cropH/2,0,sh-cropH);
   const out=document.createElement("canvas");out.width=spec.out.wPx;out.height=spec.out.hPx;
   out.getContext("2d").drawImage(src,sx,sy,cropW,cropH,0,0,spec.out.wPx,spec.out.hPx);
-  let q=.92,url=out.toDataURL("image/jpeg",q);
-  if(spec.out.maxKB){let lo=.4,hi=.95;for(let i=0;i<7;i++){q=(lo+hi)/2;url=out.toDataURL("image/jpeg",q);(Math.round(url.length*.75/1024)>spec.out.maxKB)?hi=q:lo=q;}}
-  return{url,kb:Math.round(url.length*.75/1024),spec,canvas:out};
+  const {url,kb}=encodeJPEG(out,spec.out.maxKB);
+  return{url,kb,spec,canvas:out};
+}
+// Encode a canvas to JPEG, binary-searching quality to land under maxKB (if given).
+function encodeJPEG(canvas,maxKB){
+  let q=.92,url=canvas.toDataURL("image/jpeg",q);
+  if(maxKB){let lo=.35,hi=.95;for(let i=0;i<8;i++){q=(lo+hi)/2;url=canvas.toDataURL("image/jpeg",q);(Math.round(url.length*.75/1024)>maxKB)?hi=q:lo=q;}}
+  return{url,kb:Math.round(url.length*.75/1024)};
 }
 function captureLive(){
   cancelAutoCapture();
@@ -383,6 +388,19 @@ function showResult(r){
   const km=r.spec.out.maxKB?` · ${r.kb} KB (≤${r.spec.out.maxKB})`:"";
   el.rmeta.innerHTML=`<b>${r.spec.label}</b><br>${r.spec.out.wPx}×${r.spec.out.hPx} px · JPEG${km}<br>print ${r.spec.out.printMM[0]}×${r.spec.out.printMM[1]} mm @ ${r.spec.out.dpi} dpi`;
   el.download.onclick=()=>{const a=document.createElement("a");a.href=r.url;a.download=`diypassphoto-${el.country.value}.jpg`;a.click();};
+  // Separate upload-sized file where the spec has a digital KB cap (e.g. India e-Visa ≤300 KB)
+  if(el.downloadUpload){
+    const uk=r.spec.out.uploadKB;
+    if(uk){
+      el.downloadUpload.style.display="";
+      el.downloadUpload.textContent=`Download for upload (≤${uk} KB)`;
+      el.download.textContent="Download for print";
+      el.downloadUpload.onclick=()=>{const {url}=encodeJPEG(r.canvas,uk);const a=document.createElement("a");a.href=url;a.download=`diypassphoto-${el.country.value}-upload.jpg`;a.click();};
+    } else {
+      el.downloadUpload.style.display="none";
+      el.download.textContent="Download";
+    }
+  }
   if(el.sheet) el.sheet.onclick=()=>printSheet(r);
   if(el.report) el.report.onclick=()=>downloadReport(r);
   // One-tap Save/Share — native share sheet on mobile (Save to Photos, message, email, print).
