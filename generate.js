@@ -6,7 +6,7 @@ const path = require("path");
 const ROOT = __dirname;
 const data = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "countries.json"), "utf8"));
 const slugs = Object.keys(data);
-const SITE = "https://diypassphoto.com";
+const SITE = "https://www.diypassphoto.com";
 const BRAND = "DIYPassPhoto";
 const TAGLINE = "Snap it. Verify it. Pass it.";
 
