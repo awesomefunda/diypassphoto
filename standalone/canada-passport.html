@@ -168,6 +168,8 @@ body.cam-live .vf-shutter{display:flex}
   body.cam-live .vf-shutter{display:flex}
   body.cam-live .vf-msg{display:none;top:calc(14px + env(safe-area-inset-top))}
   body.cam-live .vf-msg.show{display:flex}
+  /* after a photo is taken, hide the (now dark/idle) camera frame so only the result shows */
+  body.has-shot .camcol{display:none}
 }
 
 /* gate panel */
@@ -1882,6 +1884,7 @@ const el = {
 let landmarker=null, imageLandmarker=null, modelReady=false;
 let running=false, stream=null, mode="idle", stillImage=null, lastResults=null, prevStatus={}, lastChecks=[];
 let facing="user"; // "user" = selfie (default), "environment" = rear
+let autoTimer=null, autoCount=0; // hands-free auto-capture countdown
 
 const FLAG_LABELS={ no_glasses:"Remove glasses (not permitted)", neutral_expression:"Neutral expression — confirm", no_head_covering:"No hat / head covering (unless religious)" };
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -1978,7 +1981,18 @@ function buildChecks({geo,bg,sharp,light,faceCount,out,spec}){
   if(geo!==undefined) push("face","One face detected",faceCount===undefined?"idle":(faceCount===1?"pass":"fail"),faceCount===undefined?"—":(faceCount===1?"1 face":`${faceCount||0} faces`),faceCount===0?"No face found — move closer and face the camera.":"Only one person may be in frame.");
   if(geo){
     const[hmin,hmax]=spec.headRatio,hr=geo.headRatio;
-    push("head","Head size",hr>=hmin&&hr<=hmax?"pass":"fail",`${(hr*100).toFixed(0)}% · ${Math.round(hmin*100)}–${Math.round(hmax*100)}%`,hr<hmin?"Move closer — your head is too small in the frame.":hr>hmax?"Move back — your head fills too much of the frame.":"");
+    // We auto-crop to the exact head-size spec on export, so live framing only needs to be
+    // "close enough" to stay sharp. Warn (not fail) in a wide band; fail only if too far
+    // (cropping would pixellate) or impossibly close.
+    let hst,hco;
+    if(hr>=hmin&&hr<=hmax){ hst="pass"; hco=""; }
+    else if(hr>=0.28&&hr<=0.92){ hst="warn"; hco = hr<hmin
+      ? "A bit far — stand back ~4 ft (avoids lens distortion); we crop to the exact size for you."
+      : "A bit close — step back ~4 ft to avoid lens distortion; we crop to size."; }
+    else { hst="fail"; hco = hr<0.28
+      ? "Too far — move closer so the cropped photo stays sharp."
+      : "Too close — step back about 4 ft (arm's length distorts your face)."; }
+    push("head","Head size",hst,`${(hr*100).toFixed(0)}% · ${Math.round(hmin*100)}–${Math.round(hmax*100)}%`,hco);
     push("center","Centering",Math.abs(geo.centerX-.5)<.06?"pass":"warn",`${(geo.centerX*100).toFixed(0)}% across`,"Centre your face left-to-right.");
     if(spec.eyeFromBottom){const[a,b]=spec.eyeFromBottom;push("eyes_pos","Eye height",geo.eyeFromBottom>=a&&geo.eyeFromBottom<=b?"pass":"warn",`${(geo.eyeFromBottom*100).toFixed(0)}% up`,"Raise or lower the camera so your eyes sit in the required band.");}
     push("tilt","Head level",Math.abs(geo.roll)<5?"pass":"fail",`${geo.roll.toFixed(1)}°`,"Straighten your head — don't tilt.");
@@ -1994,7 +2008,12 @@ function buildChecks({geo,bg,sharp,light,faceCount,out,spec}){
         :"Background reads off-target — usually underexposure. Brighten the scene (face a window) rather than editing."));
     push("bg_even","Background even",bg.variance<14?"pass":"warn",`var ${bg.variance.toFixed(0)}`,"Smooth the background — shadows or texture cause rejections.");
   }
-  if(light) push("shadow","Even lighting",light.sideDiff<.14?"pass":"warn",`${(light.sideDiff*100).toFixed(0)}% L/R`,"Lighting is uneven — turn toward soft, frontal light.");
+  if(light){
+    push("shadow","Even lighting",light.sideDiff<.14?"pass":"warn",`${(light.sideDiff*100).toFixed(0)}% L/R`,"Lighting is uneven — turn toward soft, frontal light.");
+    const b=light.overall; // mean face luminance 0-255
+    push("bright","Brightness",b>=110?"pass":(b>=85?"warn":"fail"),`${Math.round(b)}/255`,
+      b>=110?"":"Too dark — face a window or put a lamp in front of you (not behind). We never brighten the photo for you.");
+  }
   if(sharp!=null) push("sharp","Sharpness",sharp>120?"pass":sharp>60?"warn":"fail",`${sharp.toFixed(0)}`,sharp<=120?"Looks soft — hold steady, use the rear camera, lock focus on your face.":"");
   if(out){
     push("dims","Pixel size",out.okDims?"pass":out.dims?"warn":"idle",out.dims||"—","Auto-sized to spec on export.");
@@ -2033,6 +2052,8 @@ function renderGates(checks){
   el.verdict.textContent=req===0?"Waiting for a photo…":go?"All required checks pass":"Not ready yet";
   el.score.textContent=req?`${pass}/${req}`:"";
   if(el.vfCapture) el.vfCapture.disabled=!canCap;
+  // hands-free auto-capture: when everything passes, count down and snap automatically
+  if(mode==="live" && go && canCap && faceOk && modelReady) startAutoCapture(); else cancelAutoCapture();
   // in-frame issue list — every gate that needs attention, each with how to fix it
   if(el.vfMsg){
     el.vfMsg.innerHTML="";
@@ -2042,7 +2063,7 @@ function renderGates(checks){
       el.vfMsg.appendChild(chip("warn","Position your face inside the oval."));
     } else if(go){
       el.vfMsg.className="vf-msg show";
-      el.vfMsg.appendChild(chip("go","✓ Looks good — tap the shutter"));
+      el.vfMsg.appendChild(chip("go", autoTimer!==null ? `Hold still — capturing in ${autoCount}…` : "✓ Looks good — tap the shutter"));
     } else {
       el.vfMsg.className="vf-msg show";
       const issues=checks.filter(c=>(c.status==="fail"||c.status==="warn")&&c.coach&&c.id!=="face")
@@ -2059,6 +2080,16 @@ function chip(status,text){
   const s=document.createElement("span"); s.textContent=text; d.appendChild(s);
   return d;
 }
+function startAutoCapture(){
+  if(autoTimer!==null) return;           // already counting
+  autoCount=3;
+  autoTimer=setInterval(()=>{
+    if(!running){ cancelAutoCapture(); return; }
+    autoCount--;
+    if(autoCount<=0){ cancelAutoCapture(); captureLive(); }
+  },1000);
+}
+function cancelAutoCapture(){ if(autoTimer!==null){ clearInterval(autoTimer); autoTimer=null; } }
 
 /* ---------- live ---------- */
 async function startCam(){
@@ -2077,7 +2108,7 @@ async function startCam(){
   sizeHud(); requestAnimationFrame(loop);
 }
 function stopCam(){
-  running=false; mode="idle";
+  running=false; mode="idle"; cancelAutoCapture();
   if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
   el.video.style.display="none"; el.vfEmpty.style.display="block";
   document.body.classList.remove("cam-live");
@@ -2199,6 +2230,7 @@ function makePhoto(src,sw,sh){
   return{url,kb:Math.round(url.length*.75/1024),spec,canvas:out};
 }
 function captureLive(){
+  cancelAutoCapture();
   const vw=el.video.videoWidth,vh=el.video.videoHeight;
   if(!vw||!vh) return;
   const c=document.createElement("canvas");c.width=vw;c.height=vh;const cx=c.getContext("2d");cx.drawImage(el.video,0,0,vw,vh);

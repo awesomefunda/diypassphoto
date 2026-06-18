@@ -146,6 +146,8 @@ body.cam-live .vf-shutter{display:flex}
   body.cam-live .vf-shutter{display:flex}
   body.cam-live .vf-msg{display:none;top:calc(14px + env(safe-area-inset-top))}
   body.cam-live .vf-msg.show{display:flex}
+  /* after a photo is taken, hide the (now dark/idle) camera frame so only the result shows */
+  body.has-shot .camcol{display:none}
 }
 
 /* gate panel */
