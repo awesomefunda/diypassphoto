@@ -7,10 +7,10 @@ const SPECS = window.COUNTRY_SPECS || {};
 const $ = id => document.getElementById(id);
 const el = {
   video:$("video"), feed:$("feed"), hud:$("hud"), frame:$("framewrap"),
-  vfEmpty:$("vfEmpty"), badge:$("vfBadge"), gates:$("gates"), verdict:$("verdict"),
+  vfEmpty:$("vfEmpty"), gates:$("gates"), verdict:$("verdict"),
   score:$("scoreNum"), status:$("status"), country:$("country"),
   vfStart:$("vfStart"), upload:$("upload"),
-  vfMsg:$("vfMsg"), vfShutter:$("vfShutter"), vfCapture:$("vfCapture"), vfFlip:$("vfFlip"), vfClose:$("vfClose"), vfZoom:$("vfZoom"),
+  vfMsg:$("vfMsg"), vfShutter:$("vfShutter"), vfCapture:$("vfCapture"), vfFlip:$("vfFlip"), vfClose:$("vfClose"),
   result:$("result"), resultImg:$("resultImg"), rmeta:$("rmeta"),
   download:$("download"), sheet:$("sheet"), report:$("report"), retake:$("retake")
 };
@@ -34,7 +34,7 @@ function boot(){
   if(el.vfCapture) el.vfCapture.addEventListener("click",captureLive);
   if(el.vfClose) el.vfClose.addEventListener("click",stopCam);
   el.upload.addEventListener("change",onUpload);
-  if(el.retake) el.retake.onclick=()=> el.result.classList.remove("on");
+  if(el.retake) el.retake.onclick=()=>{ el.result.classList.remove("on"); document.body.classList.remove("has-shot"); prevStatus={}; renderGates(currentGates()); startCam(); };
   renderGates(currentGates());
   loadModel();
 }
@@ -164,8 +164,6 @@ function renderGates(checks){
   const faceOk=faceCheck?faceCheck.status==="pass":false;
   const canCap=mode==="live"&&(faceOk||!modelReady);
   el.frame&&el.frame.classList.toggle("go",go&&mode!=="idle");
-  el.badge.className="vf-badge "+(go&&mode!=="idle"?"go":"");
-  el.badge.innerHTML=`<span class="blink"></span>${mode==="idle"?"CAMERA OFF":go?"GREEN — CAPTURE":canCap?"TAP TO CAPTURE":"HOLD"}`;
   el.verdict.className="verdict "+(go?"go":"hold");
   el.verdict.textContent=req===0?"Waiting for a photo…":go?"All required checks pass":"Not ready yet";
   el.score.textContent=req?`${pass}/${req}`:"";
@@ -200,6 +198,7 @@ function chip(status,text){
 /* ---------- live ---------- */
 async function startCam(){
   if(running)return;
+  document.body.classList.remove("has-shot"); el.result.classList.remove("on"); // fresh session — hide prior result + checklist
   try{ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:facing},width:{ideal:1920},height:{ideal:1080}},audio:false}); }
   catch(e){ setStatus("Camera not available ("+e.name+"). Use 'Check a photo' below to upload one instead."); return; }
   try{ el.video.srcObject=stream; await el.video.play(); }
@@ -209,8 +208,7 @@ async function startCam(){
   el.video.style.display="block"; el.feed.style.display="none"; el.vfEmpty.style.display="none";
   mode="live"; running=true;
   document.body.classList.add("cam-live");
-  setupZoom();
-  setStatus("Line up with the guide. The shutter unlocks once your face is detected — green means fully compliant, but you can capture and review anytime.");
+  setStatus("Line up inside the oval — fixes show on screen. Tap the shutter when you're ready; the full check appears after.");
   sizeHud(); requestAnimationFrame(loop);
 }
 function stopCam(){
@@ -218,45 +216,15 @@ function stopCam(){
   if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
   el.video.style.display="none"; el.vfEmpty.style.display="block";
   document.body.classList.remove("cam-live");
-  if(el.vfMsg) el.vfMsg.className="vf-msg";
-  if(el.vfZoom){ el.vfZoom.classList.remove("show"); el.vfZoom.innerHTML=""; }
+  if(el.vfMsg){ el.vfMsg.className="vf-msg"; el.vfMsg.innerHTML=""; }
   el.hud.getContext("2d").clearRect(0,0,el.hud.width,el.hud.height);
-  prevStatus={}; renderGates(currentGates());
+  prevStatus={};
+  // keep the captured photo's checklist on screen; only reset gates if nothing was shot
+  if(!document.body.classList.contains("has-shot")) renderGates(currentGates());
 }
 async function flipCamera(){
   facing = facing==="user" ? "environment" : "user";
   if(running){ stream&&stream.getTracks().forEach(t=>t.stop()); running=false; await startCam(); }
-}
-// Android-style zoom selector — only shown when the camera reports a zoom range.
-function setupZoom(){
-  if(!el.vfZoom) return;
-  el.vfZoom.classList.remove("show"); el.vfZoom.innerHTML="";
-  const track = stream && stream.getVideoTracks && stream.getVideoTracks()[0];
-  if(!track || !track.getCapabilities) return;
-  let caps; try{ caps=track.getCapabilities(); }catch(e){ return; }
-  if(!caps || !caps.zoom || !(caps.zoom.max > caps.zoom.min)) return;
-  const min=caps.zoom.min, max=caps.zoom.max;
-  let stops=[];
-  if(min < 1) stops.push(min);                          // ultrawide (e.g. .6)
-  for(const z of [1,2,3,4,5,6,8,10]) if(z>=Math.max(1,min) && z<=max) stops.push(z);
-  stops=[...new Set(stops)].sort((a,b)=>a-b);
-  if(stops.length < 2) return;                          // nothing meaningful to switch between
-  const cur = (track.getSettings && track.getSettings().zoom) || (stops.includes(1)?1:stops[0]);
-  for(const z of stops){
-    const b=document.createElement("button");
-    b.className="vf-zoombtn"+(Math.abs(z-cur)<1e-3?" on":"");
-    b.textContent = z<1 ? z.toFixed(1) : (Number.isInteger(z)? z+"×" : z.toFixed(1)+"×");
-    b.addEventListener("click",()=>applyZoom(z,b));
-    el.vfZoom.appendChild(b);
-  }
-  el.vfZoom.classList.add("show");
-}
-function applyZoom(z,btn){
-  const track = stream && stream.getVideoTracks && stream.getVideoTracks()[0];
-  if(!track) return;
-  track.applyConstraints({advanced:[{zoom:z}]}).then(()=>{
-    [...el.vfZoom.children].forEach(b=>b.classList.toggle("on", b===btn));
-  }).catch(()=>{});
 }
 function sizeHud(){ const r=el.video.parentElement.getBoundingClientRect(); el.hud.width=r.width; el.hud.height=r.height; }
 window.addEventListener("resize",()=>{ if(mode==="live")sizeHud(); });
@@ -322,7 +290,8 @@ function runStill(){
     lastResults=det.raw||null;
     renderGates(buildChecks({geo,bg,sharp,light,faceCount:det.count,
       out:{okDims:false,dims:`${w}×${h} → ${spec.out.wPx}×${spec.out.hPx}`,kb:null},spec}));
-    setStatus("Checked. Fix any red items, or capture fresh with the live guide for real-time help.");
+    showResult(makePhoto(img,w,h));
+    setStatus("Checked. Review the items below, or start the camera for real-time help.");
   });
 }
 async function detectStill(img,w,h){
@@ -355,14 +324,20 @@ function makePhoto(src,sw,sh){
 function captureLive(){
   const vw=el.video.videoWidth,vh=el.video.videoHeight;
   if(!vw||!vh) return;
-  const c=document.createElement("canvas");c.width=vw;c.height=vh;c.getContext("2d").drawImage(el.video,0,0,vw,vh);
-  const onPhone=document.body.classList.contains("cam-live")&&matchMedia("(max-width:900px)").matches;
+  const c=document.createElement("canvas");c.width=vw;c.height=vh;const cx=c.getContext("2d");cx.drawImage(el.video,0,0,vw,vh);
+  // freeze the compliance check against the exact frame we captured
+  const spec=SPECS[el.country.value];
+  const bg=analyzeBackground(cx,vw,vh,spec.background.target), sharp=analyzeSharpness(cx,vw,vh);
+  const g=lastResults&&lastResults.faceLandmarks&&lastResults.faceLandmarks[0]?geometry(lastResults.faceLandmarks[0],vw,vh):null;
+  const light=g?analyzeLighting(cx,g.faceBox):null;
+  const faceCount=lastResults&&lastResults.faceLandmarks?lastResults.faceLandmarks.length:0;
   showResult(makePhoto(c,vw,vh));
-  if(onPhone) stopCam(); // leave the full-screen camera so the result shows
+  renderGates(buildChecks({geo:g,bg,sharp,light,faceCount,out:{okDims:true,dims:`${spec.out.wPx}×${spec.out.hPx}`,kb:null},spec}));
+  stopCam(); // stop the live feed; the captured photo + its checklist stay on screen
 }
 let lastResult=null;
 function showResult(r){
-  lastResult=r; el.result.classList.add("on"); el.resultImg.src=r.url;
+  lastResult=r; el.result.classList.add("on"); document.body.classList.add("has-shot"); el.resultImg.src=r.url;
   const km=r.spec.out.maxKB?` · ${r.kb} KB (≤${r.spec.out.maxKB})`:"";
   el.rmeta.innerHTML=`<b>${r.spec.flag} ${r.spec.label}</b><br>${r.spec.out.wPx}×${r.spec.out.hPx} px · JPEG${km}<br>print ${r.spec.out.printMM[0]}×${r.spec.out.printMM[1]} mm @ ${r.spec.out.dpi} dpi`;
   el.download.onclick=()=>{const a=document.createElement("a");a.href=r.url;a.download=`diypassphoto-${el.country.value}.jpg`;a.click();};

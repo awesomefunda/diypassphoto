@@ -18,7 +18,7 @@
 <meta name="twitter:description" content="Take a compliant Canadian passport photo at home. DIYPassPhoto checks the 50×70mm format, 31–36mm face height and white background against IRCC rules — free, nothing uploaded."/>
 <meta name="twitter:image" content="https://diypassphoto.com/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="../styles.css?v=12"/>
+<link rel="stylesheet" href="../styles.css?v=13"/>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"DIYPassPhoto — Canada Passport photo checker","applicationCategory":"PhotographyApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://diypassphoto.com/c/canada-passport.html","description":"Take a compliant Canadian passport photo at home. DIYPassPhoto checks the 50×70mm format, 31–36mm face height and white background against IRCC rules — free, nothing uploaded."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DIYPassPhoto","item":"https://diypassphoto.com/"},{"@type":"ListItem","position":2,"name":"Canada Passport photo checker","item":"https://diypassphoto.com/c/canada-passport.html"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What size is a Canadian passport photo?","acceptedAnswer":{"@type":"Answer","text":"50 mm wide by 70 mm tall. The face (chin to crown) must be 31–36 mm — a different format from the square US/Australian photo."}},{"@type":"Question","name":"Is the Canadian passport photo square?","acceptedAnswer":{"@type":"Answer","text":"No — it is a tall 50×70 mm portrait rectangle. Square crops or 2×2 inch photos are not accepted."}},{"@type":"Question","name":"What background does a Canadian passport photo need?","acceptedAnswer":{"@type":"Answer","text":"A plain white or light-coloured background. It must be uniform with no shadows, patterns, or objects."}}]}</script>
@@ -43,10 +43,10 @@
       <div class="framewrap" id="framewrap">
         <span class="cropmark tl"></span><span class="cropmark tr"></span><span class="cropmark bl"></span><span class="cropmark br"></span>
         <div class="viewfinder">
-          <div class="vf-badge" id="vfBadge"><span class="blink"></span>CAMERA OFF</div>
           <video id="video" autoplay playsinline muted style="display:none"></video>
           <canvas class="feed" id="feed" style="display:none"></canvas>
           <canvas class="hud" id="hud"></canvas>
+          <select class="vf-doc" id="country" aria-label="Document type"></select>
           <div class="vf-msg" id="vfMsg"></div>
           <div class="vf-empty" id="vfEmpty">
             <button class="vf-startbtn" id="vfStart" aria-label="Start camera" title="Start camera">
@@ -57,7 +57,6 @@
             <label class="vf-uploadlink" for="upload">or check a photo you already have</label>
             <input type="file" id="upload" accept="image/*"/>
           </div>
-          <div class="vf-zoom" id="vfZoom"></div>
           <div class="vf-shutter" id="vfShutter">
             <button class="vf-btn" id="vfFlip" aria-label="Flip camera" title="Flip camera">⟲</button>
             <button class="vf-shot" id="vfCapture" aria-label="Capture photo" disabled></button>
@@ -66,8 +65,8 @@
         </div>
       </div>
       <div>
-        <div class="panel">
-          <div class="phead"><span class="ttl">Compliance gates</span><select class="country" id="country" aria-label="Document type"></select></div>
+        <div class="panel" id="gatesPanel">
+          <div class="phead"><span class="ttl">Compliance check</span></div>
           <div class="gates" id="gates"></div>
           <div class="score"><span class="verdict hold" id="verdict">Waiting for a photo…</span><span class="mono" id="scoreNum" style="color:var(--mist)"></span></div>
         </div>
@@ -168,7 +167,7 @@
 </div></footer>
 
 <script>window.GF_START="canada-passport";</script>
-<script src="../countries.js?v=12"></script>
-<script type="module" src="../app.js?v=12"></script>
+<script src="../countries.js?v=13"></script>
+<script type="module" src="../app.js?v=13"></script>
 </body>
 </html>

@@ -126,18 +126,14 @@ header.bar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 /* the shutter bar is shown whenever the camera is live (desktop keeps its square frame) */
 body.cam-live .vf-shutter{display:flex}
 
-/* Android-style zoom selector (.6 / 1x / 2x ...) on the frame */
-.vf-zoom{position:absolute;left:50%;bottom:112px;transform:translateX(-50%);z-index:6;display:none;
-  gap:6px;padding:5px;border-radius:999px;background:rgba(11,19,14,.5);
-  backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
-.vf-zoom.show{display:flex}
-.vf-zoombtn{min-width:38px;height:38px;padding:0 8px;border-radius:999px;border:none;cursor:pointer;
-  background:transparent;color:#fff;font-weight:700;font-size:12.5px;font-family:"Spline Sans Mono",monospace;
-  -webkit-tap-highlight-color:transparent;transition:background .2s,color .2s}
-.vf-zoombtn.on{background:rgba(255,255,255,.94);color:#0B130E}
-@supports(padding:max(0px)){
-  body.cam-live .vf-zoom{bottom:max(112px,calc(96px + env(safe-area-inset-bottom)))}
-}
+/* on-frame document picker — pick passport/visa right on the camera screen */
+.vf-doc{position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:6;max-width:80%;
+  padding:9px 34px 9px 15px;border-radius:999px;border:1px solid rgba(255,255,255,.24);
+  background:rgba(11,19,14,.74) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='white' stroke-width='2'><path d='M2 4l4 4 4-4'/></svg>") no-repeat right 13px center;
+  color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:13px;cursor:pointer;
+  -webkit-appearance:none;appearance:none;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
+  text-overflow:ellipsis;white-space:nowrap}
+.vf-doc option{color:#0B130E;background:#fff}
 
 /* phone: live camera fills the screen so feedback + shutter need no scroll */
 @media(max-width:900px){
@@ -153,6 +149,8 @@ body.cam-live .vf-shutter{display:flex}
 
 /* gate panel */
 .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-1);overflow:hidden;display:flex;flex-direction:column}
+/* the compliance checklist only appears once a photo has been taken */
+body:not(.has-shot) .panel{display:none}
 .panel .phead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 17px;border-bottom:1px solid var(--line)}
 .panel .phead .ttl{font-family:"Bricolage Grotesque";font-weight:700;font-size:15px}
 select.country{font-family:Inter;font-size:13px;font-weight:600;color:var(--ink);background:var(--paper);

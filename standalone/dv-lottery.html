@@ -147,18 +147,14 @@ header.bar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 /* the shutter bar is shown whenever the camera is live (desktop keeps its square frame) */
 body.cam-live .vf-shutter{display:flex}
 
-/* Android-style zoom selector (.6 / 1x / 2x ...) on the frame */
-.vf-zoom{position:absolute;left:50%;bottom:112px;transform:translateX(-50%);z-index:6;display:none;
-  gap:6px;padding:5px;border-radius:999px;background:rgba(11,19,14,.5);
-  backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
-.vf-zoom.show{display:flex}
-.vf-zoombtn{min-width:38px;height:38px;padding:0 8px;border-radius:999px;border:none;cursor:pointer;
-  background:transparent;color:#fff;font-weight:700;font-size:12.5px;font-family:"Spline Sans Mono",monospace;
-  -webkit-tap-highlight-color:transparent;transition:background .2s,color .2s}
-.vf-zoombtn.on{background:rgba(255,255,255,.94);color:#0B130E}
-@supports(padding:max(0px)){
-  body.cam-live .vf-zoom{bottom:max(112px,calc(96px + env(safe-area-inset-bottom)))}
-}
+/* on-frame document picker — pick passport/visa right on the camera screen */
+.vf-doc{position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:6;max-width:80%;
+  padding:9px 34px 9px 15px;border-radius:999px;border:1px solid rgba(255,255,255,.24);
+  background:rgba(11,19,14,.74) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='white' stroke-width='2'><path d='M2 4l4 4 4-4'/></svg>") no-repeat right 13px center;
+  color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:13px;cursor:pointer;
+  -webkit-appearance:none;appearance:none;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
+  text-overflow:ellipsis;white-space:nowrap}
+.vf-doc option{color:#0B130E;background:#fff}
 
 /* phone: live camera fills the screen so feedback + shutter need no scroll */
 @media(max-width:900px){
@@ -174,6 +170,8 @@ body.cam-live .vf-shutter{display:flex}
 
 /* gate panel */
 .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-1);overflow:hidden;display:flex;flex-direction:column}
+/* the compliance checklist only appears once a photo has been taken */
+body:not(.has-shot) .panel{display:none}
 .panel .phead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 17px;border-bottom:1px solid var(--line)}
 .panel .phead .ttl{font-family:"Bricolage Grotesque";font-weight:700;font-size:15px}
 select.country{font-family:Inter;font-size:13px;font-weight:600;color:var(--ink);background:var(--paper);
@@ -364,10 +362,10 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
       <div class="framewrap" id="framewrap">
         <span class="cropmark tl"></span><span class="cropmark tr"></span><span class="cropmark bl"></span><span class="cropmark br"></span>
         <div class="viewfinder">
-          <div class="vf-badge" id="vfBadge"><span class="blink"></span>CAMERA OFF</div>
           <video id="video" autoplay playsinline muted style="display:none"></video>
           <canvas class="feed" id="feed" style="display:none"></canvas>
           <canvas class="hud" id="hud"></canvas>
+          <select class="vf-doc" id="country" aria-label="Document type"></select>
           <div class="vf-msg" id="vfMsg"></div>
           <div class="vf-empty" id="vfEmpty">
             <button class="vf-startbtn" id="vfStart" aria-label="Start camera" title="Start camera">
@@ -378,7 +376,6 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
             <label class="vf-uploadlink" for="upload">or check a photo you already have</label>
             <input type="file" id="upload" accept="image/*"/>
           </div>
-          <div class="vf-zoom" id="vfZoom"></div>
           <div class="vf-shutter" id="vfShutter">
             <button class="vf-btn" id="vfFlip" aria-label="Flip camera" title="Flip camera">⟲</button>
             <button class="vf-shot" id="vfCapture" aria-label="Capture photo" disabled></button>
@@ -387,8 +384,8 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
         </div>
       </div>
       <div>
-        <div class="panel">
-          <div class="phead"><span class="ttl">Compliance gates</span><select class="country" id="country" aria-label="Document type"></select></div>
+        <div class="panel" id="gatesPanel">
+          <div class="phead"><span class="ttl">Compliance check</span></div>
           <div class="gates" id="gates"></div>
           <div class="score"><span class="verdict hold" id="verdict">Waiting for a photo…</span><span class="mono" id="scoreNum" style="color:var(--mist)"></span></div>
         </div>
@@ -1875,10 +1872,10 @@ const SPECS = window.COUNTRY_SPECS || {};
 const $ = id => document.getElementById(id);
 const el = {
   video:$("video"), feed:$("feed"), hud:$("hud"), frame:$("framewrap"),
-  vfEmpty:$("vfEmpty"), badge:$("vfBadge"), gates:$("gates"), verdict:$("verdict"),
+  vfEmpty:$("vfEmpty"), gates:$("gates"), verdict:$("verdict"),
   score:$("scoreNum"), status:$("status"), country:$("country"),
   vfStart:$("vfStart"), upload:$("upload"),
-  vfMsg:$("vfMsg"), vfShutter:$("vfShutter"), vfCapture:$("vfCapture"), vfFlip:$("vfFlip"), vfClose:$("vfClose"), vfZoom:$("vfZoom"),
+  vfMsg:$("vfMsg"), vfShutter:$("vfShutter"), vfCapture:$("vfCapture"), vfFlip:$("vfFlip"), vfClose:$("vfClose"),
   result:$("result"), resultImg:$("resultImg"), rmeta:$("rmeta"),
   download:$("download"), sheet:$("sheet"), report:$("report"), retake:$("retake")
 };
@@ -1902,7 +1899,7 @@ function boot(){
   if(el.vfCapture) el.vfCapture.addEventListener("click",captureLive);
   if(el.vfClose) el.vfClose.addEventListener("click",stopCam);
   el.upload.addEventListener("change",onUpload);
-  if(el.retake) el.retake.onclick=()=> el.result.classList.remove("on");
+  if(el.retake) el.retake.onclick=()=>{ el.result.classList.remove("on"); document.body.classList.remove("has-shot"); prevStatus={}; renderGates(currentGates()); startCam(); };
   renderGates(currentGates());
   loadModel();
 }
@@ -2032,8 +2029,6 @@ function renderGates(checks){
   const faceOk=faceCheck?faceCheck.status==="pass":false;
   const canCap=mode==="live"&&(faceOk||!modelReady);
   el.frame&&el.frame.classList.toggle("go",go&&mode!=="idle");
-  el.badge.className="vf-badge "+(go&&mode!=="idle"?"go":"");
-  el.badge.innerHTML=`<span class="blink"></span>${mode==="idle"?"CAMERA OFF":go?"GREEN — CAPTURE":canCap?"TAP TO CAPTURE":"HOLD"}`;
   el.verdict.className="verdict "+(go?"go":"hold");
   el.verdict.textContent=req===0?"Waiting for a photo…":go?"All required checks pass":"Not ready yet";
   el.score.textContent=req?`${pass}/${req}`:"";
@@ -2068,6 +2063,7 @@ function chip(status,text){
 /* ---------- live ---------- */
 async function startCam(){
   if(running)return;
+  document.body.classList.remove("has-shot"); el.result.classList.remove("on"); // fresh session — hide prior result + checklist
   try{ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:facing},width:{ideal:1920},height:{ideal:1080}},audio:false}); }
   catch(e){ setStatus("Camera not available ("+e.name+"). Use 'Check a photo' below to upload one instead."); return; }
   try{ el.video.srcObject=stream; await el.video.play(); }
@@ -2077,8 +2073,7 @@ async function startCam(){
   el.video.style.display="block"; el.feed.style.display="none"; el.vfEmpty.style.display="none";
   mode="live"; running=true;
   document.body.classList.add("cam-live");
-  setupZoom();
-  setStatus("Line up with the guide. The shutter unlocks once your face is detected — green means fully compliant, but you can capture and review anytime.");
+  setStatus("Line up inside the oval — fixes show on screen. Tap the shutter when you're ready; the full check appears after.");
   sizeHud(); requestAnimationFrame(loop);
 }
 function stopCam(){
@@ -2086,45 +2081,15 @@ function stopCam(){
   if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
   el.video.style.display="none"; el.vfEmpty.style.display="block";
   document.body.classList.remove("cam-live");
-  if(el.vfMsg) el.vfMsg.className="vf-msg";
-  if(el.vfZoom){ el.vfZoom.classList.remove("show"); el.vfZoom.innerHTML=""; }
+  if(el.vfMsg){ el.vfMsg.className="vf-msg"; el.vfMsg.innerHTML=""; }
   el.hud.getContext("2d").clearRect(0,0,el.hud.width,el.hud.height);
-  prevStatus={}; renderGates(currentGates());
+  prevStatus={};
+  // keep the captured photo's checklist on screen; only reset gates if nothing was shot
+  if(!document.body.classList.contains("has-shot")) renderGates(currentGates());
 }
 async function flipCamera(){
   facing = facing==="user" ? "environment" : "user";
   if(running){ stream&&stream.getTracks().forEach(t=>t.stop()); running=false; await startCam(); }
-}
-// Android-style zoom selector — only shown when the camera reports a zoom range.
-function setupZoom(){
-  if(!el.vfZoom) return;
-  el.vfZoom.classList.remove("show"); el.vfZoom.innerHTML="";
-  const track = stream && stream.getVideoTracks && stream.getVideoTracks()[0];
-  if(!track || !track.getCapabilities) return;
-  let caps; try{ caps=track.getCapabilities(); }catch(e){ return; }
-  if(!caps || !caps.zoom || !(caps.zoom.max > caps.zoom.min)) return;
-  const min=caps.zoom.min, max=caps.zoom.max;
-  let stops=[];
-  if(min < 1) stops.push(min);                          // ultrawide (e.g. .6)
-  for(const z of [1,2,3,4,5,6,8,10]) if(z>=Math.max(1,min) && z<=max) stops.push(z);
-  stops=[...new Set(stops)].sort((a,b)=>a-b);
-  if(stops.length < 2) return;                          // nothing meaningful to switch between
-  const cur = (track.getSettings && track.getSettings().zoom) || (stops.includes(1)?1:stops[0]);
-  for(const z of stops){
-    const b=document.createElement("button");
-    b.className="vf-zoombtn"+(Math.abs(z-cur)<1e-3?" on":"");
-    b.textContent = z<1 ? z.toFixed(1) : (Number.isInteger(z)? z+"×" : z.toFixed(1)+"×");
-    b.addEventListener("click",()=>applyZoom(z,b));
-    el.vfZoom.appendChild(b);
-  }
-  el.vfZoom.classList.add("show");
-}
-function applyZoom(z,btn){
-  const track = stream && stream.getVideoTracks && stream.getVideoTracks()[0];
-  if(!track) return;
-  track.applyConstraints({advanced:[{zoom:z}]}).then(()=>{
-    [...el.vfZoom.children].forEach(b=>b.classList.toggle("on", b===btn));
-  }).catch(()=>{});
 }
 function sizeHud(){ const r=el.video.parentElement.getBoundingClientRect(); el.hud.width=r.width; el.hud.height=r.height; }
 window.addEventListener("resize",()=>{ if(mode==="live")sizeHud(); });
@@ -2190,7 +2155,8 @@ function runStill(){
     lastResults=det.raw||null;
     renderGates(buildChecks({geo,bg,sharp,light,faceCount:det.count,
       out:{okDims:false,dims:`${w}×${h} → ${spec.out.wPx}×${spec.out.hPx}`,kb:null},spec}));
-    setStatus("Checked. Fix any red items, or capture fresh with the live guide for real-time help.");
+    showResult(makePhoto(img,w,h));
+    setStatus("Checked. Review the items below, or start the camera for real-time help.");
   });
 }
 async function detectStill(img,w,h){
@@ -2223,14 +2189,20 @@ function makePhoto(src,sw,sh){
 function captureLive(){
   const vw=el.video.videoWidth,vh=el.video.videoHeight;
   if(!vw||!vh) return;
-  const c=document.createElement("canvas");c.width=vw;c.height=vh;c.getContext("2d").drawImage(el.video,0,0,vw,vh);
-  const onPhone=document.body.classList.contains("cam-live")&&matchMedia("(max-width:900px)").matches;
+  const c=document.createElement("canvas");c.width=vw;c.height=vh;const cx=c.getContext("2d");cx.drawImage(el.video,0,0,vw,vh);
+  // freeze the compliance check against the exact frame we captured
+  const spec=SPECS[el.country.value];
+  const bg=analyzeBackground(cx,vw,vh,spec.background.target), sharp=analyzeSharpness(cx,vw,vh);
+  const g=lastResults&&lastResults.faceLandmarks&&lastResults.faceLandmarks[0]?geometry(lastResults.faceLandmarks[0],vw,vh):null;
+  const light=g?analyzeLighting(cx,g.faceBox):null;
+  const faceCount=lastResults&&lastResults.faceLandmarks?lastResults.faceLandmarks.length:0;
   showResult(makePhoto(c,vw,vh));
-  if(onPhone) stopCam(); // leave the full-screen camera so the result shows
+  renderGates(buildChecks({geo:g,bg,sharp,light,faceCount,out:{okDims:true,dims:`${spec.out.wPx}×${spec.out.hPx}`,kb:null},spec}));
+  stopCam(); // stop the live feed; the captured photo + its checklist stay on screen
 }
 let lastResult=null;
 function showResult(r){
-  lastResult=r; el.result.classList.add("on"); el.resultImg.src=r.url;
+  lastResult=r; el.result.classList.add("on"); document.body.classList.add("has-shot"); el.resultImg.src=r.url;
   const km=r.spec.out.maxKB?` · ${r.kb} KB (≤${r.spec.out.maxKB})`:"";
   el.rmeta.innerHTML=`<b>${r.spec.flag} ${r.spec.label}</b><br>${r.spec.out.wPx}×${r.spec.out.hPx} px · JPEG${km}<br>print ${r.spec.out.printMM[0]}×${r.spec.out.printMM[1]} mm @ ${r.spec.out.dpi} dpi`;
   el.download.onclick=()=>{const a=document.createElement("a");a.href=r.url;a.download=`diypassphoto-${el.country.value}.jpg`;a.click();};

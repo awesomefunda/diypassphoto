@@ -38,10 +38,10 @@ const TOOL = `
       <div class="framewrap" id="framewrap">
         <span class="cropmark tl"></span><span class="cropmark tr"></span><span class="cropmark bl"></span><span class="cropmark br"></span>
         <div class="viewfinder">
-          <div class="vf-badge" id="vfBadge"><span class="blink"></span>CAMERA OFF</div>
           <video id="video" autoplay playsinline muted style="display:none"></video>
           <canvas class="feed" id="feed" style="display:none"></canvas>
           <canvas class="hud" id="hud"></canvas>
+          <select class="vf-doc" id="country" aria-label="Document type"></select>
           <div class="vf-msg" id="vfMsg"></div>
           <div class="vf-empty" id="vfEmpty">
             <button class="vf-startbtn" id="vfStart" aria-label="Start camera" title="Start camera">
@@ -52,7 +52,6 @@ const TOOL = `
             <label class="vf-uploadlink" for="upload">or check a photo you already have</label>
             <input type="file" id="upload" accept="image/*"/>
           </div>
-          <div class="vf-zoom" id="vfZoom"></div>
           <div class="vf-shutter" id="vfShutter">
             <button class="vf-btn" id="vfFlip" aria-label="Flip camera" title="Flip camera">⟲</button>
             <button class="vf-shot" id="vfCapture" aria-label="Capture photo" disabled></button>
@@ -61,8 +60,8 @@ const TOOL = `
         </div>
       </div>
       <div>
-        <div class="panel">
-          <div class="phead"><span class="ttl">Compliance gates</span><select class="country" id="country" aria-label="Document type"></select></div>
+        <div class="panel" id="gatesPanel">
+          <div class="phead"><span class="ttl">Compliance check</span></div>
           <div class="gates" id="gates"></div>
           <div class="score"><span class="verdict hold" id="verdict">Waiting for a photo…</span><span class="mono" id="scoreNum" style="color:var(--mist)"></span></div>
         </div>
@@ -140,7 +139,7 @@ for (const slug of slugs){
 <meta name="twitter:description" content="${esc(c.seo.desc)}"/>
 <meta name="twitter:image" content="${SITE}/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="../styles.css?v=12"/>
+<link rel="stylesheet" href="../styles.css?v=13"/>
 <script type="application/ld+json">${JSON.stringify(appLd)}</script>
 <script type="application/ld+json">${JSON.stringify(crumbLd)}</script>
 <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
@@ -212,8 +211,8 @@ ${footerCountries()}
 </div></footer>
 
 <script>window.GF_START="${slug}";</script>
-<script src="../countries.js?v=12"></script>
-<script type="module" src="../app.js?v=12"></script>
+<script src="../countries.js?v=13"></script>
+<script type="module" src="../app.js?v=13"></script>
 </body>
 </html>`;
   fs.writeFileSync(path.join(cdir, `${slug}.html`), html);
