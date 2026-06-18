@@ -126,19 +126,19 @@ header.bar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--p
 /* the shutter bar is shown whenever the camera is live (desktop keeps its square frame) */
 body.cam-live .vf-shutter{display:flex}
 
-/* on-frame document picker — pick passport/visa right on the camera screen */
-.vf-doc{position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:6;max-width:80%;
-  padding:9px 34px 9px 15px;border-radius:999px;border:1px solid rgba(255,255,255,.24);
-  background:rgba(11,19,14,.74) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='white' stroke-width='2'><path d='M2 4l4 4 4-4'/></svg>") no-repeat right 13px center;
-  color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:13px;cursor:pointer;
-  -webkit-appearance:none;appearance:none;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
-  text-overflow:ellipsis;white-space:nowrap}
-.vf-doc option{color:#0B130E;background:#fff}
+/* document picker — sits above the camera frame, sets the active spec */
+.docbar{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.docbar label{font-weight:600;font-size:13px;color:var(--mist);flex:0 0 auto}
+.docsel{flex:1;min-width:0;font-family:Inter,sans-serif;font-weight:600;font-size:14px;color:var(--ink);
+  background:var(--card) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%230E1A14' stroke-width='2'><path d='M2 4l4 4 4-4'/></svg>") no-repeat right 14px center;
+  border:1px solid var(--line);border-radius:12px;padding:11px 38px 11px 14px;cursor:pointer;
+  -webkit-appearance:none;appearance:none}
+.docsel:focus{outline:none;border-color:var(--mist)}
 
 /* phone: live camera fills the screen so feedback + shutter need no scroll */
 @media(max-width:900px){
   body.cam-live{overflow:hidden}
-  body.cam-live .bar,body.cam-live footer,body.cam-live .controls,body.cam-live .hint,body.cam-live .panel{display:none}
+  body.cam-live .bar,body.cam-live footer,body.cam-live .controls,body.cam-live .hint,body.cam-live .panel,body.cam-live .docbar{display:none}
   body.cam-live .framewrap{position:fixed;inset:0;z-index:1000;padding:0;margin:0}
   body.cam-live .viewfinder{aspect-ratio:auto;width:100vw;height:100dvh;border-radius:0}
   body.cam-live .cropmark{display:none}

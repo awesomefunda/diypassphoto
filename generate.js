@@ -35,13 +35,14 @@ const headPct = h => `${Math.round(h[0]*100)}–${Math.round(h[1]*100)}%`;
 
 const TOOL = `
     <div class="studio">
-      <div class="framewrap" id="framewrap">
+      <div class="camcol">
+        <div class="docbar"><label for="country">Document type</label><select class="docsel" id="country" aria-label="Document type"></select></div>
+        <div class="framewrap" id="framewrap">
         <span class="cropmark tl"></span><span class="cropmark tr"></span><span class="cropmark bl"></span><span class="cropmark br"></span>
         <div class="viewfinder">
           <video id="video" autoplay playsinline muted style="display:none"></video>
           <canvas class="feed" id="feed" style="display:none"></canvas>
           <canvas class="hud" id="hud"></canvas>
-          <select class="vf-doc" id="country" aria-label="Document type"></select>
           <div class="vf-msg" id="vfMsg"></div>
           <div class="vf-empty" id="vfEmpty">
             <button class="vf-startbtn" id="vfStart" aria-label="Start camera" title="Start camera">
@@ -57,6 +58,7 @@ const TOOL = `
             <button class="vf-shot" id="vfCapture" aria-label="Capture photo" disabled></button>
             <button class="vf-btn" id="vfClose" aria-label="Close camera" title="Close camera">✕</button>
           </div>
+        </div>
         </div>
       </div>
       <div>
@@ -139,7 +141,7 @@ for (const slug of slugs){
 <meta name="twitter:description" content="${esc(c.seo.desc)}"/>
 <meta name="twitter:image" content="${SITE}/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="../styles.css?v=13"/>
+<link rel="stylesheet" href="../styles.css?v=14"/>
 <script type="application/ld+json">${JSON.stringify(appLd)}</script>
 <script type="application/ld+json">${JSON.stringify(crumbLd)}</script>
 <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
@@ -211,8 +213,8 @@ ${footerCountries()}
 </div></footer>
 
 <script>window.GF_START="${slug}";</script>
-<script src="../countries.js?v=13"></script>
-<script type="module" src="../app.js?v=13"></script>
+<script src="../countries.js?v=14"></script>
+<script type="module" src="../app.js?v=14"></script>
 </body>
 </html>`;
   fs.writeFileSync(path.join(cdir, `${slug}.html`), html);
