@@ -129,6 +129,13 @@ for (const slug of slugs){
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="google-site-verification" content="n2v7NmYRlID2x2gxkc62s_XNZjDP45ZBI1xCRPhwQdw"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
+<meta name="theme-color" content="#0B130E"/>
+<link rel="icon" href="/icon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/icon.svg"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="DIYPassPhoto"/>
+<meta name="mobile-web-app-capable" content="yes"/>
 <title>${esc(c.seo.title)}</title>
 <meta name="description" content="${esc(c.seo.desc)}"/>
 <meta name="keywords" content="${esc(c.seo.keywords)}"/>
@@ -224,6 +231,7 @@ ${footerCountries()}
 <script>window.GF_START="${slug}";</script>
 <script src="../countries.js?v=19"></script>
 <script type="module" src="../app.js?v=19"></script>
+<script>if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));}</script>
 </body>
 </html>`;
   fs.writeFileSync(path.join(cdir, `${slug}.html`), html);

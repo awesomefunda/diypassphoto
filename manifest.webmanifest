@@ -1,0 +1,16 @@
+{
+  "name": "DIYPassPhoto — Passport & Visa Photo Checker",
+  "short_name": "DIYPassPhoto",
+  "description": "Take a compliant passport or visa photo from your phone. Live, on-device checks for 17 documents across 8 countries — nothing uploaded, never AI-edited.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F4F6F3",
+  "theme_color": "#0B130E",
+  "categories": ["photo", "travel", "productivity"],
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

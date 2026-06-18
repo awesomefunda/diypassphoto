@@ -4,6 +4,13 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="google-site-verification" content="n2v7NmYRlID2x2gxkc62s_XNZjDP45ZBI1xCRPhwQdw"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
+<meta name="theme-color" content="#0B130E"/>
+<link rel="icon" href="/icon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/icon.svg"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="DIYPassPhoto"/>
+<meta name="mobile-web-app-capable" content="yes"/>
 <title>Schengen / EU Visa Photo Checker — 35×45mm, Free &amp; Private</title>
 <meta name="description" content="Check your Schengen or EU visa photo against the 35×45mm biometric spec. DIYPassPhoto verifies head size (32–36mm), light background and framing live — free, nothing uploaded."/>
 <meta name="keywords" content="schengen visa photo, eu visa photo, 35x45mm visa photo, schengen photo requirements, schengen visa photo checker"/>
@@ -2379,5 +2386,6 @@ function printSheet(r){
 if(!el.gates){ /* page has no tool */ } else { boot(); }
 
 </script>
+<script>if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));}</script>
 </body>
 </html>

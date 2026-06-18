@@ -4,6 +4,13 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="google-site-verification" content="n2v7NmYRlID2x2gxkc62s_XNZjDP45ZBI1xCRPhwQdw"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
+<meta name="theme-color" content="#0B130E"/>
+<link rel="icon" href="/icon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/icon.svg"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="DIYPassPhoto"/>
+<meta name="mobile-web-app-capable" content="yes"/>
 <title>DIYPassPhoto — Free Passport & Visa Photo Checker | Snap it. Verify it. Pass it.</title>
 <meta name="description" content="Take your passport or visa photo from your phone and know it's compliant before you submit. Free live camera guidance, spec-accurate checks for 10 countries. Nothing uploaded. No studio needed."/>
 <link rel="canonical" href="https://www.diypassphoto.com/"/>
@@ -190,5 +197,6 @@ addEventListener("DOMContentLoaded",()=>{
   });
 });
 </script>
+<script>if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));}</script>
 </body>
 </html>

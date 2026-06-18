@@ -4,6 +4,13 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="google-site-verification" content="n2v7NmYRlID2x2gxkc62s_XNZjDP45ZBI1xCRPhwQdw"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
+<meta name="theme-color" content="#0B130E"/>
+<link rel="icon" href="/icon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/icon.svg"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="DIYPassPhoto"/>
+<meta name="mobile-web-app-capable" content="yes"/>
 <title>US Visa Photo Checker (DS-160) — Free &amp; Private 2026</title>
 <meta name="description" content="Check your US non-immigrant visa (B1/B2, F1, H1B) photo against the official DS-160 requirements. 2×2 inch, white background, no glasses. Free, nothing uploaded."/>
 <meta name="keywords" content="us visa photo, ds-160 photo requirements, us visa photo size, b1 b2 visa photo, f1 visa photo, h1b visa photo"/>
@@ -181,5 +188,6 @@
 <script>window.GF_START="us-visa";</script>
 <script src="../countries.js?v=19"></script>
 <script type="module" src="../app.js?v=19"></script>
+<script>if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));}</script>
 </body>
 </html>

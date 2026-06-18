@@ -4,6 +4,13 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="google-site-verification" content="n2v7NmYRlID2x2gxkc62s_XNZjDP45ZBI1xCRPhwQdw"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
+<meta name="theme-color" content="#0B130E"/>
+<link rel="icon" href="/icon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/icon.svg"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="DIYPassPhoto"/>
+<meta name="mobile-web-app-capable" content="yes"/>
 <title>Canada Passport Photo Checker — 50×70mm, Free &amp; Private</title>
 <meta name="description" content="Take a compliant Canadian passport photo at home. DIYPassPhoto checks the 50×70mm format, 31–36mm face height and white background against IRCC rules — free, nothing uploaded."/>
 <meta name="keywords" content="canada passport photo, canadian passport photo size, 50x70mm photo, canada passport photo requirements, passport photo canada"/>
@@ -176,5 +183,6 @@
 <script>window.GF_START="canada-passport";</script>
 <script src="../countries.js?v=19"></script>
 <script type="module" src="../app.js?v=19"></script>
+<script>if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));}</script>
 </body>
 </html>
