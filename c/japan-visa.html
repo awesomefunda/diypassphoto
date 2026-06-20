@@ -27,7 +27,7 @@
 <meta name="twitter:description" content="Check your Japan visa photo against MOFA requirements. 35×45mm, plain background, face 32–36mm. Free, nothing uploaded, in your browser."/>
 <meta name="twitter:image" content="https://www.diypassphoto.com/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="../styles.css?v=22"/>
+<link rel="stylesheet" href="../styles.css?v=23"/>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"DIYPassPhoto — Japan Visa photo checker","applicationCategory":"PhotographyApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://www.diypassphoto.com/c/japan-visa.html","description":"Check your Japan visa photo against MOFA requirements. 35×45mm, plain background, face 32–36mm. Free, nothing uploaded, in your browser."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DIYPassPhoto","item":"https://www.diypassphoto.com/"},{"@type":"ListItem","position":2,"name":"Japan Visa photo checker","item":"https://www.diypassphoto.com/c/japan-visa.html"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the Japan visa photo the same as the passport photo?","acceptedAnswer":{"@type":"Answer","text":"Yes — the same 35×45 mm specification applies to both Japanese passport and visa applications."}},{"@type":"Question","name":"What size is a Japan visa photo?","acceptedAnswer":{"@type":"Answer","text":"35 mm wide × 45 mm tall, with the face roughly 32–36 mm from chin to crown, plain white or light background."}}]}</script>
@@ -66,7 +66,6 @@
             <span class="big">Tap to start the camera</span>
             Rear camera is sharper — ask someone to take it for you.
             <label class="vf-uploadlink" for="upload">or check a photo you already have</label>
-            <input type="file" id="upload" accept="image/*"/>
           </div>
           <div class="vf-shutter" id="vfShutter">
             <button class="vf-btn" id="vfFlip" aria-label="Flip camera" title="Flip camera">⟲</button>
@@ -85,6 +84,7 @@
         <div class="hint" id="status">Tip: face a window for soft, even light. Overhead lights cause the shadows that get photos rejected.</div>
       </div>
     </div>
+    <input type="file" id="upload" accept="image/*"/>
 
     <div class="result" id="result">
       <img id="resultImg" alt="Your formatted photo preview"/>
@@ -97,6 +97,7 @@
           <button class="btn" id="report">Download report</button>
           <button class="btn" id="sheet">4×6 sheet</button>
           <button class="btn" id="retake">Retake</button>
+          <label class="btn" for="upload">Check another photo</label>
         </div>
         <div class="disclaimer">Measured against the published spec — not a guarantee of acceptance. Confirm any “?” items yourself. No AI edits applied.</div>
       </div>
@@ -179,8 +180,8 @@
 </div></footer>
 
 <script>window.GF_START="japan-visa";</script>
-<script src="../countries.js?v=22"></script>
-<script type="module" src="../app.js?v=22"></script>
+<script src="../countries.js?v=23"></script>
+<script type="module" src="../app.js?v=23"></script>
 <script>if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));}</script>
 </body>
 </html>

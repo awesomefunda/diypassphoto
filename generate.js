@@ -51,7 +51,6 @@ const TOOL = `
             <span class="big">Tap to start the camera</span>
             Rear camera is sharper — ask someone to take it for you.
             <label class="vf-uploadlink" for="upload">or check a photo you already have</label>
-            <input type="file" id="upload" accept="image/*"/>
           </div>
           <div class="vf-shutter" id="vfShutter">
             <button class="vf-btn" id="vfFlip" aria-label="Flip camera" title="Flip camera">⟲</button>
@@ -70,6 +69,7 @@ const TOOL = `
         <div class="hint" id="status">Tip: face a window for soft, even light. Overhead lights cause the shadows that get photos rejected.</div>
       </div>
     </div>
+    <input type="file" id="upload" accept="image/*"/>
 
     <div class="result" id="result">
       <img id="resultImg" alt="Your formatted photo preview"/>
@@ -82,6 +82,7 @@ const TOOL = `
           <button class="btn" id="report">Download report</button>
           <button class="btn" id="sheet">4×6 sheet</button>
           <button class="btn" id="retake">Retake</button>
+          <label class="btn" for="upload">Check another photo</label>
         </div>
         <div class="disclaimer">Measured against the published spec — not a guarantee of acceptance. Confirm any “?” items yourself. No AI edits applied.</div>
       </div>
@@ -152,7 +153,7 @@ for (const slug of slugs){
 <meta name="twitter:description" content="${esc(c.seo.desc)}"/>
 <meta name="twitter:image" content="${SITE}/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="../styles.css?v=22"/>
+<link rel="stylesheet" href="../styles.css?v=23"/>
 <script type="application/ld+json">${JSON.stringify(appLd)}</script>
 <script type="application/ld+json">${JSON.stringify(crumbLd)}</script>
 <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
@@ -230,8 +231,8 @@ ${footerCountries()}
 </div></footer>
 
 <script>window.GF_START="${slug}";</script>
-<script src="../countries.js?v=22"></script>
-<script type="module" src="../app.js?v=22"></script>
+<script src="../countries.js?v=23"></script>
+<script type="module" src="../app.js?v=23"></script>
 <script>if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));}</script>
 </body>
 </html>`;

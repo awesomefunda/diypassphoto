@@ -27,7 +27,7 @@
 <meta name="twitter:description" content="Take a compliant German biometric passport photo. DIYPassPhoto checks the 35×45mm ISO biometric spec: light-grey background, 32–36mm face height, no glasses — free, nothing uploaded."/>
 <meta name="twitter:image" content="https://www.diypassphoto.com/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="../styles.css?v=22"/>
+<link rel="stylesheet" href="../styles.css?v=23"/>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"DIYPassPhoto — Germany Passport photo checker","applicationCategory":"PhotographyApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://www.diypassphoto.com/c/germany-passport.html","description":"Take a compliant German biometric passport photo. DIYPassPhoto checks the 35×45mm ISO biometric spec: light-grey background, 32–36mm face height, no glasses — free, nothing uploaded."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DIYPassPhoto","item":"https://www.diypassphoto.com/"},{"@type":"ListItem","position":2,"name":"Germany Passport photo checker","item":"https://www.diypassphoto.com/c/germany-passport.html"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What background does a German passport photo need?","acceptedAnswer":{"@type":"Answer","text":"A light grey background — not pure white. Germany follows the ISO biometric standard which specifies a uniformly light grey background to ensure consistent face detection."}},{"@type":"Question","name":"Are glasses allowed in a German passport photo?","acceptedAnswer":{"@type":"Answer","text":"No. Germany banned glasses in passport and ID photos since January 2017, with no exceptions for prescription glasses."}},{"@type":"Question","name":"What size is a German passport photo?","acceptedAnswer":{"@type":"Answer","text":"35 mm wide × 45 mm tall (the standard European biometric format), with the face 32–36 mm from chin to crown."}}]}</script>
@@ -66,7 +66,6 @@
             <span class="big">Tap to start the camera</span>
             Rear camera is sharper — ask someone to take it for you.
             <label class="vf-uploadlink" for="upload">or check a photo you already have</label>
-            <input type="file" id="upload" accept="image/*"/>
           </div>
           <div class="vf-shutter" id="vfShutter">
             <button class="vf-btn" id="vfFlip" aria-label="Flip camera" title="Flip camera">⟲</button>
@@ -85,6 +84,7 @@
         <div class="hint" id="status">Tip: face a window for soft, even light. Overhead lights cause the shadows that get photos rejected.</div>
       </div>
     </div>
+    <input type="file" id="upload" accept="image/*"/>
 
     <div class="result" id="result">
       <img id="resultImg" alt="Your formatted photo preview"/>
@@ -97,6 +97,7 @@
           <button class="btn" id="report">Download report</button>
           <button class="btn" id="sheet">4×6 sheet</button>
           <button class="btn" id="retake">Retake</button>
+          <label class="btn" for="upload">Check another photo</label>
         </div>
         <div class="disclaimer">Measured against the published spec — not a guarantee of acceptance. Confirm any “?” items yourself. No AI edits applied.</div>
       </div>
@@ -183,8 +184,8 @@
 </div></footer>
 
 <script>window.GF_START="germany-passport";</script>
-<script src="../countries.js?v=22"></script>
-<script type="module" src="../app.js?v=22"></script>
+<script src="../countries.js?v=23"></script>
+<script type="module" src="../app.js?v=23"></script>
 <script>if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));}</script>
 </body>
 </html>

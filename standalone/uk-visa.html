@@ -388,7 +388,6 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
             <span class="big">Tap to start the camera</span>
             Rear camera is sharper — ask someone to take it for you.
             <label class="vf-uploadlink" for="upload">or check a photo you already have</label>
-            <input type="file" id="upload" accept="image/*"/>
           </div>
           <div class="vf-shutter" id="vfShutter">
             <button class="vf-btn" id="vfFlip" aria-label="Flip camera" title="Flip camera">⟲</button>
@@ -407,6 +406,7 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
         <div class="hint" id="status">Tip: face a window for soft, even light. Overhead lights cause the shadows that get photos rejected.</div>
       </div>
     </div>
+    <input type="file" id="upload" accept="image/*"/>
 
     <div class="result" id="result">
       <img id="resultImg" alt="Your formatted photo preview"/>
@@ -419,6 +419,7 @@ footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
           <button class="btn" id="report">Download report</button>
           <button class="btn" id="sheet">4×6 sheet</button>
           <button class="btn" id="retake">Retake</button>
+          <label class="btn" for="upload">Check another photo</label>
         </div>
         <div class="disclaimer">Measured against the published spec — not a guarantee of acceptance. Confirm any “?” items yourself. No AI edits applied.</div>
       </div>

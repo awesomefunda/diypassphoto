@@ -27,7 +27,7 @@
 <meta name="twitter:description" content="Check your Canada visitor visa or immigration photo against IRCC requirements. 50×70mm, white background, face 31–36mm. Free, in your browser, nothing uploaded."/>
 <meta name="twitter:image" content="https://www.diypassphoto.com/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="../styles.css?v=22"/>
+<link rel="stylesheet" href="../styles.css?v=23"/>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"DIYPassPhoto — Canada Visa / eTA photo checker","applicationCategory":"PhotographyApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://www.diypassphoto.com/c/canada-visa.html","description":"Check your Canada visitor visa or immigration photo against IRCC requirements. 50×70mm, white background, face 31–36mm. Free, in your browser, nothing uploaded."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DIYPassPhoto","item":"https://www.diypassphoto.com/"},{"@type":"ListItem","position":2,"name":"Canada Visa / eTA photo checker","item":"https://www.diypassphoto.com/c/canada-visa.html"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the Canada visa photo the same as the passport photo?","acceptedAnswer":{"@type":"Answer","text":"Yes — IRCC uses the same 50×70 mm photo specification for both passport and visa/immigration applications."}},{"@type":"Question","name":"What size is a Canada visa photo?","acceptedAnswer":{"@type":"Answer","text":"50 mm wide by 70 mm tall, with the face (chin to crown) 31–36 mm."}}]}</script>
@@ -66,7 +66,6 @@
             <span class="big">Tap to start the camera</span>
             Rear camera is sharper — ask someone to take it for you.
             <label class="vf-uploadlink" for="upload">or check a photo you already have</label>
-            <input type="file" id="upload" accept="image/*"/>
           </div>
           <div class="vf-shutter" id="vfShutter">
             <button class="vf-btn" id="vfFlip" aria-label="Flip camera" title="Flip camera">⟲</button>
@@ -85,6 +84,7 @@
         <div class="hint" id="status">Tip: face a window for soft, even light. Overhead lights cause the shadows that get photos rejected.</div>
       </div>
     </div>
+    <input type="file" id="upload" accept="image/*"/>
 
     <div class="result" id="result">
       <img id="resultImg" alt="Your formatted photo preview"/>
@@ -97,6 +97,7 @@
           <button class="btn" id="report">Download report</button>
           <button class="btn" id="sheet">4×6 sheet</button>
           <button class="btn" id="retake">Retake</button>
+          <label class="btn" for="upload">Check another photo</label>
         </div>
         <div class="disclaimer">Measured against the published spec — not a guarantee of acceptance. Confirm any “?” items yourself. No AI edits applied.</div>
       </div>
@@ -179,8 +180,8 @@
 </div></footer>
 
 <script>window.GF_START="canada-visa";</script>
-<script src="../countries.js?v=22"></script>
-<script type="module" src="../app.js?v=22"></script>
+<script src="../countries.js?v=23"></script>
+<script type="module" src="../app.js?v=23"></script>
 <script>if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));}</script>
 </body>
 </html>
