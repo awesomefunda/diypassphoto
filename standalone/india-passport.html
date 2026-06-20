@@ -2244,9 +2244,15 @@ function makePhoto(src,sw,sh){
   let cropH,cropW,cx,cy;
   if(g){ cropH=(g.headRatio*sh)/mid; cropW=cropH*aspect; cx=g.centerX*sw; cy=g.faceBox.y+g.faceBox.h*.5-cropH*.04; }
   else { cropH=Math.min(sh,sw/aspect); cropW=cropH*aspect; cx=sw/2; cy=sh/2; }
+  // Never sample beyond the source frame: cap the crop to the video size (keeping the
+  // output aspect ratio). Prevents the black band + horizontal squish when the head is
+  // large in a smaller/portrait frame.
+  if(cropW>sw){ cropW=sw; cropH=cropW/aspect; }
+  if(cropH>sh){ cropH=sh; cropW=cropH*aspect; }
   const sx=clamp(cx-cropW/2,0,sw-cropW), sy=clamp(cy-cropH/2,0,sh-cropH);
   const out=document.createElement("canvas");out.width=spec.out.wPx;out.height=spec.out.hPx;
-  out.getContext("2d").drawImage(src,sx,sy,cropW,cropH,0,0,spec.out.wPx,spec.out.hPx);
+  const octx=out.getContext("2d"); octx.fillStyle="#fff"; octx.fillRect(0,0,spec.out.wPx,spec.out.hPx); // white safety fill — no black edges
+  octx.drawImage(src,sx,sy,cropW,cropH,0,0,spec.out.wPx,spec.out.hPx);
   const {url,kb}=encodeJPEG(out,spec.out.maxKB);
   return{url,kb,spec,canvas:out};
 }
