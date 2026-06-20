@@ -62,20 +62,26 @@ function rgb2lab([r,g,b]){r/=255;g/=255;b/=255;
 const deltaE=(a,b)=>{const A=rgb2lab(a),B=rgb2lab(b);return Math.hypot(A[0]-B[0],A[1]-B[1],A[2]-B[2]);};
 
 function analyzeBackground(ctx,w,h,target){
-  const b=Math.max(4,Math.round(Math.min(w,h)*.06)), step=Math.max(2,Math.round(w/120)), pts=[];
-  // sample a band at two depths along each edge — better catches curtains/patterns/objects
-  const dTop=[b>>1,b], dBot=[h-1-(b>>1),h-1-b];
-  for(let x=0;x<w;x+=step){ for(const y of dTop) pts.push([x,y]); for(const y of dBot) pts.push([x,y]); }
-  const dL=[b>>1,b], dR=[w-1-(b>>1),w-1-b];
-  for(let y=0;y<h;y+=step){ for(const x of dL) pts.push([x,y]); for(const x of dR) pts.push([x,y]); }
-  let r=0,g=0,bl=0,n=0,lum=[];
-  for(const[x,y]of pts){const d=ctx.getImageData(clamp(x,0,w-1),clamp(y,0,h-1),1,1).data;r+=d[0];g+=d[1];bl+=d[2];lum.push(.299*d[0]+.587*d[1]+.114*d[2]);n++;}
-  const mean=[r/n,g/n,bl/n],mL=lum.reduce((a,c)=>a+c,0)/n;
-  const variance=Math.sqrt(lum.reduce((a,c)=>a+(c-mL)**2,0)/n);
-  // "busy" fraction: share of background points far from the median brightness (texture/objects/shadows)
-  const med=[...lum].sort((a,c)=>a-c)[n>>1];
-  let busy=0; for(const L of lum) if(Math.abs(L-med)>18) busy++;
-  return{mean,dE:deltaE(mean,target),variance,busyFrac:busy/n};
+  const b=Math.max(4,Math.round(Math.min(w,h)*.06)), step=Math.max(3,Math.round(w/110));
+  const edges=[[],[],[],[]]; // ordered luminance along top, bottom, left, right
+  let r=0,g=0,bl=0,n=0;
+  // sample a denoised 3x3 average per point so fine wall texture doesn't read as clutter
+  const samp=(px,py,e)=>{
+    const x=clamp(px-1,0,w-3), y=clamp(py-1,0,h-3);
+    const d=ctx.getImageData(x,y,3,3).data; let R=0,G=0,B=0;
+    for(let i=0;i<d.length;i+=4){R+=d[i];G+=d[i+1];B+=d[i+2];}
+    R/=9;G/=9;B/=9; r+=R;g+=G;bl+=B;n++;
+    edges[e].push(.299*R+.587*G+.114*B);
+  };
+  for(let x=0;x<w;x+=step){ samp(x,b>>1,0); samp(x,h-1-(b>>1),1); }
+  for(let y=0;y<h;y+=step){ samp(b>>1,y,2); samp(w-1-(b>>1),y,3); }
+  const mean=[r/n,g/n,bl/n];
+  const lab=rgb2lab(mean), L=lab[0], chroma=Math.hypot(lab[1],lab[2]);
+  // texture/pattern = local (adjacent) contrast along each edge; a smooth gradient stays low
+  let diff=0,dc=0;
+  for(const e of edges) for(let i=1;i<e.length;i++){ diff+=Math.abs(e[i]-e[i-1]); dc++; }
+  const rough=dc?diff/dc:0;
+  return{mean,dE:deltaE(mean,target),L,chroma,rough};
 }
 function analyzeSharpness(ctx,w,h){
   const s=Math.min(256,w),sc=s/w,hh=Math.round(h*sc);
@@ -139,16 +145,19 @@ function buildChecks({geo,bg,sharp,light,faceCount,out,spec}){
     push("mouth","Neutral mouth",geo.mouthOpen<.08?"pass":"warn",geo.mouthOpen<.08?"closed":"smiling","Close your mouth — neutral expression.");
   }
   if(bg){
-    const m=spec.background.maxDeltaE;
-    const bst=bg.dE<=m?"pass":(bg.dE<=m*2?"warn":"fail");
-    push("bg_color","Background colour",bst,`ΔE ${bg.dE.toFixed(0)} · ≤${m}`,
-      bst==="pass"?"":(bst==="warn"
-        ?"Background is close — brighten the scene a little (face a window) for a cleaner white."
-        :"Background reads off-target — usually underexposure. Brighten the scene (face a window) rather than editing."));
-    const bf=bg.busyFrac;
-    const evst=bf<0.10?"pass":(bf<0.22?"warn":"fail");
-    push("bg_even","Plain background",evst,`${Math.round(bf*100)}% uneven`,
-      evst==="pass"?"":"Use a plain, smooth wall behind you — curtains, patterns, furniture, or shadows get the photo rejected.");
+    // Accept any light, neutral background (white / off-white / light grey, as the specs allow);
+    // fail only if it's coloured (high chroma) or too dark.
+    const L=bg.L, ch=bg.chroma;
+    let cst,ccoach;
+    if(L>=80&&ch<=9){ cst="pass"; ccoach=""; }
+    else if(L>=70&&ch<=15){ cst="warn"; ccoach = ch>9 ? "Background has a slight colour tint — a whiter/greyer wall is safer." : "Background a little dark — brighten it (face a window)."; }
+    else { cst="fail"; ccoach = ch>15 ? "Background has colour — use a plain white, off-white or light-grey wall." : "Background too dark — passport backgrounds must be light. Add light or move to a lighter wall."; }
+    push("bg_color","Background colour",cst,`L ${Math.round(L)} · tint ${Math.round(ch)}`,ccoach);
+    // Plainness from local contrast: smooth wall/gradient passes; curtains/patterns/objects fail.
+    const rg=bg.rough;
+    const evst=rg<7?"pass":(rg<14?"warn":"fail");
+    push("bg_even","Plain background",evst,evst==="pass"?"plain":`texture ${rg.toFixed(0)}`,
+      evst==="pass"?"":"Use a plain, smooth wall — curtains, patterns or objects behind you get the photo rejected.");
   }
   if(light){
     push("shadow","Even lighting",light.sideDiff<.14?"pass":"warn",`${(light.sideDiff*100).toFixed(0)}% L/R`,"Lighting is uneven — turn toward soft, frontal light.");
