@@ -1948,13 +1948,19 @@ const deltaE=(a,b)=>{const A=rgb2lab(a),B=rgb2lab(b);return Math.hypot(A[0]-B[0]
 
 function analyzeBackground(ctx,w,h,target){
   const b=Math.max(4,Math.round(Math.min(w,h)*.06)), step=Math.max(2,Math.round(w/120)), pts=[];
-  for(let x=0;x<w;x+=step){pts.push([x,b>>1]);pts.push([x,h-1-(b>>1)]);}
-  for(let y=0;y<h;y+=step){pts.push([b>>1,y]);pts.push([w-1-(b>>1),y]);}
+  // sample a band at two depths along each edge — better catches curtains/patterns/objects
+  const dTop=[b>>1,b], dBot=[h-1-(b>>1),h-1-b];
+  for(let x=0;x<w;x+=step){ for(const y of dTop) pts.push([x,y]); for(const y of dBot) pts.push([x,y]); }
+  const dL=[b>>1,b], dR=[w-1-(b>>1),w-1-b];
+  for(let y=0;y<h;y+=step){ for(const x of dL) pts.push([x,y]); for(const x of dR) pts.push([x,y]); }
   let r=0,g=0,bl=0,n=0,lum=[];
-  for(const[x,y]of pts){const d=ctx.getImageData(x,y,1,1).data;r+=d[0];g+=d[1];bl+=d[2];lum.push(.299*d[0]+.587*d[1]+.114*d[2]);n++;}
+  for(const[x,y]of pts){const d=ctx.getImageData(clamp(x,0,w-1),clamp(y,0,h-1),1,1).data;r+=d[0];g+=d[1];bl+=d[2];lum.push(.299*d[0]+.587*d[1]+.114*d[2]);n++;}
   const mean=[r/n,g/n,bl/n],mL=lum.reduce((a,c)=>a+c,0)/n;
   const variance=Math.sqrt(lum.reduce((a,c)=>a+(c-mL)**2,0)/n);
-  return{mean,dE:deltaE(mean,target),variance};
+  // "busy" fraction: share of background points far from the median brightness (texture/objects/shadows)
+  const med=[...lum].sort((a,c)=>a-c)[n>>1];
+  let busy=0; for(const L of lum) if(Math.abs(L-med)>18) busy++;
+  return{mean,dE:deltaE(mean,target),variance,busyFrac:busy/n};
 }
 function analyzeSharpness(ctx,w,h){
   const s=Math.min(256,w),sc=s/w,hh=Math.round(h*sc);
@@ -2024,7 +2030,10 @@ function buildChecks({geo,bg,sharp,light,faceCount,out,spec}){
       bst==="pass"?"":(bst==="warn"
         ?"Background is close — brighten the scene a little (face a window) for a cleaner white."
         :"Background reads off-target — usually underexposure. Brighten the scene (face a window) rather than editing."));
-    push("bg_even","Background even",bg.variance<14?"pass":"warn",`var ${bg.variance.toFixed(0)}`,"Smooth the background — shadows or texture cause rejections.");
+    const bf=bg.busyFrac;
+    const evst=bf<0.10?"pass":(bf<0.22?"warn":"fail");
+    push("bg_even","Plain background",evst,`${Math.round(bf*100)}% uneven`,
+      evst==="pass"?"":"Use a plain, smooth wall behind you — curtains, patterns, furniture, or shadows get the photo rejected.");
   }
   if(light){
     push("shadow","Even lighting",light.sideDiff<.14?"pass":"warn",`${(light.sideDiff*100).toFixed(0)}% L/R`,"Lighting is uneven — turn toward soft, frontal light.");
