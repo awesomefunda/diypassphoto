@@ -2260,7 +2260,14 @@ function makePhoto(src,sw,sh){
   const g=lastResults&&lastResults.faceLandmarks&&lastResults.faceLandmarks[0]?geometry(lastResults.faceLandmarks[0],sw,sh):null;
   const mid=(spec.headRatio[0]+spec.headRatio[1])/2;
   let cropH,cropW,cx,cy;
-  if(g){ cropH=(g.headRatio*sh)/mid; cropW=cropH*aspect; cx=g.centerX*sw; cy=g.faceBox.y+g.faceBox.h*.5-cropH*.04; }
+  if(g){
+    cropH=(g.headRatio*sh)/mid; cropW=cropH*aspect; cx=g.centerX*sw;
+    // Position vertically by the EYE LINE (the official method): place the eyes at the
+    // spec's eye-height band so there's headroom above and the chin stays in frame.
+    const e = spec.eyeFromBottom ? (spec.eyeFromBottom[0]+spec.eyeFromBottom[1])/2 : 0.58;
+    const eyeY = sh*(1 - g.eyeFromBottom);            // eye line in source pixels
+    cy = eyeY + cropH*(e-0.5);                         // => crop top = eyeY-(1-e)*cropH
+  }
   else { cropH=Math.min(sh,sw/aspect); cropW=cropH*aspect; cx=sw/2; cy=sh/2; }
   // Never sample beyond the source frame: cap the crop to the video size (keeping the
   // output aspect ratio). Prevents the black band + horizontal squish when the head is
