@@ -2261,7 +2261,10 @@ function makePhoto(src,sw,sh){
   const mid=(spec.headRatio[0]+spec.headRatio[1])/2;
   let cropH,cropW,cx,cy;
   if(g){
-    cropH=(g.headRatio*sh)/mid; cropW=cropH*aspect; cx=g.centerX*sw;
+    // The face mesh detects the skull, not the hair on top, so zoom out a little
+    // (HEADROOM) to leave room for hair above the crown and clearance below the chin.
+    const HEADROOM=1.14;
+    cropH=(g.headRatio*sh)/mid*HEADROOM; cropW=cropH*aspect; cx=g.centerX*sw;
     // Position vertically by the EYE LINE (the official method): place the eyes at the
     // spec's eye-height band so there's headroom above and the chin stays in frame.
     const e = spec.eyeFromBottom ? (spec.eyeFromBottom[0]+spec.eyeFromBottom[1])/2 : 0.58;
