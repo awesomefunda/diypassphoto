@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Snap your passport or ID photo from your phone — get the green light when it's ready. Live, private, in-browser. Free & open-source.",
   "scripts": {
+    "test": "node --test \"test/**/*.test.mjs\"",
     "build": "node generate.js",
     "dev": "node generate.js && npx --yes serve .",
     "serve": "npx --yes serve .",

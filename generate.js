@@ -153,7 +153,7 @@ for (const slug of slugs){
 <meta name="twitter:description" content="${esc(c.seo.desc)}"/>
 <meta name="twitter:image" content="${SITE}/og-image.png"/>
 <meta name="robots" content="index,follow"/>
-<link rel="stylesheet" href="../styles.css?v=24"/>
+<link rel="stylesheet" href="../styles.css?v=25"/>
 <script type="application/ld+json">${JSON.stringify(appLd)}</script>
 <script type="application/ld+json">${JSON.stringify(crumbLd)}</script>
 <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
@@ -231,8 +231,8 @@ ${footerCountries()}
 </div></footer>
 
 <script>window.GF_START="${slug}";</script>
-<script src="../countries.js?v=24"></script>
-<script type="module" src="../app.js?v=24"></script>
+<script src="../countries.js?v=25"></script>
+<script type="module" src="../app.js?v=25"></script>
 <script>if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));}</script>
 </body>
 </html>`;
@@ -245,11 +245,16 @@ fs.mkdirSync(sdir, { recursive: true });
 const CSS = fs.readFileSync(path.join(ROOT,"styles.css"),"utf8");
 const REG = fs.readFileSync(path.join(ROOT,"countries.js"),"utf8");
 const APP = fs.readFileSync(path.join(ROOT,"app.js"),"utf8");
+// For single-file standalone pages, bundle lib/core.mjs inline (its relative import
+// can't be fetched from a self-contained <script>). Strip `export ` and drop app.js's
+// import of it so the two concatenate into one valid module.
+const CORE = fs.readFileSync(path.join(ROOT,"lib","core.mjs"),"utf8").replace(/^export\s+/gm,"");
+const APP_BUNDLED = CORE + "\n" + APP.replace(/^\s*import\s*\{[^}]*\}\s*from\s*["']\.\/lib\/core\.mjs[^"']*["'];?\s*$/m, "");
 function inline(html){
   return html
     .replace(/<link rel="stylesheet" href="(\.\.\/)?styles\.css(\?[^"]*)?"\/>/, "<style>\n"+CSS+"\n</style>")
     .replace(/<script src="(\.\.\/)?countries\.js(\?[^"]*)?"><\/script>/, "<script>\n"+REG+"\n</script>")
-    .replace(/<script type="module" src="(\.\.\/)?app\.js(\?[^"]*)?"><\/script>/, '<script type="module">\n'+APP+"\n</script>");
+    .replace(/<script type="module" src="(\.\.\/)?app\.js(\?[^"]*)?"><\/script>/, '<script type="module">\n'+APP_BUNDLED+"\n</script>");
 }
 for (const slug of slugs){
   fs.writeFileSync(path.join(sdir, `${slug}.html`), inline(fs.readFileSync(path.join(cdir, `${slug}.html`),"utf8")));

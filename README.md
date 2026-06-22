@@ -35,6 +35,17 @@ ES-module imports on `file://`). The design renders anywhere; the live geometry 
 Upload-mode background/sharpness/lighting checks work regardless. Deploy: push to a static host
 (Vercel auto-detects; `vercel.json` included).
 
+## Test
+
+```bash
+npm test     # pure-logic suite (node --test): check engine + crop geometry
+```
+The compliance check engine and the export-crop math live in `lib/core.mjs` (no DOM/MediaPipe), so
+they're unit-tested in `test/core.test.mjs` and run in CI on every push (`.github/workflows/test.yml`).
+They cover the regressions that used to need manual phone testing: head-size pass/warn/fail tiers,
+background colour/plainness/brightness tiers, file-size caps, and — most importantly — that the crop
+never clips hair or chin and keeps the eyes in the spec band.
+
 ## Rebuild after editing data
 
 ```bash
